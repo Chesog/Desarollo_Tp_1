@@ -59,7 +59,8 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log(isGrounded());
+        
+        transform.rotation.SetEulerRotation(0f, playerCamera.transform.rotation.y,0f);
 
         if (isGrounded())
         {
