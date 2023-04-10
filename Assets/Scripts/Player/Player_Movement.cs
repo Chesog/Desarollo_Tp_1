@@ -59,7 +59,8 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log(isGrounded());
+        
+        transform.rotation.SetEulerRotation(0f, playerCamera.transform.rotation.y,0f);
 
         if (isGrounded())
         {
@@ -105,6 +106,9 @@ public class Player_Movement : MonoBehaviour
 
     public void OnMove(InputValue input)
     {
+        if (!isGrounded())
+            return;
+
         var movement = input.Get<Vector2>();
         _CurrentMovement = new Vector3(movement.x, 0f, movement.y).normalized;
     }
