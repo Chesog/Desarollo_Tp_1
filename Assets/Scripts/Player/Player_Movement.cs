@@ -83,14 +83,15 @@ public class Player_Movement : MonoBehaviour
         if (_CurrentMovement.magnitude >= 1f)
         {
             float targetAngle = Mathf.Atan2(_CurrentMovement.x, _CurrentMovement.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
-
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y,targetAngle,ref turnSmoothVelocity , turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f,angle,0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             rigidbody.velocity = moveDir.normalized * speed + Vector3.up * rigidbody.velocity.y;
         }
         else
         {
-            rigidbody.velocity = new Vector3(0f, rigidbody.velocity.y, 0f);
+            rigidbody.velocity = new Vector3(rigidbody.velocity.x - Time.deltaTime, rigidbody.velocity.y, rigidbody.velocity.z - Time.deltaTime);
         }
 
         if (isSprinting)
@@ -105,6 +106,9 @@ public class Player_Movement : MonoBehaviour
 
     public void OnMove(InputValue input)
     {
+        if (!isGrounded())
+            return;
+
         var movement = input.Get<Vector2>();
         _CurrentMovement = new Vector3(movement.x, 0f, movement.y).normalized;
     }
