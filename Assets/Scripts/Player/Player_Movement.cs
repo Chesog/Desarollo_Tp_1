@@ -13,7 +13,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float jumpBufferTimeCounter;
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float turnSmoothVelocity;
-    [SerializeField] private float gravityValue = -9.81f;
     private Coroutine _jumpCorutine;
     [Header("Movement")]
     [SerializeField] Vector3 _CurrentMovement;
@@ -59,8 +58,6 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        transform.rotation.SetEulerRotation(0f, playerCamera.transform.rotation.y,0f);
 
         if (isGrounded())
         {
