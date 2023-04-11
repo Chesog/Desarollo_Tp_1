@@ -87,10 +87,10 @@ public class Player_Movement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             rigidbody.velocity = moveDir.normalized * speed + Vector3.up * rigidbody.velocity.y;
         }
-        else
-        {
-            rigidbody.velocity = new Vector3(rigidbody.velocity.x - Time.deltaTime, rigidbody.velocity.y, rigidbody.velocity.z - Time.deltaTime);
-        }
+        //else
+        //{
+        //    rigidbody.velocity = new Vector3(rigidbody.velocity.x - Time.deltaTime, rigidbody.velocity.y, rigidbody.velocity.z - Time.deltaTime);
+        //}
 
         if (isSprinting)
         {
