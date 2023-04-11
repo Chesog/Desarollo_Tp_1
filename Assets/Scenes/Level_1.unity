@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mazeSize: {x: 10, y: 10}
-  offSet: {x: 130, y: -130}
+  offSet: {x: 130, y: 130}
   starPos: 0
   rooms:
   - {fileID: 8149747068613397862, guid: 4bc436ca57df5164e99f6babc7227c47, type: 3}
