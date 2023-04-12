@@ -63,7 +63,8 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        anim.SetFloat("VelocityX", rigidbody.velocity.magnitude);
+        anim.SetFloat("VelocityX", rigidbody.velocity.magnitude );
+
         if (isGrounded())
         {
             coyoteTimerCounter = coyoteTime;
