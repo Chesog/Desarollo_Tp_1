@@ -9,6 +9,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private Transform feet_Pivot;
     [SerializeField] private Transform playerCamera;
+    [SerializeField] private Animator anim;
     [SerializeField] private float jumpBufferTime = 0.2f;
     [SerializeField] private float jumpBufferTimeCounter;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -49,7 +50,11 @@ public class Player_Movement : MonoBehaviour
             Debug.LogError(message: $"{name}: (logError){nameof(controller)} is null");
         }
 
-
+        anim ??= GetComponent<Animator>();
+        if (!feet_Pivot)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(anim)} is null");
+        }
 
         isJumping = false;
         isSprinting = false;
@@ -58,7 +63,7 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        anim.SetFloat("VelocityX", rigidbody.velocity.magnitude);
         if (isGrounded())
         {
             coyoteTimerCounter = coyoteTime;
