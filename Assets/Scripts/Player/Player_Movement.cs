@@ -14,6 +14,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float jumpBufferTimeCounter;
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float turnSmoothVelocity;
+    private float lastAngle;
     private Coroutine _jumpCorutine;
     [Header("Movement")]
     [SerializeField] Vector3 _CurrentMovement;
@@ -63,40 +64,58 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        anim.SetFloat("VelocityX", rigidbody.velocity.magnitude );
 
         if (isGrounded())
         {
             coyoteTimerCounter = coyoteTime;
+            jumpBufferTimeCounter = jumpBufferTime;
+            anim.SetBool("IsJumping", false);
         }
         else
         {
             coyoteTimerCounter -= Time.deltaTime;
-        }
-
-        if (isGrounded())
-        {
-            jumpBufferTimeCounter = jumpBufferTime;
-        }
-        else
-        {
             jumpBufferTimeCounter -= Time.deltaTime;
+            anim.SetBool("IsJumping", true);
         }
-
+        anim.SetFloat("VelocityX/Z", rigidbody.velocity.magnitude - rigidbody.velocity.y);
+        anim.SetFloat("VelocityY",rigidbody.velocity.y);
 
         if (_CurrentMovement.magnitude >= 1f)
         {
-            float targetAngle = Mathf.Atan2(_CurrentMovement.x, _CurrentMovement.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y,targetAngle,ref turnSmoothVelocity , turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f,angle,0f);
+            if (isGrounded())
+            {
+                float targetAngle = Mathf.Atan2(_CurrentMovement.x, _CurrentMovement.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
+                lastAngle = targetAngle;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            rigidbody.velocity = moveDir.normalized * speed + Vector3.up * rigidbody.velocity.y;
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
+                rigidbody.velocity = moveDir.normalized * speed + Vector3.up * rigidbody.velocity.y;
+            }
+            else
+            {
+                Vector3 moveDir = Quaternion.Euler(0f, lastAngle, 0f) * Vector3.forward;
+
+                rigidbody.velocity = moveDir.normalized * speed + Vector3.up * rigidbody.velocity.y;
+            }
+
         }
-        //else
-        //{
-        //    rigidbody.velocity = new Vector3(rigidbody.velocity.x - Time.deltaTime, rigidbody.velocity.y, rigidbody.velocity.z - Time.deltaTime);
-        //}
+        else
+        {
+            float xVelocity = rigidbody.velocity.x;
+            float zVelocity = rigidbody.velocity.z;
+            if (xVelocity > 0f)
+            {
+                xVelocity -= (Time.deltaTime);
+            }
+            if (zVelocity > 0f)
+            {
+                zVelocity -= (Time.deltaTime);
+            }
+
+            rigidbody.velocity = new Vector3(xVelocity, rigidbody.velocity.y, zVelocity);
+        }
 
         if (isSprinting)
         {
