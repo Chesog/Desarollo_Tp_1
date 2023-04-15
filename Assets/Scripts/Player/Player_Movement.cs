@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,7 +29,6 @@ public class Player_Movement : MonoBehaviour
     [Header("Coyote Time Setup")]
     [SerializeField] private float coyoteTime = 0.2f;
     [SerializeField] private float coyoteTimerCounter;
-
 
     private void Awake()
     {
@@ -61,7 +61,6 @@ public class Player_Movement : MonoBehaviour
         isSprinting = false;
         initialSpeed = speed;
     }
-
     private void FixedUpdate()
     {
 
@@ -189,6 +188,4 @@ public class Player_Movement : MonoBehaviour
         Debug.Log(input.isPressed);
         isSprinting = input.isPressed;
     }
-
-
 }

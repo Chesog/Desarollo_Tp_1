@@ -12,12 +12,16 @@ public class Dungegon_Generator : MonoBehaviour
         public bool[] status = new bool[4];
     }
 
+    private int currentRoomIndex = -1;
+    private Room_Behaviour currentRoom;
+
     [Header("SetUp")]
     [SerializeField] private Vector2Int mazeSize;
     [SerializeField] private Vector2Int offSet;
     [SerializeField] private int starPos = 0;
     [SerializeField] private Room_Rule[] rooms;
-
+    [SerializeField] private List<Room_Behaviour> dungegonRooms;
+    [SerializeField] private Transform player;
     List<Cell> board;
 
 
@@ -32,6 +36,10 @@ public class Dungegon_Generator : MonoBehaviour
         StartCoroutine(_SpawnCorutine());
     }
 
+    private void Update()
+    {
+        checkPlayerPos();
+    }
 
     private IEnumerator _SpawnCorutine() 
     {
@@ -42,14 +50,6 @@ public class Dungegon_Generator : MonoBehaviour
                 Cell currentCell = board[(i + j * mazeSize.x)];
                 if (currentCell.visited)
                 {
-                    float duration = 0.3f; // 3 seconds you can change this 
-                                         //to whatever you want
-                    float normalizedTime = 0;
-                    while (normalizedTime <= 1f)
-                    {
-                        normalizedTime += Time.deltaTime / duration;
-                        yield return null;
-                    }
                     int randomRoom = -1;
                     List<int> availableRoom = new List<int>();
 
@@ -84,9 +84,49 @@ public class Dungegon_Generator : MonoBehaviour
                     newRoom.UpdateRoom(board[(i + j * mazeSize.x)].status);
 
                     newRoom.name += " " + i + " - " + j;
+                    dungegonRooms.Add(newRoom);
                 }
             }
         }
+        foreach (var item in dungegonRooms)
+        {
+            item.SetAdjRooms();
+        }
+
+
+        yield return null;
+    }
+
+    void checkPlayerPos()
+    {
+        var aux = currentRoom;
+        var count = 0f;
+
+        for (int i = 0; i < dungegonRooms.Count; i++)
+        {
+            if (dungegonRooms[i].isPointInside(player.position))
+            {
+                currentRoom = dungegonRooms[i];
+                dungegonRooms[i].SetRoomVisible(true);
+                dungegonRooms[i].SetRoomCheked(true);
+            }
+
+            else
+            {
+                dungegonRooms[i].SetRoomVisible(false);
+                dungegonRooms[i].SetRoomCheked(false);
+                count++;
+            }
+
+        }
+
+        if (count == dungegonRooms.Count)
+        {
+            currentRoom = aux;
+            currentRoom.SetRoomVisible(true);
+            currentRoom.SetRoomCheked(true);
+        }
+        currentRoom.ShowAdjRooms();
     }
 
     private void MazeGenerator() 
