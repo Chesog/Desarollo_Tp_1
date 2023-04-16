@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player_Controler : MonoBehaviour
+public class Player_Controller : MonoBehaviour
 {
     [Header("SetUp")]
     private CharacterController controller;
