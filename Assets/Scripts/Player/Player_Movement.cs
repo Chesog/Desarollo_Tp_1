@@ -1,33 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player_Movement : MonoBehaviour
 {
-    private CharacterController controller;
     [Header("SetUp")]
+    private CharacterController controller;
+    [SerializeField] private Player_Setings setings;
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private Transform feet_Pivot;
     [SerializeField] private Transform playerCamera;
     [SerializeField] private Animator anim;
-    [SerializeField] private float jumpBufferTime = 0.2f;
     [SerializeField] private float jumpBufferTimeCounter;
-    [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float turnSmoothVelocity;
     private float lastAngle;
     private Coroutine _jumpCorutine;
     [Header("Movement")]
     [SerializeField] Vector3 _CurrentMovement;
-    [Range(0, 500)][SerializeField] private float speed = 20.0f;
+
     [SerializeField] float initialSpeed;
-    [Range(0, 500)][SerializeField] private float jumpForce = 20.0f;
     [SerializeField] private bool isJumping;
     [SerializeField] private bool isSprinting;
-    [SerializeField] const float maxDistance = 10f;
-    [SerializeField] const float minJumpDistance = 0.5f;
+
     [Header("Coyote Time Setup")]
-    [SerializeField] private float coyoteTime = 0.2f;
     [SerializeField] private float coyoteTimerCounter;
 
     private void Awake()
@@ -59,15 +55,15 @@ public class Player_Movement : MonoBehaviour
 
         isJumping = false;
         isSprinting = false;
-        initialSpeed = speed;
+        initialSpeed = setings.speed;
     }
     private void FixedUpdate()
     {
 
         if (isGrounded())
         {
-            coyoteTimerCounter = coyoteTime;
-            jumpBufferTimeCounter = jumpBufferTime;
+            coyoteTimerCounter = setings.coyoteTime;
+            jumpBufferTimeCounter = setings.jumpBufferTime;
             anim.SetBool("IsJumping", false);
         }
         else
@@ -85,18 +81,18 @@ public class Player_Movement : MonoBehaviour
             {
                 float targetAngle = Mathf.Atan2(_CurrentMovement.x, _CurrentMovement.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
                 lastAngle = targetAngle;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, setings.turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-                rigidbody.velocity = moveDir.normalized * speed + Vector3.up * rigidbody.velocity.y;
+                rigidbody.velocity = moveDir.normalized * setings.speed + Vector3.up * rigidbody.velocity.y;
             }
             else
             {
                 Vector3 moveDir = Quaternion.Euler(0f, lastAngle, 0f) * Vector3.forward;
 
-                rigidbody.velocity = moveDir.normalized * speed + Vector3.up * rigidbody.velocity.y;
+                rigidbody.velocity = moveDir.normalized * setings.speed + Vector3.up * rigidbody.velocity.y;
             }
 
         }
@@ -118,11 +114,11 @@ public class Player_Movement : MonoBehaviour
 
         if (isSprinting)
         {
-            speed = initialSpeed * 2;
+            setings.speed = initialSpeed * 2;
         }
         else
         {
-            speed = initialSpeed;
+            setings.speed = initialSpeed;
         }
     }
 
@@ -139,12 +135,12 @@ public class Player_Movement : MonoBehaviour
     {
         if (_jumpCorutine != null)
             StopCoroutine(_jumpCorutine);
-        _jumpCorutine = StartCoroutine(JumpCorutine(jumpBufferTime));
+        _jumpCorutine = StartCoroutine(JumpCorutine(setings.jumpBufferTime));
 
-        StopCoroutine(JumpCorutine(jumpBufferTime));
+        StopCoroutine(JumpCorutine(setings.jumpBufferTime));
         if (input.isPressed && rigidbody.velocity.y > 0f)
         {
-            rigidbody.velocity = _CurrentMovement * speed + Vector3.up * rigidbody.velocity.y * 0.5f;
+            rigidbody.velocity = _CurrentMovement * setings.speed + Vector3.up * rigidbody.velocity.y * 0.5f;
             coyoteTimerCounter = 0f;
         }
     }
@@ -165,7 +161,7 @@ public class Player_Movement : MonoBehaviour
             if (coyoteTimerCounter > 0f && jumpBufferTimeCounter > 0f && !isJumping)
             {
                 rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z);
-                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                rigidbody.AddForce(Vector3.up * setings.jumpForce, ForceMode.Impulse);
                 if (timeElapsed > 0)
                 {
                     Debug.Log(message: $"{name}: buffer jump for {timeElapsed} seconds");
@@ -180,7 +176,7 @@ public class Player_Movement : MonoBehaviour
 
     private bool isGrounded()
     {
-        return Physics.Raycast(feet_Pivot.position, Vector3.down, out var hit, maxDistance) && hit.distance <= minJumpDistance;
+        return Physics.Raycast(feet_Pivot.position, Vector3.down, out var hit, setings.maxDistance) && hit.distance <= setings.minJumpDistance;
     }
 
     public void OnSprint(InputValue input)
