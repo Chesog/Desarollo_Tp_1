@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class Player_Movement : MonoBehaviour
 
     [Header("Coyote Time Setup")]
     [SerializeField] private float coyoteTimerCounter;
+
+    public event Action<float> OnPlayerJump;
 
     private void Awake()
     {
@@ -61,7 +64,6 @@ public class Player_Movement : MonoBehaviour
 
     public void FixedUpdate()
     {
-
         if (isGrounded())
         {
             coyoteTimerCounter = setings.coyoteTime;
@@ -118,6 +120,7 @@ public class Player_Movement : MonoBehaviour
         {
             setings.speed = initialSpeed;
         }
+        OnPlayerJump.Invoke(rigidbody.velocity.y);
     }
 
     private void Controller_OnPlayerMove(Vector2 obj)
@@ -178,7 +181,7 @@ public class Player_Movement : MonoBehaviour
             timeElapsed += Time.fixedDeltaTime;
         }
     }
-    private bool isGrounded()
+    public bool isGrounded()
     {
         return Physics.Raycast(feet_Pivot.position, Vector3.down, out var hit, setings.maxDistance) && hit.distance <= setings.minJumpDistance;
     }

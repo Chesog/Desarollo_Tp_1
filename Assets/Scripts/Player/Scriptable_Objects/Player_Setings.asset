@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player_Setings
   m_EditorClassIdentifier: 
   speed: 10
-  jumpForce: 20
+  jumpForce: 10
   maxDistance: 10
   minJumpDistance: 0.5
   jumpBufferTime: 0.2
