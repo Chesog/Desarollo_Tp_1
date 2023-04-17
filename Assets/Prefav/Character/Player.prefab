@@ -818,6 +818,7 @@ GameObject:
   - component: {fileID: 656559978401318368}
   - component: {fileID: 656559978401318380}
   - component: {fileID: 656559978401318381}
+  - component: {fileID: 2299447462200517668}
   - component: {fileID: 5503618086157593141}
   m_Layer: 0
   m_Name: Player
@@ -938,6 +939,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bbf0c06ab18af42ab98393f7d3bc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setings: {fileID: 0}
+  rigidbody: {fileID: 0}
+  feet_Pivot: {fileID: 0}
+  playerCamera: {fileID: 0}
+  jumpBufferTimeCounter: 0
+  turnSmoothVelocity: 0
+  _CurrentMovement: {x: 0, y: 0, z: 0}
+  initialSpeed: 0
+  isJumping: 0
+  isSprinting: 0
+  coyoteTimerCounter: 0
+--- !u!114 &2299447462200517668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270577669987283354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2af60abba19ed499b17a8546ef8dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 3899752145710056005}
 --- !u!114 &5503618086157593141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,18 +975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41d29ee12733d54ea6ca6a69dce5740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setings: {fileID: 11400000, guid: 6f2974fcb1c2af742a90b8259bc2cc97, type: 2}
-  rigidbody: {fileID: 656559978401318382}
-  feet_Pivot: {fileID: 656559977413399971}
-  playerCamera: {fileID: 0}
-  anim: {fileID: 3899752145710056005}
-  jumpBufferTimeCounter: 0
-  turnSmoothVelocity: 0
-  _CurrentMovement: {x: 0, y: 0, z: 0}
-  initialSpeed: 0
-  isJumping: 0
-  isSprinting: 0
-  coyoteTimerCounter: 0
 --- !u!1 &1281370389992057380
 GameObject:
   m_ObjectHideFlags: 0

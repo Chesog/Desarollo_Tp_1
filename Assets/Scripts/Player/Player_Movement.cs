@@ -12,7 +12,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private Transform feet_Pivot;
     [SerializeField] private Transform playerCamera;
-    [SerializeField] private Animator anim;
     [SerializeField] private float jumpBufferTimeCounter;
     [SerializeField] private float turnSmoothVelocity;
     private float lastAngle;
@@ -42,13 +41,11 @@ public class Player_Movement : MonoBehaviour
             Debug.LogError(message: $"{name}: (logError){nameof(feet_Pivot)} is null");
         }
 
-        anim ??= GetComponent<Animator>();
-        if (!anim)
+        controller ??= GetComponent<Player_Controller>();
+        if (!controller)
         {
-            Debug.LogError(message: $"{name}: (logError){nameof(anim)} is null");
+            Debug.LogError(message: $"{name}: (logError){nameof(controller)} is null");
         }
-
-        controller = GetComponent<Player_Controller>();
 
         isJumping = false;
         isSprinting = false;
@@ -69,16 +66,12 @@ public class Player_Movement : MonoBehaviour
         {
             coyoteTimerCounter = setings.coyoteTime;
             jumpBufferTimeCounter = setings.jumpBufferTime;
-            anim.SetBool("IsJumping", false);
         }
         else
         {
             coyoteTimerCounter -= Time.deltaTime;
             jumpBufferTimeCounter -= Time.deltaTime;
-            anim.SetBool("IsJumping", true);
         }
-        anim.SetFloat("VelocityX/Z", rigidbody.velocity.magnitude - rigidbody.velocity.y);
-        anim.SetFloat("VelocityY", rigidbody.velocity.y);
 
         if (_CurrentMovement.magnitude >= 1f)
         {
