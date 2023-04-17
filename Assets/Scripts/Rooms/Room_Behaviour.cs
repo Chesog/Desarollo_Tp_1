@@ -45,7 +45,6 @@ public class Room_Behaviour : MonoBehaviour
         else
         {
             Hide();
-            //Invoke("Hide",2f);
         }
 
         if (isRoomCheked)
@@ -105,21 +104,36 @@ public class Room_Behaviour : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(rayOrigin.position, Vector3.forward ,out hit,rayDistance))
+        if (doors[0].activeInHierarchy)
         {
-            adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
+            if (Physics.Raycast(rayOrigin.position, Vector3.forward, out hit, rayDistance))
+            {
+                adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
+            }
         }
-        if (Physics.Raycast(rayOrigin.position, - Vector3.forward, out hit, rayDistance))
+
+        if (doors[1].activeInHierarchy)
         {
-            adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
+            if (Physics.Raycast(rayOrigin.position, -Vector3.forward, out hit, rayDistance))
+            {
+                adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
+            }
         }
-        if (Physics.Raycast(rayOrigin.position, Vector3.left, out hit, rayDistance))
+
+        if (doors[2].activeInHierarchy)
         {
-            adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
+            if (Physics.Raycast(rayOrigin.position, Vector3.right, out hit, rayDistance))
+            {
+                adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
+            }
         }
-        if (Physics.Raycast(rayOrigin.position, Vector3.right, out hit, rayDistance))
+
+        if (doors[3].activeInHierarchy)
         {
-            adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
+            if (Physics.Raycast(rayOrigin.position, Vector3.left, out hit, rayDistance))
+            {
+                adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
+            }
         }
     }
 
