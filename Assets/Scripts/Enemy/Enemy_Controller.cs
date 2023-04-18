@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class Enemy_Controller : MonoBehaviour
 {
-    public float lookRad = 10f;
+    [SerializeField]private float lookRad = 10f;
+    [SerializeField]private float stopDistance = 5f;
     [SerializeField] private Transform target;
     [SerializeField] NavMeshAgent agent;
 
@@ -27,8 +28,11 @@ public class Enemy_Controller : MonoBehaviour
         {
 
             transform.position = Vector3.MoveTowards(transform.position, target.position, 0.2f);
-            if (distance <= agent.stoppingDistance)
+            Debug.Log("Stop Distance" + stopDistance);
+            if (distance <= stopDistance)
             {
+                Debug.Log("Distance" + distance);
+                transform.position = transform.position;
                 //Attack the Target
                 faceTarget();
             }
