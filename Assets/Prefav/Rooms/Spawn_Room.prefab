@@ -1318,6 +1318,7 @@ MonoBehaviour:
   - {fileID: 8511934981246276330}
   - {fileID: 1258083458656575722}
   playerPos: {fileID: 1939414284527397664, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
+  updateTimer: 2
   roomPoints:
   - {fileID: 9071634066635341699}
   - {fileID: 3457408602868776571}
