@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player_Setings : ScriptableObject
 {
     [Header("Player SetUps")]
+    public float health = 100f;
     [Range(0, 500)] public float speed = 20.0f;
     [Range(0, 500)] public float jumpForce = 20.0f;
      public float maxDistance = 10f;
