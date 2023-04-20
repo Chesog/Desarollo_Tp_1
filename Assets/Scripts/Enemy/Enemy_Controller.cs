@@ -8,8 +8,12 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private float lookRad = 20f;
     [SerializeField] private float stopDistance = 5f;
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float timeBetweenAttacks = 0.5f;
+    [SerializeField] private bool alreadyAttacked;
     [SerializeField] private Transform target;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private float health;
 
     private void Start()
     {
@@ -39,6 +43,7 @@ public class Enemy_Controller : MonoBehaviour
             rb.velocity = gameObject.transform.forward * speed;
             if (distance <= stopDistance)
             {
+                AttackPlayer();
 
                 rb.velocity = new Vector3(0f,0f,0f);
                 //Attack the Target
@@ -48,10 +53,39 @@ public class Enemy_Controller : MonoBehaviour
 
     private void faceTarget()
     {
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         transform.LookAt(target.position);
+    }
+
+    private void AttackPlayer() 
+    {
+        if (!alreadyAttacked) 
+        {
+            Rigidbody projectile = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            projectile.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
+           
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack),timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+    }
+
+    private void TakeDamage(int damage) 
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Invoke(nameof(DestroyEnemy),0.5f);
+        }
+    }
+
+    private void DestroyEnemy() 
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()
