@@ -60,12 +60,10 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (!alreadyAttacked) 
         {
-            Rigidbody projectile = Instantiate(bullet, transform.position, Quaternion.identity,this.transform).GetComponent<Rigidbody>();
+            Rigidbody projectile = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             projectile.AddForce(transform.forward * 32f, ForceMode.Impulse);
             projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
             
-
-
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack),timeBetweenAttacks);
         }
