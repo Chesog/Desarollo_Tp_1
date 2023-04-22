@@ -12,7 +12,8 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private bool alreadyAttacked;
     [SerializeField] private Transform target;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private GameObject bullet;
+    //[SerializeField] private Bullet bullet;
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float health;
 
     private void Start()
@@ -60,10 +61,16 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (!alreadyAttacked) 
         {
-            Rigidbody projectile = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            projectile.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
-            
+
+            //Rigidbody projectile = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            //projectile.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            //projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
+
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+            Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
+            bulletScript.Fire();
+
+
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack),timeBetweenAttacks);
         }
