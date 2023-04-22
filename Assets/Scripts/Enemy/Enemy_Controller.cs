@@ -11,6 +11,7 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private float timeBetweenAttacks = 0.5f;
     [SerializeField] private bool alreadyAttacked;
     [SerializeField] private Transform target;
+    [SerializeField] private Transform bulletSpawn;
     [SerializeField] private Rigidbody rb;
     //[SerializeField] private Bullet bullet;
     [SerializeField] private GameObject bulletPrefab;
@@ -66,7 +67,7 @@ public class Enemy_Controller : MonoBehaviour
             //projectile.AddForce(transform.forward * 32f, ForceMode.Impulse);
             //projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
 
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab,bulletSpawn.position, transform.rotation);
             Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
             bulletScript.Fire();
 
@@ -81,7 +82,7 @@ public class Enemy_Controller : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    private void TakeDamage(int damage) 
+    public void TakeDamage(int damage) 
     {
         health -= damage;
         if (health <= 0)

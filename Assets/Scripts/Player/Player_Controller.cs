@@ -15,7 +15,7 @@ public class Player_Controller : MonoBehaviour
 
     private void Start()
     {
-       
+       setings = new Player_Setings();
     }
 
     public void OnMove(InputValue input)
@@ -42,13 +42,23 @@ public class Player_Controller : MonoBehaviour
             Debug.LogWarning($"On Sprint: event has no listeners");
     }
 
-    private void TakeDamage(int damage) 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            TakeDamage(other.GetComponent<Bullet_Controller>().damage);
+            Destroy(other.gameObject);
+        }
+    }
+
+    public void TakeDamage(float damage) 
     {
         setings.health -= damage;
         if (setings.health <= 0)
         {
             Invoke(nameof(DestroyPlayer),0.5f);
         }
+        Debug.Log("Player Health " + setings.health);
     }
 
     private void DestroyPlayer() 

@@ -179,28 +179,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 6330706891537420384, guid: 598ef64c9d852b6408d6e4982442fd43, type: 3}
-    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1898060030}
-    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 6330706891537420384, guid: 598ef64c9d852b6408d6e4982442fd43, type: 3}
-    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: timeBetweenAttacks
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
---- !u!4 &806969030 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 656559977413399971, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
-  m_PrefabInstance: {fileID: 1901866625}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1050326158
 GameObject:
   m_ObjectHideFlags: 0
@@ -5288,11 +5271,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1898060028 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 656559978401318382, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
-  m_PrefabInstance: {fileID: 1901866625}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1898060030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1939414284527397664, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
@@ -5305,18 +5283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 656559978401318381, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
-      propertyPath: setings
-      value: 
-      objectReference: {fileID: 11400000, guid: 6f2974fcb1c2af742a90b8259bc2cc97, type: 2}
-    - target: {fileID: 656559978401318381, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
-      propertyPath: rigidbody
-      value: 
-      objectReference: {fileID: 1898060028}
-    - target: {fileID: 656559978401318381, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
-      propertyPath: feet_Pivot
-      value: 
-      objectReference: {fileID: 806969030}
     - target: {fileID: 656559978401318381, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
       propertyPath: playerCamera
       value: 
