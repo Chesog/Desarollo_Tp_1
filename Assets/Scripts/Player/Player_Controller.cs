@@ -73,6 +73,9 @@ public class Player_Controller : MonoBehaviour
         {
             if (!setings.isBlocking)
             {
+                if (setings.health <= 0)
+                    return;
+
                 OnPlayerTakeDamage.Invoke();
                 TakeDamage(other.GetComponent<Bullet_Controller>().damage);
                 Destroy(other.gameObject);
@@ -100,8 +103,10 @@ public class Player_Controller : MonoBehaviour
 
     public void TakeDamage(float damage) 
     {
-        setings.health -= damage;
+        if (setings.health <= 0)
+            return;
 
+        setings.health -= damage;
         Debug.Log("Player Health " + setings.health);
     }
 

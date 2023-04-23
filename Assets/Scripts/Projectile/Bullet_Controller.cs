@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet_Controller : MonoBehaviour
 {
     public float speed = 10f; // speed of the bullet
-    public float lifetime = 3f; // lifetime of the bullet in seconds
+    public float lifetime = 5f; // lifetime of the bullet in seconds
     public float damage = 5f;
 
     private float timer; // timer to keep track of how long the bullet has been alive
@@ -23,11 +23,11 @@ public class Bullet_Controller : MonoBehaviour
         // increment the timer
         timer += Time.deltaTime;
 
-        // destroy the bullet if it has been alive for longer than its lifetime
-        //if (timer >= lifetime)
-        //{
-        //    Destroy(gameObject);
-        //}
+        //destroy the bullet if it has been alive for longer than its lifetime
+        if (timer >= lifetime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Fire()
