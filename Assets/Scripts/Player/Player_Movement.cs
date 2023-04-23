@@ -28,6 +28,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float coyoteTimerCounter;
 
     public event Action<float> OnPlayerJump;
+    public event Action<float> OnPlayerAttack;
+    public event Action<float> OnPlayerBlock;
 
     private void Awake()
     {
@@ -151,7 +153,6 @@ public class Player_Movement : MonoBehaviour
         Debug.Log(obj);
         isSprinting = obj;
     }
-
 
     private IEnumerator JumpCorutine(float bufferTime)
     {

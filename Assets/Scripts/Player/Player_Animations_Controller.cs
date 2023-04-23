@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,8 @@ public class Player_Animations_Controller : MonoBehaviour
         controller.OnPlayerMove += Controller_OnPlayerMove;
         controller.OnPlayerJump += Controller_OnPlayerJump;
         controller.OnPlayerSprint += Controller_OnPlayerSprint;
+        controller.OnPlayerAttack += Controller_OnPlayerAttack;
+        controller.OnPlayerBlock += Controller_OnPlayerBlock;
 
         movement_Controller.OnPlayerJump += Controller_OnPlayerJump;
     }
@@ -74,10 +77,24 @@ public class Player_Animations_Controller : MonoBehaviour
         anim.SetBool("IsRuning",obj);
     }
 
+    private void Controller_OnPlayerBlock(bool obj)
+    {
+        anim.SetBool("Blocking",obj);
+    }
+
+    private void Controller_OnPlayerAttack(bool obj)
+    {
+        anim.SetBool("Attacking",obj);
+    }
+
     private void OnDestroy()
     {
         controller.OnPlayerMove -= Controller_OnPlayerMove;
         controller.OnPlayerJump -= Controller_OnPlayerJump;
         controller.OnPlayerSprint -= Controller_OnPlayerSprint;
+        controller.OnPlayerAttack -= Controller_OnPlayerAttack;
+        controller.OnPlayerBlock -= Controller_OnPlayerBlock;
+
+        movement_Controller.OnPlayerJump -= Controller_OnPlayerJump;
     }
 }

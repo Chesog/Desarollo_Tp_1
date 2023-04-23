@@ -12,6 +12,8 @@ public class Player_Controller : MonoBehaviour
     public event Action<Vector2> OnPlayerMove;
     public event Action<bool> OnPlayerJump;
     public event Action<bool> OnPlayerSprint;
+    public event Action<bool> OnPlayerAttack;
+    public event Action<bool> OnPlayerBlock;
 
     private void Start()
     {
@@ -42,6 +44,22 @@ public class Player_Controller : MonoBehaviour
             Debug.LogWarning($"On Sprint: event has no listeners");
     }
 
+    public void OnR_Click(InputValue input)
+    {
+        if (OnPlayerBlock != null)
+            OnPlayerBlock.Invoke(input.isPressed);
+        else
+            Debug.LogWarning($"On Sprint: event has no listeners");
+    }
+
+    public void OnL_Click(InputValue input)
+    {
+        if (OnPlayerAttack != null)
+            OnPlayerAttack.Invoke(input.isPressed);
+        else
+            Debug.LogWarning($"On Sprint: event has no listeners");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet"))
@@ -50,6 +68,8 @@ public class Player_Controller : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    
 
     public void TakeDamage(float damage) 
     {
