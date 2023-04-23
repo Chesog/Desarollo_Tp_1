@@ -15,9 +15,14 @@ public class Player_Controller : MonoBehaviour
     public event Action<bool> OnPlayerAttack;
     public event Action<bool> OnPlayerBlock;
 
-    private void Start()
+    private void Awake()
     {
        setings = new Player_Setings();
+    }
+
+    public Player_Setings GetPlayerSetings() 
+    {
+        return setings;
     }
 
     public void OnMove(InputValue input)
@@ -64,8 +69,15 @@ public class Player_Controller : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            TakeDamage(other.GetComponent<Bullet_Controller>().damage);
-            Destroy(other.gameObject);
+            if (!setings.isBlocking)
+            {
+                TakeDamage(other.GetComponent<Bullet_Controller>().damage);
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                return;
+            }
         }
     }
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3894219589045316901}
   m_Layer: 0
   m_Name: Metal Sword
-  m_TagString: Untagged
+  m_TagString: Player_Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

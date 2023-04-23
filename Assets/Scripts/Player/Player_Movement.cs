@@ -52,6 +52,8 @@ public class Player_Movement : MonoBehaviour
             Debug.LogError(message: $"{name}: (logError){nameof(controller)} is null");
         }
 
+        setings = controller.GetPlayerSetings();
+
         isJumping = false;
         isSprinting = false;
         initialSpeed = setings.speed;
@@ -62,6 +64,8 @@ public class Player_Movement : MonoBehaviour
         controller.OnPlayerMove += Controller_OnPlayerMove;
         controller.OnPlayerJump += Controller_OnPlayerJump;
         controller.OnPlayerSprint += Controller_OnPlayerSprint;
+        controller.OnPlayerAttack += Controller_OnPlayerAttack;
+        controller.OnPlayerBlock += Controller_OnPlayerBlock;
     }
 
     public void FixedUpdate()
@@ -154,6 +158,16 @@ public class Player_Movement : MonoBehaviour
         isSprinting = obj;
     }
 
+    private void Controller_OnPlayerBlock(bool obj)
+    {
+        setings.isBlocking = obj;
+    }
+
+    private void Controller_OnPlayerAttack(bool obj)
+    {
+        setings.isAttacking = obj;
+    }
+
     private IEnumerator JumpCorutine(float bufferTime)
     {
         if (!feet_Pivot)
@@ -191,5 +205,7 @@ public class Player_Movement : MonoBehaviour
         controller.OnPlayerMove -= Controller_OnPlayerMove;
         controller.OnPlayerJump -= Controller_OnPlayerJump;
         controller.OnPlayerSprint -= Controller_OnPlayerSprint;
+        controller.OnPlayerAttack -= Controller_OnPlayerAttack;
+        controller.OnPlayerBlock -= Controller_OnPlayerBlock;
     }
 }
