@@ -36,10 +36,10 @@ public class Enemy_Controller : MonoBehaviour
 
     private void Update()
     {
-        float distance = Vector3.Distance(transform.position,target.position);
+        float distance = Vector3.Distance(transform.position, target.position);
         faceTarget();
 
-        if (distance <= lookRad) 
+        if (distance <= lookRad)
         {
             //transform.Translate(Vector3.forward * Time.deltaTime * speed);
             rb.velocity = gameObject.transform.forward * speed;
@@ -47,7 +47,7 @@ public class Enemy_Controller : MonoBehaviour
             {
                 AttackPlayer();
 
-                rb.velocity = new Vector3(0f,0f,0f);
+                rb.velocity = new Vector3(0f, 0f, 0f);
                 //Attack the Target
             }
         }
@@ -58,22 +58,22 @@ public class Enemy_Controller : MonoBehaviour
         transform.LookAt(target.position);
     }
 
-    private void AttackPlayer() 
+    private void AttackPlayer()
     {
-        if (!alreadyAttacked) 
+        if (!alreadyAttacked)
         {
 
             //Rigidbody projectile = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             //projectile.AddForce(transform.forward * 32f, ForceMode.Impulse);
             //projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
 
-            GameObject bullet = Instantiate(bulletPrefab,bulletSpawn.position, transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, transform.rotation);
             Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
             bulletScript.Fire();
 
 
             alreadyAttacked = true;
-            Invoke(nameof(ResetAttack),timeBetweenAttacks);
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
 
@@ -82,16 +82,25 @@ public class Enemy_Controller : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(int damage) 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player_Weapon"))
+        {
+            TakeDamage(other.GetComponent<Weapon_Stats>().GetDamage());
+        }
+    }
+
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
         {
-            Invoke(nameof(DestroyEnemy),0.5f);
+            Invoke(nameof(DestroyEnemy), 0.5f);
         }
+        Debug.Log(health);
     }
 
-    private void DestroyEnemy() 
+    private void DestroyEnemy()
     {
         Destroy(gameObject);
     }

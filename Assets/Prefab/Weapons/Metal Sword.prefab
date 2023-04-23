@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6301139689938710704}
   - component: {fileID: 6291900812345867842}
   - component: {fileID: 3894219589045316901}
+  - component: {fileID: 4555648804274867399}
   m_Layer: 0
   m_Name: Metal Sword
   m_TagString: Player_Weapon
@@ -97,3 +98,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.85, y: 7.088237, z: 0.73}
   m_Center: {x: -0.00078618526, y: 4.4643226, z: -0.00055497885}
+--- !u!114 &4555648804274867399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269368558458436348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5b0803428c7942468c0de8027462ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponDamage: 10
