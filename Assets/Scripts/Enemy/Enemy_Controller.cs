@@ -51,6 +51,15 @@ public class Enemy_Controller : MonoBehaviour
                 //Attack the Target
             }
         }
+        CheckHealth();
+    }
+
+    private void CheckHealth() 
+    {
+        if (health <= 0)
+        {
+            Invoke(nameof(DestroyEnemy), 0.5f);
+        }
     }
 
     private void faceTarget()
@@ -82,6 +91,7 @@ public class Enemy_Controller : MonoBehaviour
         alreadyAttacked = false;
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player_Weapon"))
@@ -93,10 +103,6 @@ public class Enemy_Controller : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if (health <= 0)
-        {
-            Invoke(nameof(DestroyEnemy), 0.5f);
-        }
         Debug.Log(health);
     }
 

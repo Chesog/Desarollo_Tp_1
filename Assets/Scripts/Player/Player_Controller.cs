@@ -81,15 +81,23 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
-    
+    private void Update()
+    {
+        CheckHealth();
+    }
+
+    private void CheckHealth()
+    {
+        if (setings.health <= 0)
+        {
+            Invoke(nameof(DestroyPlayer), 0.5f);
+        }
+    }
 
     public void TakeDamage(float damage) 
     {
         setings.health -= damage;
-        if (setings.health <= 0)
-        {
-            Invoke(nameof(DestroyPlayer),0.5f);
-        }
+
         Debug.Log("Player Health " + setings.health);
     }
 
