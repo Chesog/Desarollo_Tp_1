@@ -38,6 +38,8 @@ public class Player_Animations_Controller : MonoBehaviour
         controller.OnPlayerSprint += Controller_OnPlayerSprint;
         controller.OnPlayerAttack += Controller_OnPlayerAttack;
         controller.OnPlayerBlock += Controller_OnPlayerBlock;
+        controller.OnPlayerTakeDamage += Controller_OnPlayerTakeDamage;
+        controller.OnPlayerDead += Controller_OnPlayerDead;
 
         movement_Controller.OnPlayerJump += Controller_OnPlayerJump;
     }
@@ -87,6 +89,16 @@ public class Player_Animations_Controller : MonoBehaviour
         anim.SetBool("Attacking",obj);
     }
 
+    private void Controller_OnPlayerTakeDamage()
+    {
+        anim.Play("GetHit");
+    }
+
+    private void Controller_OnPlayerDead()
+    {
+        anim.Play("Death");
+    }
+
     private void OnDestroy()
     {
         controller.OnPlayerMove -= Controller_OnPlayerMove;
@@ -94,6 +106,8 @@ public class Player_Animations_Controller : MonoBehaviour
         controller.OnPlayerSprint -= Controller_OnPlayerSprint;
         controller.OnPlayerAttack -= Controller_OnPlayerAttack;
         controller.OnPlayerBlock -= Controller_OnPlayerBlock;
+        controller.OnPlayerTakeDamage -= Controller_OnPlayerTakeDamage;
+        controller.OnPlayerDead -= Controller_OnPlayerDead;
 
         movement_Controller.OnPlayerJump -= Controller_OnPlayerJump;
     }

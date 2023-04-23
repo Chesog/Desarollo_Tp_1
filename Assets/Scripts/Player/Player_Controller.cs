@@ -14,6 +14,8 @@ public class Player_Controller : MonoBehaviour
     public event Action<bool> OnPlayerSprint;
     public event Action<bool> OnPlayerAttack;
     public event Action<bool> OnPlayerBlock;
+    public event Action OnPlayerTakeDamage;
+    public event Action OnPlayerDead;
 
     private void Awake()
     {
@@ -71,6 +73,7 @@ public class Player_Controller : MonoBehaviour
         {
             if (!setings.isBlocking)
             {
+                OnPlayerTakeDamage.Invoke();
                 TakeDamage(other.GetComponent<Bullet_Controller>().damage);
                 Destroy(other.gameObject);
             }
@@ -90,7 +93,8 @@ public class Player_Controller : MonoBehaviour
     {
         if (setings.health <= 0)
         {
-            Invoke(nameof(DestroyPlayer), 0.5f);
+            OnPlayerDead.Invoke();
+            //Invoke(nameof(DestroyPlayer), 0.5f);
         }
     }
 
