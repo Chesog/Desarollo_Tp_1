@@ -57,17 +57,14 @@ public class Enemy_Controller : MonoBehaviour
                 AttackPlayer();
 
                 rb.velocity = new Vector3(0f, 0f, 0f);
-                //Attack the Target
             }
         }
-        if (rb.velocity.magnitude >= 1f)
-        {
-            Vector2 pos = new Vector2(rb.velocity.x, rb.velocity.z);
-            OnEnemyMove(pos);
-        }
+
+        Vector2 pos = new Vector2(rb.velocity.x, rb.velocity.z);
+        OnEnemyMove(pos);
     }
 
-    private void CheckHealth() 
+    private void CheckHealth()
     {
         if (health <= 0)
         {
