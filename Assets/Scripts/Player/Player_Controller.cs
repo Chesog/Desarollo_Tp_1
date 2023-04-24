@@ -8,6 +8,7 @@ public class Player_Controller : MonoBehaviour
 
     Player_Movement movement;
     [SerializeField] private Player_Setings setings;
+    public Game_Manager _Manager;
 
     public event Action<Vector2> OnPlayerMove;
     public event Action<bool> OnPlayerJump;
@@ -20,6 +21,7 @@ public class Player_Controller : MonoBehaviour
     private void Awake()
     {
         setings = ScriptableObject.CreateInstance<Player_Setings>();
+        _Manager.SetMaxHealth(setings.health);
     }
 
     public Player_Setings GetPlayerSetings()
@@ -101,6 +103,7 @@ public class Player_Controller : MonoBehaviour
             OnPlayerDead.Invoke();
             //Invoke(nameof(DestroyPlayer), 0.5f);
         }
+        _Manager.SetHealth(setings.health);
     }
 
     public void TakeDamage(float damage)
