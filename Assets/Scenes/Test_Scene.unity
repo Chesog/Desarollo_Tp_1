@@ -187,9 +187,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1898060030}
     - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
+      propertyPath: destroyTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
       propertyPath: enemyAnimController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1057172128}
     - target: {fileID: 8329165050019950566, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
       propertyPath: m_CullingMode
       value: 0
@@ -6313,7 +6317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3004312682217694654, guid: 1457811a4fc2f9b4ea9e9bf8b0ad94b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -32.800034
+      value: -32.800053
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1457811a4fc2f9b4ea9e9bf8b0ad94b9, type: 3}

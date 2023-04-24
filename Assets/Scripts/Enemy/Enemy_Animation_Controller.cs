@@ -18,6 +18,12 @@ public class Enemy_Animation_Controller : MonoBehaviour
         controller.OnEnemyMove += Controller_OnEnemyMove;
         controller.OnEnemyAttack += Controller_OnEnemyAttack;
         controller.OnEnemyHit += Controller_OnEnemyHit;
+        controller.OnEnemyDeath += Controller_OnEnemyDeath;
+    }
+
+    private void Controller_OnEnemyDeath()
+    {
+        anim.Play("Standing React Death Backward");
     }
 
     private void Controller_OnEnemyHit()
@@ -47,5 +53,6 @@ public class Enemy_Animation_Controller : MonoBehaviour
         controller.OnEnemyMove -= Controller_OnEnemyMove;
         controller.OnEnemyAttack -= Controller_OnEnemyAttack;
         controller.OnEnemyHit -= Controller_OnEnemyHit;
+        controller.OnEnemyDeath -= Controller_OnEnemyDeath;
     }
 }

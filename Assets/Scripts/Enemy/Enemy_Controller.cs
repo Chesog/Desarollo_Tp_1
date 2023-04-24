@@ -10,7 +10,10 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private float stopDistance = 5f;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float timeBetweenAttacks = 0.5f;
+    [SerializeField] private float destroyTime;
+    [SerializeField] private float destroyTimer;
     [SerializeField] private bool alreadyAttacked;
+    [SerializeField] private bool deathLoop;
     [SerializeField] private Transform target;
     [SerializeField] private Transform bulletSpawn;
     [SerializeField] private Rigidbody rb;
@@ -22,6 +25,7 @@ public class Enemy_Controller : MonoBehaviour
     public event Action<Vector2> OnEnemyMove;
     public event Action OnEnemyAttack;
     public event Action OnEnemyHit;
+    public event Action OnEnemyDeath;
 
     private void Start()
     {
@@ -40,6 +44,8 @@ public class Enemy_Controller : MonoBehaviour
             Debug.LogError(message: $"{name}: (logError){nameof(rb)} is null");
             enabled = false;
         }
+
+        deathLoop = false;
     }
 
     private void EnemyAnimController_OnBulletSpawn()
@@ -52,27 +58,34 @@ public class Enemy_Controller : MonoBehaviour
 
     private void Update()
     {
+        float distance = Vector3.Distance(transform.position, target.position);
+
+        if(distance <= lookRad || distance <= stopDistance)
         faceTarget();
+
         CheckHealth();
     }
 
     private void FixedUpdate()
     {
-        float distance = Vector3.Distance(transform.position, target.position);
-        if (distance <= lookRad)
+        if (!deathLoop)
         {
-            //transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            rb.velocity = gameObject.transform.forward * speed;
-            if (distance <= stopDistance)
+            float distance = Vector3.Distance(transform.position, target.position);
+            if (distance <= lookRad)
             {
-                AttackPlayer();
+                //transform.Translate(Vector3.forward * Time.deltaTime * speed);
+                rb.velocity = gameObject.transform.forward * speed;
+                if (distance <= stopDistance)
+                {
+                    AttackPlayer();
 
-                rb.velocity = new Vector3(0f, 0f, 0f);
+                    rb.velocity = new Vector3(0f, 0f, 0f);
+                }
             }
-        }
 
-        Vector2 pos = new Vector2(rb.velocity.x, rb.velocity.z);
-        OnEnemyMove(pos);
+            Vector2 pos = new Vector2(rb.velocity.x, rb.velocity.z);
+            OnEnemyMove(pos);
+        }
     }
 
     private void CheckHealth()
@@ -92,11 +105,6 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (!alreadyAttacked)
         {
-
-            //Rigidbody projectile = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            //projectile.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            //projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
-
             OnEnemyAttack.Invoke();
 
             alreadyAttacked = true;
@@ -113,9 +121,12 @@ public class Enemy_Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player_Weapon"))
+        if (health != 0)
         {
-            TakeDamage(other.GetComponent<Weapon_Stats>().GetDamage());
+            if (other.CompareTag("Player_Weapon"))
+            {
+                TakeDamage(other.GetComponent<Weapon_Stats>().GetDamage());
+            }
         }
     }
 
@@ -128,7 +139,17 @@ public class Enemy_Controller : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        Destroy(gameObject);
+        if (!deathLoop)
+        {
+            OnEnemyDeath.Invoke();
+            deathLoop = true;
+        }
+
+        destroyTimer += Time.deltaTime;
+        if (destroyTimer >= destroyTime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnDrawGizmosSelected()
