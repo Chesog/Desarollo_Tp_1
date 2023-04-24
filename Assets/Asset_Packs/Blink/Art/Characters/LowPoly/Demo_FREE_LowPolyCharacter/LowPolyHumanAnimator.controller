@@ -172,7 +172,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6589092039564311902, guid: a8bd4d740daa72c46bbff25e229c4ad2, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: e604344eb60d12543b2c848e483a9e99, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -527,7 +527,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MeleeAttack_OneHanded
+  m_Name: Sword And Shield Slash
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -541,7 +541,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -8731992131643994696, guid: 3d7c10dfb76b352458c6ee3cf1acd54f, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: fa72d0d6e8feb1c449d44304a234f29e, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -19,10 +19,10 @@ public class Player_Controller : MonoBehaviour
 
     private void Awake()
     {
-       setings = ScriptableObject.CreateInstance<Player_Setings>();
+        setings = ScriptableObject.CreateInstance<Player_Setings>();
     }
 
-    public Player_Setings GetPlayerSetings() 
+    public Player_Setings GetPlayerSetings()
     {
         return setings;
     }
@@ -30,7 +30,9 @@ public class Player_Controller : MonoBehaviour
     public void OnMove(InputValue input)
     {
         if (OnPlayerMove != null)
-        OnPlayerMove.Invoke(input.Get<Vector2>());
+        {
+            OnPlayerMove.Invoke(input.Get<Vector2>());
+        }
         else
             Debug.LogWarning($"On Move: event has no listeners");
     }
@@ -101,7 +103,7 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage) 
+    public void TakeDamage(float damage)
     {
         if (setings.health <= 0)
             return;
@@ -110,7 +112,7 @@ public class Player_Controller : MonoBehaviour
         Debug.Log("Player Health " + setings.health);
     }
 
-    private void DestroyPlayer() 
+    private void DestroyPlayer()
     {
         Destroy(gameObject);
     }

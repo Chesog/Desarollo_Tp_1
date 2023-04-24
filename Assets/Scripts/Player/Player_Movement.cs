@@ -22,6 +22,7 @@ public class Player_Movement : MonoBehaviour
 
     [SerializeField] float initialSpeed;
     [SerializeField] private bool isJumping;
+    [SerializeField] private bool wasJumping;
     [SerializeField] private bool isSprinting;
 
     [Header("Coyote Time Setup")]
@@ -97,26 +98,16 @@ public class Player_Movement : MonoBehaviour
             else
             {
                 Vector3 moveDir = Quaternion.Euler(0f, lastAngle, 0f) * Vector3.forward;
-
+                rigidbody.drag = 0f;
                 rigidbody.velocity = moveDir.normalized * setings.speed + Vector3.up * rigidbody.velocity.y;
             }
 
         }
-        else
+        else 
         {
-            float xVelocity = rigidbody.velocity.x;
-            float zVelocity = rigidbody.velocity.z;
-            if (xVelocity > 0f)
-            {
-                xVelocity -= (Time.deltaTime);
-            }
-            if (zVelocity > 0f)
-            {
-                zVelocity -= (Time.deltaTime);
-            }
-
-            rigidbody.velocity = new Vector3(xVelocity, rigidbody.velocity.y, zVelocity);
+            rigidbody.drag = 10f;
         }
+
 
         if (isSprinting)
         {
