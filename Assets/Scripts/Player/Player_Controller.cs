@@ -19,7 +19,7 @@ public class Player_Controller : MonoBehaviour
 
     private void Awake()
     {
-       setings = new Player_Setings();
+       setings = ScriptableObject.CreateInstance<Player_Setings>();
     }
 
     public Player_Setings GetPlayerSetings() 

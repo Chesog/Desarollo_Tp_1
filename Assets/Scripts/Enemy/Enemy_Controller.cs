@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,10 @@ public class Enemy_Controller : MonoBehaviour
     //[SerializeField] private Bullet bullet;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float health;
+
+    public event Action<Vector2> OnEnemyMove;
+    public event Action OnEnemyAttack;
+    public event Action OnEnemyHit;
 
     private void Start()
     {
@@ -36,9 +41,13 @@ public class Enemy_Controller : MonoBehaviour
 
     private void Update()
     {
-        float distance = Vector3.Distance(transform.position, target.position);
         faceTarget();
+        CheckHealth();
+    }
 
+    private void FixedUpdate()
+    {
+        float distance = Vector3.Distance(transform.position, target.position);
         if (distance <= lookRad)
         {
             //transform.Translate(Vector3.forward * Time.deltaTime * speed);
@@ -51,7 +60,11 @@ public class Enemy_Controller : MonoBehaviour
                 //Attack the Target
             }
         }
-        CheckHealth();
+        if (rb.velocity.magnitude >= 1f)
+        {
+            Vector2 pos = new Vector2(rb.velocity.x, rb.velocity.z);
+            OnEnemyMove(pos);
+        }
     }
 
     private void CheckHealth() 
@@ -76,10 +89,10 @@ public class Enemy_Controller : MonoBehaviour
             //projectile.AddForce(transform.forward * 32f, ForceMode.Impulse);
             //projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
 
+            OnEnemyAttack.Invoke();
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, transform.rotation);
             Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
             bulletScript.Fire();
-
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -103,6 +116,7 @@ public class Enemy_Controller : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        OnEnemyHit.Invoke();
         Debug.Log(health);
     }
 

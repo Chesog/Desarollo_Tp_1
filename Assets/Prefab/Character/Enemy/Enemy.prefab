@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1391027550116362415}
   - component: {fileID: 1391027550116362418}
   - component: {fileID: 1391027550116362417}
+  - component: {fileID: 1832410452845282009}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -120,6 +121,20 @@ MonoBehaviour:
   rb: {fileID: 1391027550116362418}
   bulletPrefab: {fileID: 6330706891537420384, guid: 598ef64c9d852b6408d6e4982442fd43, type: 3}
   health: 100
+--- !u!114 &1832410452845282009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391027550116362414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07beffdf10349d04da2d7d2f800c1569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 8329165050019950566}
+  controller: {fileID: 1391027550116362417}
 --- !u!1 &8359836135337944581
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,10 +221,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PT_Skeleton_Male_Modular
       objectReference: {fileID: 0}
+    - target: {fileID: 6979118533080132827, guid: b91f2cacb0bef7f4bac8f61b0f00b4c6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6c5a46bd8a547cb459d2a8eed9c74595, type: 2}
+    - target: {fileID: 6979118533080132827, guid: b91f2cacb0bef7f4bac8f61b0f00b4c6, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'PT_Hips'\n\tTransform 'PT_RightLeg'\n\tTransform
+        'PT_LeftUpLeg'\n\tTransform 'PT_Neck'\n\tTransform 'PT_Spine3'\n\tTransform
+        'PT_RightHandIndex1'\n\tTransform 'PT_LeftForeArm'\n\tTransform 'PT_RightArm'\n\tTransform
+        'PT_Spine2'\n\tTransform 'PT_RightHandRing2'\n\tand more ...\n\tFrom animation
+        clip 'Standing Walk Forward'\n\tFrom animation clip 'Get_Hit'\n\tFrom animation
+        clip 'Standing 1H Magic Attack 01'"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b91f2cacb0bef7f4bac8f61b0f00b4c6, type: 3}
 --- !u!4 &2699643746855974300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3907685768628008609, guid: b91f2cacb0bef7f4bac8f61b0f00b4c6, type: 3}
+  m_PrefabInstance: {fileID: 1391027548743238461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8329165050019950566 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6979118533080132827, guid: b91f2cacb0bef7f4bac8f61b0f00b4c6, type: 3}
   m_PrefabInstance: {fileID: 1391027548743238461}
   m_PrefabAsset: {fileID: 0}
