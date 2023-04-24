@@ -17,6 +17,7 @@ public class Enemy_Controller : MonoBehaviour
     //[SerializeField] private Bullet bullet;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float health;
+    [SerializeField] private Enemy_Animation_Controller enemyAnimController;
 
     public event Action<Vector2> OnEnemyMove;
     public event Action OnEnemyAttack;
@@ -24,6 +25,8 @@ public class Enemy_Controller : MonoBehaviour
 
     private void Start()
     {
+        enemyAnimController.OnBulletSpawn += EnemyAnimController_OnBulletSpawn;
+
         target ??= GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         if (!target)
         {
@@ -37,6 +40,14 @@ public class Enemy_Controller : MonoBehaviour
             Debug.LogError(message: $"{name}: (logError){nameof(rb)} is null");
             enabled = false;
         }
+    }
+
+    private void EnemyAnimController_OnBulletSpawn()
+    {
+        Debug.Log("Bullet Spawn");
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, transform.rotation);
+        Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
+        bulletScript.Fire();
     }
 
     private void Update()
@@ -87,14 +98,12 @@ public class Enemy_Controller : MonoBehaviour
             //projectile.AddForce(transform.up * 8f, ForceMode.Impulse);
 
             OnEnemyAttack.Invoke();
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, transform.rotation);
-            Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
-            bulletScript.Fire();
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+
 
     private void ResetAttack()
     {
@@ -129,5 +138,10 @@ public class Enemy_Controller : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, stopDistance);
+    }
+
+    private void OnDestroy()
+    {
+        enemyAnimController.OnBulletSpawn -= EnemyAnimController_OnBulletSpawn;
     }
 }

@@ -92,7 +92,7 @@ public class Player_Movement : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
+                rigidbody.drag = 0f;
                 rigidbody.velocity = moveDir.normalized * setings.speed + Vector3.up * rigidbody.velocity.y;
             }
             else
