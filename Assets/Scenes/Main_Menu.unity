@@ -1522,5 +1522,9 @@ PrefabInstance:
       propertyPath: VelocityModule.enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2712969317997145742, guid: 614b31881e31e42439f8d9d3e9f81042, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.28
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 614b31881e31e42439f8d9d3e9f81042, type: 3}
