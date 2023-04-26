@@ -6229,6 +6229,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 6269368558458436348, guid: e8471d5b11d1c614eaf2f3c56f443ad9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6275123226149355822, guid: e8471d5b11d1c614eaf2f3c56f443ad9, type: 3}
       propertyPath: m_RootOrder
       value: 0

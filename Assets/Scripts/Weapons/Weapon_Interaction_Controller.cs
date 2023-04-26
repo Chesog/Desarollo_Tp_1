@@ -24,7 +24,7 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         if (!equiped)
         {
             weapon.enabled = false;
-            rb.isKinematic = false;
+            //rb.isKinematic = false;
             coll.isTrigger = false;
         }
         else
@@ -48,6 +48,16 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         {
             Drop_Weapon();
         }
+
+        if (equiped)
+        {
+            UpdateEquipedPos();
+        }
+    }
+
+    private void UpdateEquipedPos() 
+    {
+        transform.localPosition = Vector3.zero;
     }
 
     public void OnPickUp(InputValue input)
@@ -74,14 +84,14 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         equiped = true;
         slotFull = true;
 
-        transform.SetParent(weapon_Container);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
-        //transform.localScale = Vector3.one;
-
         rb.isKinematic = true;
         coll.isTrigger = true;
         weapon.enabled = true;
+
+
+        transform.SetParent(weapon_Container);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
     private void Drop_Weapon()
