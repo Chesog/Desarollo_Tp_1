@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 4986
+  controlID: 13435
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -84,8 +84,8 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMin: 1
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
-    m_HSlider: 1
-    m_VSlider: 1
+    m_HSlider: 0
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -98,18 +98,18 @@ MonoBehaviour:
       y: 21
       width: 536
       height: 337
-    m_Scale: {x: 1.2599208, y: 1.2599208}
-    m_Translation: {x: 268, y: 168.49997}
+    m_Scale: {x: 0.39238653, y: 0.39238653}
+    m_Translation: {x: 268, y: 168.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -212.71178
-      y: -133.73854
-      width: 425.42355
-      height: 267.4771
+      x: -683
+      y: -429.42352
+      width: 1366
+      height: 858.84705
     m_MinimalGUI: 1
   m_defaultScale: 0.39238653
   m_LastWindowPixelSize: {x: 536, y: 358}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 4987
+  controlID: 13379
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 4988
+  controlID: 13343
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -228,7 +228,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: ca27ffff062cffffb833ffff1c4bffff744bffff784bffff7c4bffff804bffff384cffff3c4cffff404cffff6c4cffff704cffff0a4effff584effffc44fffff
+      m_ExpandedIDs: f4e0feffe6fffeff7009ffffca27ffff062cffffb833ffff1c4bffff744bffff784bffff7c4bffff804bffff384cffff3c4cffff404cffff6c4cffff704cffff0a4effff584effffc44fffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -244,7 +244,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 7}
+        m_ClientGUIView: {fileID: 5}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -540,9 +540,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 29.946545, y: -57.81174, z: 205.54948}
+    m_Target: {x: -34.75052, y: -116.580505, z: 191.68173}
     speed: 2
-    m_Value: {x: 29.946545, y: -57.81174, z: 205.54948}
+    m_Value: {x: -34.75052, y: -116.580505, z: 191.68173}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -589,9 +589,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.1379111, y: -0.08271072, z: 0.01163278, w: -0.98719084}
+    m_Target: {x: -0.2623028, y: 0.081344426, z: -0.022255752, w: -0.9615862}
     speed: 2
-    m_Value: {x: -0.13787375, y: -0.082688324, z: 0.01162963, w: -0.9869235}
+    m_Value: {x: -0.262229, y: 0.08132154, z: -0.02224949, w: -0.96131563}
   m_Size:
     m_Target: 117.62864
     speed: 2
@@ -981,7 +981,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 4922
+  controlID: 13380
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1001,8 +1001,8 @@ MonoBehaviour:
     y: 0
     width: 851
     height: 290
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -1050,22 +1050,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefab/Camera
+    - Assets/Asset_Packs/CubexCube - Free Medieval_Cemetery/Prefabs/Environment
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Prefab/Camera
+  - Assets/Asset_Packs/CubexCube - Free Medieval_Cemetery/Prefabs/Environment
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Aula 2\Desktop\Desarollo_1\Desarollo_Tp_1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 5e330100
-    m_LastClickedID: 78686
-    m_ExpandedIDs: 000000007c0b0100840b010000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 111}
+    m_SelectedIDs: 4e5c0100
+    m_LastClickedID: 89166
+    m_ExpandedIDs: 000000007c0b0100800b0100385c0100485c010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1118,8 +1118,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: c027ffff
-    m_LastClickedInstanceID: -55360
+    m_SelectedInstanceIDs: c4b7feff
+    m_LastClickedInstanceID: -84028
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300004c6c0000465c0000000000009efa0000889300003a00010008fc0000d09d0000a464000040960000aeb4000024fb0000
     m_RenameOverlay:
@@ -1168,8 +1168,8 @@ MonoBehaviour:
     y: 0
     width: 532
     height: 290
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -1228,7 +1228,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 4887
+  controlID: 13436
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1274,8 +1274,8 @@ MonoBehaviour:
     y: 379
     width: 537
     height: 568
-  m_MinSize: {x: 276, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -1316,8 +1316,8 @@ MonoBehaviour:
     m_CachedPref: -151
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -55360
-  m_LastVerticalScrollValue: 20
+  m_LastInspectedObjectInstanceID: -84028
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
