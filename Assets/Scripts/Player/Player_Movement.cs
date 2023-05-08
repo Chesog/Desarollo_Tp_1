@@ -9,7 +9,7 @@ public class Player_Movement : MonoBehaviour
     private Player_Controller controller;
 
     [Header("SetUp")]
-    [SerializeField] private Player_Setings setings;
+    private Player_Setings setings;
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private Transform feet_Pivot;
     [SerializeField] private Transform playerCamera;
@@ -58,6 +58,7 @@ public class Player_Movement : MonoBehaviour
         isJumping = false;
         isSprinting = false;
         initialSpeed = setings.speed;
+        Debug.Log("Player Speed : " + setings.speed);
     }
 
     private void Start()

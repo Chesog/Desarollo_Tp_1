@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef29f44ebcff09a458806ecee6dafafd, type: 3}
   m_Name: Player_Setings
   m_EditorClassIdentifier: 
+  health: 100
   speed: 10
   jumpForce: 10
   maxDistance: 10
   minJumpDistance: 0.5
+  isAttacking: 0
+  isBlocking: 0
   jumpBufferTime: 0.2
   turnSmoothTime: 0.1
   coyoteTime: 0.2

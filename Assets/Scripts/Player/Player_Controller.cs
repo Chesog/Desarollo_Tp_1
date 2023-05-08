@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,7 +21,6 @@ public class Player_Controller : MonoBehaviour
 
     private void Awake()
     {
-        setings = ScriptableObject.CreateInstance<Player_Setings>();
         _Manager.SetMaxHealth(setings.health);
     }
 
