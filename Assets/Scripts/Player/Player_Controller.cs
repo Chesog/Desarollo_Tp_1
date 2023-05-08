@@ -18,6 +18,8 @@ public class Player_Controller : MonoBehaviour
     public event Action<bool> OnPlayerBlock;
     public event Action OnPlayerTakeDamage;
     public event Action OnPlayerDead;
+    
+
 
     private void Awake()
     {
