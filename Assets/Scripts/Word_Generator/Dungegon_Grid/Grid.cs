@@ -1,10 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Grid : MonoBehaviour
 {
-    public static Vector3[,,] grid;
+    [Serializable]
+    public struct NodeGrid
+    {
+        public List<Node2D> nodes;
+    }
+    public  List<NodeGrid> gridOfNodes;
+    public List<Node2D> listita;
+    public Node2D[,,] grid;
     public int sizeX = 10;
     public int sizeY = 1;
     public int sizeZ = 10;
@@ -15,7 +24,7 @@ public class Grid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grid = new Vector3[sizeX, sizeY, sizeZ];
+        grid = new Node2D[sizeX, sizeY, sizeZ];
 
         for (int x = 0; x < grid.GetLength(0); x++)
         {
@@ -23,8 +32,8 @@ public class Grid : MonoBehaviour
             {
                 for (int z = 0; z < grid.GetLength(2); z++)
                 {
-                    // Lo multiplico por delta para que cada punto tenga una separacion
-                    grid[x, y, z] = new Vector3(x, y, z) * delta;
+                    grid[x, y, z] = new Node2D(x, y, z) * delta;
+                    Debug.Log("Node2D pos x" + x + " " + y + " " + z);
                 }
             }
         }
@@ -46,7 +55,7 @@ public class Grid : MonoBehaviour
             {
                 for (int z = 0; z < grid.GetLength(2); z++)
                 {
-                    Gizmos.DrawWireSphere(grid[x, y, z], pointsInGridSize);
+                    Gizmos.DrawWireSphere(grid[x, y, z].pos, pointsInGridSize);
                 }
             }
         }
