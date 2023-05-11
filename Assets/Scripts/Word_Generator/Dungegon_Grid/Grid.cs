@@ -39,6 +39,13 @@ public class Grid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the size for this 2D grid
+    /// </summary>
+    public Vector2Int Size => new(sizeX, sizeZ);
+
+    public ref Node2D this[int x, int z] => ref grid[x, 0, z];
+
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying)
