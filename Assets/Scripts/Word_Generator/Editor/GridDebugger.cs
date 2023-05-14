@@ -138,6 +138,12 @@ namespace Word_Generator.Editor
             nodeSelection.state = (Node_States)EditorGUILayout.EnumPopup("State", nodeSelection.state);
             EditorGUIUtility.labelWidth = normalWidth;
 
+            // State Popup
+            normalWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 50;
+            EditorGUILayout.IntField("Possible_Types",nodeSelection.possible_Types.Count);
+            EditorGUIUtility.labelWidth = normalWidth;
+
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }

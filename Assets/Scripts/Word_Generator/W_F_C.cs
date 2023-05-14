@@ -27,7 +27,10 @@ public class W_F_C : MonoBehaviour
     {
         grid.StartGrid();
         firsNodeSelection();
-        SearchLeastEntropy();
+        for (int i = 0; i < 10; i++)
+        {
+            SearchLeastEntropy();
+        }
     }
 
     // Update is called once per frame
@@ -38,25 +41,112 @@ public class W_F_C : MonoBehaviour
 
     private void firsNodeSelection() 
     {
-        List<RNode_Type> rNode_Types = new List<RNode_Type>();
-
         int x = UnityEngine.Random.Range(0,grid.grid.GetLength(0));
         int y = UnityEngine.Random.Range(0,grid.grid.GetLength(1));
         int z = UnityEngine.Random.Range(0,grid.grid.GetLength(2));
 
-        RNode_Type selectedType = (RNode_Type)(UnityEngine.Random.Range(0, Enum.GetValues(typeof(RNode_Type)).Length));
-        rNode_Types.Add(selectedType);
+        Debug.Log(grid.grid[x, y, z].gridpos + new Vector3Int(1,0,1));
+        collapseSelection( ref grid.grid[x, y, z]);
 
-
-        grid.grid[x, y, z].possible_Types = rNode_Types;
-        grid.grid[x, y, z].state = Node_States.Collapsed;
     }
+    private void UpdateEntropy(Node2D currentNode) 
+    {
 
+        List<RNode_Type> tempType = new List<RNode_Type>();
+        foreach (RNode_Type item in Enum.GetValues(typeof(RNode_Type)))
+        {
+            tempType.Add(item);
+        }
+
+        int x = (int)(currentNode.pos.x);
+        int y = (int)(currentNode.pos.y);
+        int z = (int)(currentNode.pos.z);
+
+        //Look Up
+        if (currentNode.gridpos.z + 1 < grid.grid.GetLength(2))
+        {
+            if (grid.grid[x, y, z + 1].state == Node_States.Collapsed)
+                return;
+
+            grid.grid[x, y, z + 1].possible_Types = PossibilityOverlap(grid.grid[x, y, z + 1].possible_Types, currentNode.Possible_Neighbors[(int)currentNode.type]["Up"]);
+        }
+
+        //Look Down
+        if (currentNode.gridpos.z - 1 >= 0)
+        {
+            if (grid.grid[x, y, z - 1].state == Node_States.Collapsed)
+                return;
+
+            grid.grid[x, y, z - 1].possible_Types = PossibilityOverlap(grid.grid[x, y, z - 1].possible_Types, currentNode.Possible_Neighbors[(int)currentNode.type]["Down"]);
+        }
+
+        //Look Right
+        if (currentNode.gridpos.x + 1 < grid.grid.GetLength(0))
+        {
+            if (grid.grid[x + 1, y, z].state == Node_States.Collapsed)
+                return;
+
+            grid.grid[x + 1, y, z].possible_Types = PossibilityOverlap(grid.grid[x + 1, y, z].possible_Types, currentNode.Possible_Neighbors[(int)currentNode.type]["Right"]);
+        }
+
+        //Look Left
+        if (currentNode.gridpos.x - 1 >= 0)
+        {
+            if (grid.grid[x - 1, y, z].state == Node_States.Collapsed)
+                return;
+
+            grid.grid[x - 1, y, z].possible_Types = PossibilityOverlap(grid.grid[x - 1, y, z].possible_Types, currentNode.Possible_Neighbors[(int)currentNode.type]["Left"]);
+        }
+    }
     private void SearchLeastEntropy() 
     {
         List<Node2D> sorted_Grid = sortGrid(grid.grid);
+        int index = 0;
+        for (int i = 0; i < sorted_Grid.Count; i++)
+        {
+            if (sorted_Grid[i].CompareTo(sorted_Grid[0]) != 0)
+            {
+                index = i;
+                break;
+            }
+        }
+
+        int rand = UnityEngine.Random.Range(0, index);
+        Debug.Log(sorted_Grid[0].possible_Types.Count);
+        Vector3Int randpos = sorted_Grid[rand].gridpos;
+        collapseSelection(ref grid.grid[randpos.x, randpos.y, randpos.z]);
+    }
+
+    private void collapseSelection( ref Node2D currentNode) 
+    {
+        List<RNode_Type> rNode_Types = new List<RNode_Type>();
+
+        // Le asigna un valor aleatorio entre los valores que posee el nodo 
+        int randType = (UnityEngine.Random.Range(0, currentNode.possible_Types.Count));
+        RNode_Type selectedType = currentNode.possible_Types[randType];
+        rNode_Types.Add(selectedType);
 
 
+        currentNode.possible_Types = rNode_Types;
+        currentNode.type = selectedType;
+        currentNode.state = Node_States.Collapsed;
+
+        UpdateEntropy(currentNode);
+    }
+
+    private List<RNode_Type> PossibilityOverlap(List<RNode_Type> list, RNode_Type[] rs_Type) 
+    {
+        List<RNode_Type> rs = new List<RNode_Type>();
+
+        for (int i = 0; i < rs_Type.Length; i++)
+        {
+            if (list.Contains(rs_Type[i]))
+            {
+                rs.Add(rs_Type[i]);
+            }
+        }
+
+        return rs;
     }
 
     private List<Node2D> sortGrid(Node2D[,,] grid_to_Sort) 
@@ -69,7 +159,10 @@ public class W_F_C : MonoBehaviour
             {
                 for (int z = 0; z < grid_to_Sort.GetLength(2); z++)
                 {
-                    output.Add(grid_to_Sort[x,y,z]);
+                    if (grid_to_Sort[x, y, z].state == Node_States.UnCollapsed)
+                    {
+                        output.Add(grid_to_Sort[x, y, z]);
+                    }
                 }
             }
         }
