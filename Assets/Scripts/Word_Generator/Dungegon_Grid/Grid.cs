@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class Grid : MonoBehaviour
 {
     [Serializable]
@@ -11,18 +12,25 @@ public class Grid : MonoBehaviour
     {
         public List<Node2D> nodes;
     }
-    public  List<NodeGrid> gridOfNodes;
-    public List<Node2D> listita;
     public Node2D[,,] grid;
     public int sizeX = 10;
     public int sizeY = 1;
     public int sizeZ = 10;
+    public int Spawn_Node_Limit = 1;
+    public int Spawn_Node = 0;
+    public int Boss_Node_Limit = 1;
+    public int Boss_Node = 0;
     public bool showGrid;
     public float pointsInGridSize = 0.1f;
     public static float delta = 1f;
 
     // Start is called before the first frame update
     void Start()
+    {
+        //StartGrid();
+    }
+
+    public void StartGrid() 
     {
         grid = new Node2D[sizeX, sizeY, sizeZ];
 
@@ -32,8 +40,9 @@ public class Grid : MonoBehaviour
             {
                 for (int z = 0; z < grid.GetLength(2); z++)
                 {
-                    grid[x, y, z] = new Node2D(x, y, z) * delta;
-                    Debug.Log("Node2D pos x" + x + " " + y + " " + z);
+                    RNode_Type currentSelec;
+                    grid[x, y, z] = new Node2D(x * delta, y * delta, z * delta);
+                    grid[x, y, z].state = Node_States.UnCollapsed;
                 }
             }
         }
@@ -51,8 +60,6 @@ public class Grid : MonoBehaviour
         if (!Application.isPlaying)
         { return; }
 
-        Gizmos.color = Color.black;
-
         if (!showGrid)
             return;
 
@@ -62,7 +69,17 @@ public class Grid : MonoBehaviour
             {
                 for (int z = 0; z < grid.GetLength(2); z++)
                 {
-                    Gizmos.DrawWireSphere(grid[x, y, z].pos, pointsInGridSize);
+
+                    if (grid[x, y, z].state != Node_States.UnCollapsed)
+                    {
+                        Gizmos.color = Color.black;
+                        Gizmos.DrawWireSphere(grid[x, y, z].pos, pointsInGridSize);
+                    }
+                    else
+                    {
+                        Gizmos.color = Color.green;
+                        Gizmos.DrawWireSphere(grid[x, y, z].pos, pointsInGridSize);
+                    }
                 }
             }
         }

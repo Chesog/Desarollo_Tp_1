@@ -310,6 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1330503210}
+  - component: {fileID: 1330503211}
   - component: {fileID: 1330503209}
   m_Layer: 0
   m_Name: Dng_Grid
@@ -330,9 +331,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11f4494b9c79c446ae8bbba478ac6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridOfNodes: []
+  listita: []
   sizeX: 20
   sizeY: 1
   sizeZ: 20
+  Spawn_Node_Limit: 1
+  Spawn_Node: 0
+  Boss_Node_Limit: 1
+  Boss_Node: 0
   showGrid: 1
   pointsInGridSize: 0.1
 --- !u!4 &1330503210
@@ -350,3 +357,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1330503211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330503208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f234ad4f89fb84ea695a37e1d841d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 1330503209}
