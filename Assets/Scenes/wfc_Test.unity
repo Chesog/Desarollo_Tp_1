@@ -607,7 +607,7 @@ PrefabInstance:
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: trap_rooms_Prefab.Array.data[0]
       value: 
-      objectReference: {fileID: 5991330738004835114, guid: 4cd2fd60fc3e12040992e5e816e551a6, type: 3}
+      objectReference: {fileID: 5991330738004835114, guid: 80d25b73f77fbab439bf3ceca07d1c7d, type: 3}
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: spawn_rooms_Prefab.Array.data[0]
       value: 
