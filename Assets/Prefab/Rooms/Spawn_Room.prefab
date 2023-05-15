@@ -1255,7 +1255,7 @@ GameObject:
   - component: {fileID: 1868501682934055435}
   m_Layer: 0
   m_Name: Spawn_Room
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   room: {fileID: 5991330738004835114}
   minPos: {x: 0, y: 0}
   maxPos: {x: 10, y: 10}
-  obligatory: 1
+  obligatory: 0
 --- !u!114 &1868501682934055435
 MonoBehaviour:
   m_ObjectHideFlags: 0

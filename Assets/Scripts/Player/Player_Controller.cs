@@ -10,7 +10,7 @@ public class Player_Controller : MonoBehaviour
     Player_Movement movement;
     [SerializeField] private Player_Setings setings;
     public Game_Manager _Manager;
-
+        
     public event Action<Vector2> OnPlayerMove;
     public event Action<bool> OnPlayerJump;
     public event Action<bool> OnPlayerSprint;
@@ -23,7 +23,7 @@ public class Player_Controller : MonoBehaviour
 
     private void Awake()
     {
-        _Manager.SetMaxHealth(setings.health);
+         _Manager.SetMaxHealth(setings.health);
     }
 
     public Player_Setings GetPlayerSetings()

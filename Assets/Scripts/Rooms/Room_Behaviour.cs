@@ -167,6 +167,11 @@ public class Room_Behaviour : MonoBehaviour
         }
     }
 
+    public void SetPlayerReference(Transform playerPos) 
+    {
+        this.playerPos = playerPos;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(rayOrigin.position,Vector3.forward * rayDistance);

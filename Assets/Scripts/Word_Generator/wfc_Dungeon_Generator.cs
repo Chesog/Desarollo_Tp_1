@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,26 +9,76 @@ public class wfc_Dungeon_Generator : MonoBehaviour
 {
     [SerializeField] private Grid gr;
     [SerializeField] private W_F_C wave;
+    [SerializeField] private Vector3 ofset;
     [SerializeField] private int boss_RoomsCant;
     [SerializeField] private int spawn_RoomsCant;
+    [SerializeField] private Transform gridHolder;
     [SerializeField] private List<GameObject> spawn_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
     [SerializeField] private List<GameObject> trap_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
     [SerializeField] private List<GameObject> normal_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
     [SerializeField] private List<GameObject> boss_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
-    // Start is called before the first frame update
+
+
+    [SerializeField] private Player_Movement player;
+    private int currentRoomIndex = -1;
+    private Room_Behaviour currentRoom;
+
+
+    [SerializeField] private List<Room_Behaviour> dungegonRooms;
     void Start()
     {
         wave.StartWFC();
         CheckRoomCant();
         InstantiatePrefabs();
+
+        List<Transform> rooms = transform.Cast<Transform>().ToList();
+
+        foreach (Transform item in rooms)
+        {
+            if (item.CompareTag("Respawn"))
+            {
+                player.SetSpawnPos(item.position);
+
+            }
+            dungegonRooms.Add(item.GetComponent<Room_Behaviour>());
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        checkPlayerPos();
     }
+    void checkPlayerPos()
+    {
+        var aux = currentRoom;
+        var count = 0f;
 
+        for (int i = 0; i < dungegonRooms.Count; i++)
+        {
+            if (dungegonRooms[i].isPointInside(player.transform.position))
+            {
+                currentRoom = dungegonRooms[i];
+                dungegonRooms[i].SetRoomVisible(true);
+                dungegonRooms[i].SetRoomCheked(true);
+            }
+            else
+            {
+                dungegonRooms[i].SetRoomVisible(false);
+                dungegonRooms[i].SetRoomCheked(false);
+                count++;
+            }
+
+        }
+
+        if (count == dungegonRooms.Count)
+        {
+            currentRoom = aux;
+            currentRoom.SetRoomVisible(true);
+            currentRoom.SetRoomCheked(true);
+        }
+        currentRoom.ShowAdjRooms();
+    }
     private void CheckRoomCant()
     {
         List<Node2D> boss_Rooms = new List<Node2D>();
@@ -64,7 +115,7 @@ public class wfc_Dungeon_Generator : MonoBehaviour
             {
                 while (boss_Rooms.Count > boss_RoomsCant)
                 {
-                    List<RNode_Type> randList; 
+                    List<RNode_Type> randList;
 
                     int rand = UnityEngine.Random.Range(0, boss_Rooms.Count);
                     randList = wave.GetNodePossibilities(boss_Rooms[rand]);
@@ -110,28 +161,33 @@ public class wfc_Dungeon_Generator : MonoBehaviour
             {
                 for (int z = 0; z < gr.grid.GetLength(2); z++)
                 {
-                    int index = 0;
-                    switch (gr.grid[x,y,z].type)
+                    int index;
+                    Vector3 wordPOs = new Vector3();
+                    wordPOs.x = gr.grid[x, y, z].pos.x * ofset.x;
+                    wordPOs.y = gr.grid[x, y, z].pos.y * ofset.y;
+                    wordPOs.z = gr.grid[x, y, z].pos.z * ofset.z;
+
+                    switch (gr.grid[x, y, z].type)
                     {
                         case RNode_Type.Empty:
                             break;
                         case RNode_Type.Spawn:
                             index = UnityEngine.Random.Range(0, spawn_rooms_Prefab.Count);
-                            Instantiate(spawn_rooms_Prefab[index], gr.grid[x, y, z].pos,Quaternion.identity);
+                            Instantiate(spawn_rooms_Prefab[index], wordPOs, Quaternion.identity, gridHolder);
                             break;
                         case RNode_Type.Trap:
                             index = UnityEngine.Random.Range(0, trap_rooms_Prefab.Count);
-                            Instantiate(trap_rooms_Prefab[index], gr.grid[x, y, z].pos, Quaternion.identity);
+                            Instantiate(trap_rooms_Prefab[index], wordPOs, Quaternion.identity, gridHolder);
                             break;
                         case RNode_Type.Normal:
                             index = UnityEngine.Random.Range(0, normal_rooms_Prefab.Count);
-                            Instantiate(normal_rooms_Prefab[index], gr.grid[x, y, z].pos, Quaternion.identity);
+                            Instantiate(normal_rooms_Prefab[index], wordPOs, Quaternion.identity, gridHolder);
                             break;
                         case RNode_Type.Boss:
                             index = UnityEngine.Random.Range(0, boss_rooms_Prefab.Count);
                             Debug.LogWarning("Boss Room Count " + boss_rooms_Prefab.Count);
                             Debug.LogWarning("Boss Room Index " + index);
-                            Instantiate(boss_rooms_Prefab[index], gr.grid[x, y, z].pos, Quaternion.identity);
+                            Instantiate(boss_rooms_Prefab[index], wordPOs, Quaternion.identity, gridHolder);
                             break;
                         default:
                             Debug.LogError("No Rooms To spawn");

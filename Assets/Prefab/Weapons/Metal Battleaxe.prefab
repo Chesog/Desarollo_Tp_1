@@ -146,7 +146,7 @@ MonoBehaviour:
   coll: {fileID: 3309572345892585098}
   player: {fileID: 0}
   weapon_Container: {fileID: 0}
-  pickUp_Range: 4
+  pickUp_Range: 2
   dropForwardForce: 8
   dropUpwardForce: 7
   equiped: 0

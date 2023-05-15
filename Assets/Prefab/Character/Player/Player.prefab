@@ -971,7 +971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bbf0c06ab18af42ab98393f7d3bc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setings: {fileID: 11400000, guid: 6f2974fcb1c2af742a90b8259bc2cc97, type: 2}
   rigidbody: {fileID: 656559978401318382}
   feet_Pivot: {fileID: 656559977413399971}
   playerCamera: {fileID: 0}
@@ -1008,7 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41d29ee12733d54ea6ca6a69dce5740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setings: {fileID: 0}
+  setings: {fileID: 11400000, guid: 6f2974fcb1c2af742a90b8259bc2cc97, type: 2}
   _Manager: {fileID: 0}
 --- !u!1 &1281370389992057380
 GameObject:
@@ -6209,6 +6208,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ac5476c9c10e5a4b888420268e75397, type: 3}
+--- !u!1 &6050348020442330147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9209167452684281619, guid: 3ac5476c9c10e5a4b888420268e75397, type: 3}
+  m_PrefabInstance: {fileID: 3187051509953467184}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &253439439
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050348020442330147}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 2
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!4 &6052272089159687757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9207419293480373629, guid: 3ac5476c9c10e5a4b888420268e75397, type: 3}
@@ -6225,6 +6245,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1939414284527397664}
+    - target: {fileID: 2004510899974565994, guid: e8471d5b11d1c614eaf2f3c56f443ad9, type: 3}
+      propertyPath: pickUp_Range
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2004510899974565994, guid: e8471d5b11d1c614eaf2f3c56f443ad9, type: 3}
+      propertyPath: weapon_Container
+      value: 
+      objectReference: {fileID: 1989077402}
     - target: {fileID: 6269368558458436348, guid: e8471d5b11d1c614eaf2f3c56f443ad9, type: 3}
       propertyPath: m_Name
       value: Metal Sword

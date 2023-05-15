@@ -189,6 +189,12 @@ public class Player_Movement : MonoBehaviour
             timeElapsed += Time.fixedDeltaTime;
         }
     }
+
+    public void SetSpawnPos(Vector3 pos) 
+    {
+        this.rigidbody.position = pos;
+
+    }
     public bool isGrounded()
     {
         return Physics.Raycast(feet_Pivot.position, Vector3.down, out var hit, setings.maxDistance) && hit.distance <= setings.minJumpDistance;
