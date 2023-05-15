@@ -16,10 +16,6 @@ public class Grid : MonoBehaviour
     public int sizeX = 10;
     public int sizeY = 1;
     public int sizeZ = 10;
-    public int Spawn_Node_Limit = 1;
-    public int Spawn_Node = 0;
-    public int Boss_Node_Limit = 1;
-    public int Boss_Node = 0;
     public bool showGrid;
     public float pointsInGridSize = 0.1f;
     public static float delta = 1f;
