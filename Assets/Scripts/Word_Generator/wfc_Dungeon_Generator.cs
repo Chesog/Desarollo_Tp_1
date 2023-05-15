@@ -42,6 +42,10 @@ public class wfc_Dungeon_Generator : MonoBehaviour
             }
             dungegonRooms.Add(item.GetComponent<Room_Behaviour>());
         }
+        foreach (var item in dungegonRooms)
+        {
+            item.SetAdjRooms();
+        }
     }
 
     // Update is called once per frame
