@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 10
-  jumpForce: 10
-  maxDistance: 10
+  jumpForce: 5
+  maxDistance: 5
   minJumpDistance: 0.5
   isAttacking: 0
   isBlocking: 0
