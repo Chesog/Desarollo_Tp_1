@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
 public class W_F_C : MonoBehaviour
 {
     [SerializeField] private Grid grid;
+    private bool stopWFC;
     //1. var model.now Overlappingodeimovt.N:3, width:48 height:48, periodicinput:true, pertedic:false,
     //    symmetry:8 ground:0 ):
     //2. model.Rum(random.Next, limit:#):
@@ -21,32 +24,25 @@ public class W_F_C : MonoBehaviour
     //symetry - a value between 1..8. indicating how nany reflection and rotation symetries should be sampled
     //from the input
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void StartWFC() 
     {
         grid.StartGrid();
-        firsNodeSelection();
-        for (int i = 0; i < 10; i++)
+        FirsNodeSelection();
+        do
         {
             SearchLeastEntropy();
-        }
+
+        } while (!stopWFC);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void firsNodeSelection() 
+    private void FirsNodeSelection() 
     {
         int x = UnityEngine.Random.Range(0,grid.grid.GetLength(0));
         int y = UnityEngine.Random.Range(0,grid.grid.GetLength(1));
         int z = UnityEngine.Random.Range(0,grid.grid.GetLength(2));
 
         Debug.Log(grid.grid[x, y, z].gridpos + new Vector3Int(1,0,1));
-        collapseSelection( ref grid.grid[x, y, z]);
+        CollapseSelection( ref grid.grid[x, y, z]);
 
     }
     private void UpdateEntropy(Node2D currentNode) 
@@ -58,9 +54,9 @@ public class W_F_C : MonoBehaviour
             tempType.Add(item);
         }
 
-        int x = (int)(currentNode.pos.x);
-        int y = (int)(currentNode.pos.y);
-        int z = (int)(currentNode.pos.z);
+        int x = currentNode.gridpos.x;
+        int y = currentNode.gridpos.y;
+        int z = currentNode.gridpos.z;
 
         //Look Up
         if (currentNode.gridpos.z + 1 < grid.grid.GetLength(2))
@@ -100,7 +96,12 @@ public class W_F_C : MonoBehaviour
     }
     private void SearchLeastEntropy() 
     {
-        List<Node2D> sorted_Grid = sortGrid(grid.grid);
+        List<Node2D> sorted_Grid = SortGrid(grid.grid);
+        if (sorted_Grid.Count == 0)
+        {
+            stopWFC = true;
+            return;
+        }
         int index = 0;
         for (int i = 0; i < sorted_Grid.Count; i++)
         {
@@ -114,10 +115,10 @@ public class W_F_C : MonoBehaviour
         int rand = UnityEngine.Random.Range(0, index);
         Debug.Log(sorted_Grid[0].possible_Types.Count);
         Vector3Int randpos = sorted_Grid[rand].gridpos;
-        collapseSelection(ref grid.grid[randpos.x, randpos.y, randpos.z]);
+        CollapseSelection(ref grid.grid[randpos.x, randpos.y, randpos.z]);
     }
 
-    private void collapseSelection( ref Node2D currentNode) 
+    private void CollapseSelection( ref Node2D currentNode) 
     {
         List<RNode_Type> rNode_Types = new List<RNode_Type>();
 
@@ -149,7 +150,50 @@ public class W_F_C : MonoBehaviour
         return rs;
     }
 
-    private List<Node2D> sortGrid(Node2D[,,] grid_to_Sort) 
+    public List<RNode_Type> GetNodePossibilities(Node2D node) 
+    {
+        List<RNode_Type> possible_Types = new List<RNode_Type>();
+        foreach (RNode_Type item in Enum.GetValues(typeof(RNode_Type)))
+        {
+            possible_Types.Add(item);
+        }
+
+        int x = node.gridpos.x;
+        int y = node.gridpos.y;
+        int z = node.gridpos.z;
+
+        //Look Up
+        if (node.gridpos.z + 1 < grid.grid.GetLength(2))
+        {
+            Node2D up = grid.grid[x, y, z + 1];
+            possible_Types = PossibilityOverlap(possible_Types, up.Possible_Neighbors[(int)up.type]["Down"]);
+        }
+
+        //Look Down
+        if (node.gridpos.z - 1 >= 0)
+        {
+            Node2D down = grid.grid[x, y, z - 1];
+            possible_Types = PossibilityOverlap(possible_Types, down.Possible_Neighbors[(int)down.type]["Up"]);
+        }
+
+        //Look Right
+        if (node.gridpos.x + 1 < grid.grid.GetLength(0))
+        {
+            Node2D right = grid.grid[x + 1, y, z];
+            possible_Types = PossibilityOverlap(possible_Types, right.Possible_Neighbors[(int)right.type]["Left"]);
+        }
+
+        //Look Left
+        if (node.gridpos.x - 1 >= 0)
+        {
+            Node2D left = grid.grid[x - 1, y, z];
+            possible_Types = PossibilityOverlap(possible_Types, left.Possible_Neighbors[(int)left.type]["Right"]);
+        }
+
+        return possible_Types;
+    }
+
+    private List<Node2D> SortGrid(Node2D[,,] grid_to_Sort) 
     {
         List<Node2D> output = new List<Node2D>();
 
@@ -171,4 +215,5 @@ public class W_F_C : MonoBehaviour
 
         return output;
     }
+
 }

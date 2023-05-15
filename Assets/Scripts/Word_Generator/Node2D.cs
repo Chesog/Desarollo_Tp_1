@@ -27,18 +27,18 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
         new Dictionary<string, RNode_Type[]>
         {
             {"Up",new RNode_Type[]{RNode_Type.Normal,RNode_Type.Trap, RNode_Type.Boss} },
-            {"Down",new RNode_Type[]{RNode_Type.Trap} },
-            {"Right",new RNode_Type[]{RNode_Type.Normal,RNode_Type.Spawn} },
-            {"Left",new RNode_Type[]{RNode_Type.Empty} }
+            {"Down",new RNode_Type[]{RNode_Type.Trap, RNode_Type.Normal} },
+            {"Right",new RNode_Type[]{RNode_Type.Normal,RNode_Type.Spawn, RNode_Type.Trap } },
+            {"Left",new RNode_Type[]{RNode_Type.Empty, RNode_Type.Trap , RNode_Type.Normal} }
         },
 
         // RNode_Type Spawn
         new Dictionary<string, RNode_Type[]>
         {
-            {"Up",new RNode_Type[]{RNode_Type.Normal} },
-            {"Down",new RNode_Type[]{ RNode_Type.Normal } },
-            {"Right",new RNode_Type[]{ RNode_Type.Normal } },
-            {"Left",new RNode_Type[]{ RNode_Type.Normal } }
+            {"Up",new RNode_Type[]{RNode_Type.Normal, RNode_Type.Trap } },
+            {"Down",new RNode_Type[]{ RNode_Type.Normal , RNode_Type.Trap } },
+            {"Right",new RNode_Type[]{ RNode_Type.Normal , RNode_Type.Trap } },
+            {"Left",new RNode_Type[]{ RNode_Type.Normal , RNode_Type.Empty, RNode_Type.Trap } }
         },
 
         // RNode_Type Trap
@@ -53,17 +53,17 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
         // RNode_Type Normal
         new Dictionary<string, RNode_Type[]>
         {
-            {"Up",new RNode_Type[]{RNode_Type.Empty , RNode_Type.Spawn, RNode_Type.Normal, RNode_Type.Trap } },
-            {"Down",new RNode_Type[]{RNode_Type.Empty , RNode_Type.Spawn, RNode_Type.Normal, RNode_Type.Trap } },
-            {"Right",new RNode_Type[]{RNode_Type.Empty , RNode_Type.Spawn, RNode_Type.Normal, RNode_Type.Trap } },
-            {"Left",new RNode_Type[]{RNode_Type.Empty , RNode_Type.Spawn, RNode_Type.Normal, RNode_Type.Trap } }
+            {"Up",new RNode_Type[]{ RNode_Type.Empty, RNode_Type.Spawn, RNode_Type.Trap, RNode_Type.Normal, RNode_Type.Boss } },
+            {"Down",new RNode_Type[]{ RNode_Type.Empty, RNode_Type.Spawn, RNode_Type.Trap, RNode_Type.Normal, RNode_Type.Boss } },
+            {"Right",new RNode_Type[]{ RNode_Type.Empty, RNode_Type.Spawn, RNode_Type.Trap, RNode_Type.Normal, RNode_Type.Boss } },
+            {"Left",new RNode_Type[]{RNode_Type.Empty , RNode_Type.Spawn, RNode_Type.Trap, RNode_Type.Normal, RNode_Type.Boss } }
         },
 
         // RNode_Type Boss
         new Dictionary<string, RNode_Type[]>
         {
             {"Up",new RNode_Type[]{RNode_Type.Normal,RNode_Type.Trap} },
-            {"Down",new RNode_Type[]{ RNode_Type.Normal, RNode_Type.Trap } },
+            {"Down",new RNode_Type[]{ RNode_Type.Normal, RNode_Type.Trap,RNode_Type.Empty} },
             {"Right",new RNode_Type[]{RNode_Type.Normal, RNode_Type.Trap } },
             {"Left",new RNode_Type[]{RNode_Type.Normal, RNode_Type.Trap } }
         },
