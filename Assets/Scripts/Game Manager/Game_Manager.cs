@@ -7,9 +7,16 @@ public class Game_Manager : MonoBehaviour
 {
     [SerializeField] Slider healthBar;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     public void SetHealth(float health) 
     {
         healthBar.value = health;
+        Debug.LogWarning("Player healt " + health);
     }
 
     public void SetMaxHealth(float health)

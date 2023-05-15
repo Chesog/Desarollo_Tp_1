@@ -8,9 +8,10 @@ public class Player_Controller : MonoBehaviour
     // private CharacterController controller;
 
     Player_Movement movement;
+    float health;
     [SerializeField] private Player_Setings setings;
     public Game_Manager _Manager;
-        
+
     public event Action<Vector2> OnPlayerMove;
     public event Action<bool> OnPlayerJump;
     public event Action<bool> OnPlayerSprint;
@@ -18,12 +19,13 @@ public class Player_Controller : MonoBehaviour
     public event Action<bool> OnPlayerBlock;
     public event Action OnPlayerTakeDamage;
     public event Action OnPlayerDead;
-    
+
 
 
     private void Awake()
     {
-         _Manager.SetMaxHealth(setings.health);
+        _Manager.SetMaxHealth(setings.health);
+        health = setings.health;
     }
 
     public Player_Setings GetPlayerSetings()
@@ -105,16 +107,16 @@ public class Player_Controller : MonoBehaviour
             OnPlayerDead.Invoke();
             //Invoke(nameof(DestroyPlayer), 0.5f);
         }
-        _Manager.SetHealth(setings.health);
+        _Manager.SetHealth(health);
     }
 
     public void TakeDamage(float damage)
     {
-        if (setings.health <= 0)
+        if (health <= 0)
             return;
 
-        setings.health -= damage;
-        Debug.Log("Player Health " + setings.health);
+        health -= damage;
+        Debug.Log("Player Health " + health);
     }
 
     private void DestroyPlayer()
