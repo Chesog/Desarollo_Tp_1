@@ -17,7 +17,6 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Transform bulletSpawn;
     [SerializeField] private Rigidbody rb;
-    //[SerializeField] private Bullet bullet;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float health;
     [SerializeField] private Enemy_Animation_Controller enemyAnimController;
@@ -31,14 +30,21 @@ public class Enemy_Controller : MonoBehaviour
     {
         enemyAnimController.OnBulletSpawn += EnemyAnimController_OnBulletSpawn;
 
-        target ??= GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        if (target == null)
+        {
+            target = Player_Controller.playerPos.transform;
+        }
         if (!target)
         {
             Debug.LogError(message: $"{name}: (logError){nameof(target)} is null");
             enabled = false;
         }
 
-        rb ??= GetComponent<Rigidbody>();
+        //rb ??= GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
         if (!rb)
         {
             Debug.LogError(message: $"{name}: (logError){nameof(rb)} is null");
@@ -81,10 +87,11 @@ public class Enemy_Controller : MonoBehaviour
 
                     rb.velocity = new Vector3(0f, 0f, 0f);
                 }
+
+                Vector2 pos = new Vector2(rb.velocity.x, rb.velocity.z);
+                OnEnemyMove.Invoke(pos);
             }
 
-            Vector2 pos = new Vector2(rb.velocity.x, rb.velocity.z);
-            OnEnemyMove(pos);
         }
     }
 

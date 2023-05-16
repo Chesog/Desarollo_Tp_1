@@ -674,15 +674,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7279614904407507172, guid: 51e09f9d47c2cce40a9673454086b76d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.023195684
+      value: -0.023195704
       objectReference: {fileID: 0}
     - target: {fileID: 7279614904407507172, guid: 51e09f9d47c2cce40a9673454086b76d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000029802322
+      value: -0.000000029802319
       objectReference: {fileID: 0}
     - target: {fileID: 7279614904407507172, guid: 51e09f9d47c2cce40a9673454086b76d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000007450581
+      value: 0.00000002235174
       objectReference: {fileID: 0}
     - target: {fileID: 7279614904720790321, guid: 51e09f9d47c2cce40a9673454086b76d, type: 3}
       propertyPath: m_Name
@@ -1297,7 +1297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: normal_rooms_Prefab.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: boss_rooms_Prefab.Array.data[0]
@@ -1326,7 +1326,7 @@ PrefabInstance:
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: normal_rooms_Prefab.Array.data[1]
       value: 
-      objectReference: {fileID: 5991330738004835114, guid: 4cd2fd60fc3e12040992e5e816e551a6, type: 3}
+      objectReference: {fileID: 5991330738004835114, guid: 893e5708cb93316439a5781932ee6182, type: 3}
     - target: {fileID: 6673351024770648121, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: m_Name
       value: wfc_Dungeon_Generator
