@@ -6,9 +6,12 @@ using UnityEngine;
 public class Game_Manager : MonoBehaviour
 {
     [SerializeField] Slider healthBar;
+    [SerializeField] AudioClip GameMusic;
 
     private void Start()
     {
+        SoundManager.Instance.StopMusic();
+        SoundManager.Instance.PlayMusic(GameMusic);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
