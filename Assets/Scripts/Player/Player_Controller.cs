@@ -1,4 +1,5 @@
 using System;
+using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,7 @@ public class Player_Controller : MonoBehaviour
     Player_Movement movement;
     float health;
     [SerializeField] private Player_Setings setings;
+    [SerializeField] private AudioClip swing;
     public Game_Manager _Manager;
 
     public event Action<Vector2> OnPlayerMove;
@@ -75,6 +77,9 @@ public class Player_Controller : MonoBehaviour
     {
         if (OnPlayerAttack != null)
             OnPlayerAttack.Invoke(input.isPressed);
+        if (input.isPressed)
+            SoundManager.Instance.PlaySound(swing);
+
         else
             Debug.LogWarning($"On Sprint: event has no listeners");
     }
