@@ -21,6 +21,29 @@ public class Weapon_Interaction_Controller : MonoBehaviour
 
     private void Start()
     {
+
+        if (player == null)
+        {
+            player = Player_Controller.playerPos.transform;
+        }
+        if (!player)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(player)} is null");
+            enabled = false;
+        }
+
+        //weapon_Container ??= Player_Controller.playerPos.playerHolder;
+        if (weapon_Container == null)
+        {
+            weapon_Container = Player_Controller.playerPos.playerHolder;
+
+        }
+        if (!player)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(weapon_Container)} is null");
+            enabled = false;
+        }
+
         if (!equiped)
         {
             weapon.enabled = false;
@@ -34,6 +57,11 @@ public class Weapon_Interaction_Controller : MonoBehaviour
             coll.isTrigger = true;
             slotFull = true;
         }
+    }
+
+    private void Awake()
+    {
+
     }
 
     private void Update()

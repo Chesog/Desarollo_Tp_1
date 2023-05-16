@@ -16,7 +16,6 @@ public class Game_Manager : MonoBehaviour
     public void SetHealth(float health) 
     {
         healthBar.value = health;
-        Debug.LogWarning("Player healt " + health);
     }
 
     public void SetMaxHealth(float health)

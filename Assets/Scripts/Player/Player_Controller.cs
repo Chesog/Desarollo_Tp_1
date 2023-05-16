@@ -20,10 +20,14 @@ public class Player_Controller : MonoBehaviour
     public event Action OnPlayerTakeDamage;
     public event Action OnPlayerDead;
 
+    public static Player_Controller playerPos;
+    public Transform playerHolder;
 
 
     private void Awake()
     {
+        playerPos = this;
+
         _Manager.SetMaxHealth(setings.health);
         health = setings.health;
     }

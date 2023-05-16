@@ -19,7 +19,9 @@ public class wfc_Dungeon_Generator : MonoBehaviour
     [SerializeField] private List<GameObject> boss_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
 
 
-    [SerializeField] private Player_Movement player;
+    [SerializeField] private Player_Movement player_m;
+    [SerializeField] public Transform player;
+    [SerializeField] public Transform playerContainer;
     private int currentRoomIndex = -1;
     private Room_Behaviour currentRoom;
 
@@ -37,7 +39,7 @@ public class wfc_Dungeon_Generator : MonoBehaviour
         {
             if (item.CompareTag("Respawn"))
             {
-                player.SetSpawnPos(item.position);
+                player_m.SetSpawnPos(item.position);
 
             }
             dungegonRooms.Add(item.GetComponent<Room_Behaviour>());
@@ -53,6 +55,7 @@ public class wfc_Dungeon_Generator : MonoBehaviour
     {
         checkPlayerPos();
     }
+
     void checkPlayerPos()
     {
         var aux = currentRoom;

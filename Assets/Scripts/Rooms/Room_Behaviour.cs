@@ -7,7 +7,8 @@ public class Room_Behaviour : MonoBehaviour
     [Header("Room SetUp")]
     [SerializeField] private GameObject[] walls;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
     [SerializeField] private GameObject[] doors;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
-    [SerializeField] private Transform playerPos;
+    [SerializeField] public Transform playerPos;
+    [SerializeField] public Transform playerContainer;
     [SerializeField] private float updateTimer = 2.0f;
     [Header("Room Points")]
     [SerializeField] private const int maxRoomPoints = 8;
@@ -104,10 +105,17 @@ public class Room_Behaviour : MonoBehaviour
     {
         RaycastHit hit;
 
+        // 0 = Up
+        // 1 = Down
+        // 2 = Right
+        // 3 = Left
+
         if (doors[0].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.forward, out hit, rayDistance))
             {
+                hit.collider.GetComponentInParent<Room_Behaviour>().doors[1].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().walls[1].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
@@ -116,6 +124,8 @@ public class Room_Behaviour : MonoBehaviour
         {
             if (Physics.Raycast(rayOrigin.position, -Vector3.forward, out hit, rayDistance))
             {
+                hit.collider.GetComponentInParent<Room_Behaviour>().doors[0].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().walls[0].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
@@ -124,6 +134,8 @@ public class Room_Behaviour : MonoBehaviour
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.right, out hit, rayDistance))
             {
+                hit.collider.GetComponentInParent<Room_Behaviour>().doors[3].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().walls[3].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
@@ -132,6 +144,8 @@ public class Room_Behaviour : MonoBehaviour
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.left, out hit, rayDistance))
             {
+                hit.collider.GetComponentInParent<Room_Behaviour>().doors[2].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().walls[2].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
