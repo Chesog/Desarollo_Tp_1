@@ -1829,18 +1829,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3309572345892585093, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.14666644
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309572345892585093, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.14666636
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309572345892585093, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.1466664
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309572345892585093, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6231309
       objectReference: {fileID: 0}
@@ -1883,18 +1871,6 @@ PrefabInstance:
     - target: {fileID: 3309572345892585102, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}
       propertyPath: m_Name
       value: Metal Battleaxe
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309572345892585103, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309572345892585103, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}
-      propertyPath: pickUp_Range
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3309572345892585103, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}
-      propertyPath: weapon_Container
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04aac35f33abfb1479c400dba4a06f14, type: 3}

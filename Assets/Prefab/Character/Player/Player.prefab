@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setings: {fileID: 11400000, guid: 6f2974fcb1c2af742a90b8259bc2cc97, type: 2}
   _Manager: {fileID: 0}
+  playerHolder: {fileID: 1989077402}
 --- !u!1 &1281370389992057380
 GameObject:
   m_ObjectHideFlags: 0
@@ -6253,6 +6254,10 @@ PrefabInstance:
       propertyPath: weapon_Container
       value: 
       objectReference: {fileID: 1989077402}
+    - target: {fileID: 4555648804274867399, guid: e8471d5b11d1c614eaf2f3c56f443ad9, type: 3}
+      propertyPath: WeaponDamage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6269368558458436348, guid: e8471d5b11d1c614eaf2f3c56f443ad9, type: 3}
       propertyPath: m_Name
       value: Metal Sword
