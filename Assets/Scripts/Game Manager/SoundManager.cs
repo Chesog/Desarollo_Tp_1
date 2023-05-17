@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource effectSource;
-    [SerializeField] public AudioClip button;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
 
 
     private void Awake()
@@ -23,6 +25,12 @@ public class SoundManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+    }
+
+    private void Update()
+    {
+        musicSource.volume = musicSlider.value;
+        effectSource.volume = sfxSlider.value;
     }
 
     public void PlaySound(AudioClip clip)
@@ -54,7 +62,6 @@ public class SoundManager : MonoBehaviour
     {
         effectSource.mute = !effectSource.mute;
         musicSource.mute = !musicSource.mute;
-        PlaySound(button);
     }
 
 }
