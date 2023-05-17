@@ -128,7 +128,7 @@ public class Enemy_Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (health != 0)
+        if (health >= 0)
         {
             if (other.CompareTag("Player_Weapon"))
             {
