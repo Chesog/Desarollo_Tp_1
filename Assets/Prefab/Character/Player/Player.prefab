@@ -1008,6 +1008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setings: {fileID: 11400000, guid: 6f2974fcb1c2af742a90b8259bc2cc97, type: 2}
+  swing: {fileID: 0}
   _Manager: {fileID: 0}
   playerHolder: {fileID: 1989077402}
 --- !u!1 &1281370389992057380

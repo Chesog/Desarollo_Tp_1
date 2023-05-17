@@ -63,7 +63,7 @@
                     "name": "PickUp",
                     "type": "Value",
                     "id": "fb5e06b7-3bde-4df0-b662-c9c28bac9038",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -83,6 +83,17 @@
                     "name": "",
                     "id": "635af7c5-8d43-44ae-9d45-e6054532cead",
                     "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse_Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4590ec6b-685f-4a31-be18-e8317001e86b",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -147,8 +158,30 @@
                 },
                 {
                     "name": "",
+                    "id": "110a8729-ff93-44d8-be9d-319be7d8350c",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b394860d-2a0e-4a66-a182-69bd2a491699",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f827eb09-2fa0-4b01-b706-9f3389f55c22",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -169,8 +202,30 @@
                 },
                 {
                     "name": "",
+                    "id": "36832e25-1324-4346-b099-2d6d671bfa78",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1d245980-5556-42bc-9904-6afd132f333f",
                     "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "L_Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c7927e6-198e-4921-899b-c04470cb187f",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -191,6 +246,17 @@
                 },
                 {
                     "name": "",
+                    "id": "be6614e7-d3e6-4e00-93f8-c9e47b7283bb",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "R_Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "589bb07c-27b4-4c37-a18c-e8eb8fefbb2b",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -202,8 +268,30 @@
                 },
                 {
                     "name": "",
+                    "id": "393a4880-bc08-4da4-a8ce-555f5ff0a04a",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "337b9f07-c8c1-4879-bba1-019825cf56e9",
                     "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ac2932c-ecde-4dc6-9e35-cec7628070b9",
+                    "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

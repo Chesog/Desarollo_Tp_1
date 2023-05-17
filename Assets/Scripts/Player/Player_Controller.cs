@@ -3,6 +3,7 @@ using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Player_Controller : MonoBehaviour
     public event Action<bool> OnPlayerBlock;
     public event Action OnPlayerTakeDamage;
     public event Action OnPlayerDead;
+    public event Action OnPlayerPickUp;
+    public event Action OnPlayerDrop;
 
     public static Player_Controller playerPos;
     public Transform playerHolder;
@@ -82,6 +85,25 @@ public class Player_Controller : MonoBehaviour
 
         else
             Debug.LogWarning($"On Sprint: event has no listeners");
+    }
+
+    public void OnPickUp(InputValue input) 
+    {
+        if (input.isPressed) 
+        {
+            Debug.Log("OnPlayerPickUp");
+            OnPlayerPickUp.Invoke();
+        }
+
+    }
+
+    public void OnDrop(InputValue input) 
+    {
+        if (input.isPressed) 
+        {
+            Debug.Log("OnPlayerDrop");
+            OnPlayerDrop.Invoke();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

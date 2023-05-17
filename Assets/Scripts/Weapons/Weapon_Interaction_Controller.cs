@@ -61,22 +61,29 @@ public class Weapon_Interaction_Controller : MonoBehaviour
 
     private void Awake()
     {
+        Player_Controller.playerPos.OnPlayerPickUp += PlayerPos_OnPlayerPickUp;
+        Player_Controller.playerPos.OnPlayerDrop += PlayerPos_OnPlayerDrop;
+    }
 
+    private void PlayerPos_OnPlayerDrop()
+    {
+        if (equiped)
+        {
+            Drop_Weapon();
+        }
+    }
+
+    private void PlayerPos_OnPlayerPickUp()
+    {
+        Vector3 distance = player.position - transform.position;
+        if (!equiped && distance.magnitude <= pickUp_Range && !slotFull)
+        {
+            PickUp_Weapon();
+        }
     }
 
     private void Update()
     {
-        Vector3 distance = player.position - transform.position;
-        if (!equiped && distance.magnitude <= pickUp_Range && !slotFull && Input.GetKeyDown(KeyCode.E))
-        {
-            PickUp_Weapon();
-        }
-
-        if (equiped && Input.GetKeyDown(KeyCode.Q))
-        {
-            Drop_Weapon();
-        }
-
         if (equiped)
         {
             UpdateEquipedPos();
@@ -86,25 +93,6 @@ public class Weapon_Interaction_Controller : MonoBehaviour
     private void UpdateEquipedPos() 
     {
         transform.localPosition = Vector3.zero;
-    }
-
-    public void OnPickUp(InputValue input)
-    {
-        Debug.Log("PickUp");
-        Vector3 distance = player.position - transform.position;
-        if (!equiped && distance.magnitude <= pickUp_Range && !slotFull)
-        {
-            PickUp_Weapon();
-        }
-    }
-
-    public void OnDrop(InputValue input)
-    {
-        Debug.Log("Drop");
-        if (equiped)
-        {
-            Drop_Weapon();
-        }
     }
 
     private void PickUp_Weapon()
@@ -139,6 +127,12 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         float rand = Random.Range(-1f, 1f);
         rb.AddTorque(new Vector3(rand, rand, rand) * 10f);
         weapon.enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        Player_Controller.playerPos.OnPlayerPickUp -= PlayerPos_OnPlayerPickUp;
+        Player_Controller.playerPos.OnPlayerDrop -= PlayerPos_OnPlayerDrop;
     }
 
     private void OnDrawGizmos()

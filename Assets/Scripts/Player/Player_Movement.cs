@@ -147,7 +147,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Controller_OnPlayerSprint(bool obj)
     {
-        Debug.Log(obj);
+        //Debug.Log(obj);
         isSprinting = obj;
     }
 
