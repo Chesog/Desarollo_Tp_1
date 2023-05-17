@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -82,6 +83,18 @@ public class Game_Manager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+    }
+
+    public void BackToMenu() 
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Main_Menu");
+    }
+
+    public void ReloadScene() 
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("wfc_Test");
     }
 
     public void SetHealth(float health) 
