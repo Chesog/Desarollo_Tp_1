@@ -17,7 +17,7 @@ public class Buton : MonoBehaviour
 
     public void OnClickStart() 
     {
-        SceneManager.LoadScene("Test_Scene");
+        SceneManager.LoadScene("wfc_Test");
         SceneManager.UnloadScene("Main_Menu");
     }
 
