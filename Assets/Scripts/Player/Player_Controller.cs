@@ -144,7 +144,7 @@ public class Player_Controller : MonoBehaviour
 
     private void CheckHealth()
     {
-        if (setings.health <= 0)
+        if (health <= 0)
         {
             OnPlayerDead.Invoke();
             //Invoke(nameof(DestroyPlayer), 0.5f);

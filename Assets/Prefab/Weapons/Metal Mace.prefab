@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8925975387006475930}
   m_Layer: 0
   m_Name: Metal Mace
-  m_TagString: Untagged
+  m_TagString: Player_Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
