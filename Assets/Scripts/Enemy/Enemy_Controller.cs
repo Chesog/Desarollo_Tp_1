@@ -137,6 +137,11 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
 
+    public float GetHealth() 
+    {
+        return health;
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;

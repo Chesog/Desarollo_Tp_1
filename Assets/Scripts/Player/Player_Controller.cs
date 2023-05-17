@@ -24,6 +24,7 @@ public class Player_Controller : MonoBehaviour
     public event Action OnPlayerDead;
     public event Action OnPlayerPickUp;
     public event Action OnPlayerDrop;
+    public event Action OnPlayerPause;
 
     public static Player_Controller playerPos;
     public Transform playerHolder;
@@ -35,6 +36,11 @@ public class Player_Controller : MonoBehaviour
 
         _Manager.SetMaxHealth(setings.health);
         health = setings.health;
+    }
+
+    public float GetHealth() 
+    {
+        return health;
     }
 
     public Player_Setings GetPlayerSetings()
@@ -104,6 +110,11 @@ public class Player_Controller : MonoBehaviour
             Debug.Log("OnPlayerDrop");
             OnPlayerDrop.Invoke();
         }
+    }
+
+    public void OnPause() 
+    {
+        OnPlayerPause.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
