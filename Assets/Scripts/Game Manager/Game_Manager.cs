@@ -22,6 +22,8 @@ public class Game_Manager : MonoBehaviour
         Pause_Canvas.active = false;
         Lose_Canvas.active = false;
         Win_Canvas.active = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         SoundManager.Instance.StopMusic();
         SoundManager.Instance.PlayMusic(GameMusic);
@@ -41,14 +43,14 @@ public class Game_Manager : MonoBehaviour
                 Lose_Canvas.active = false;
                 Win_Canvas.active = false;
                 Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             Time.timeScale = 0;
             Pause_Canvas.active = true;
             game_Canvas.active = false;
