@@ -61,14 +61,18 @@ public class Game_Manager : MonoBehaviour
 
     public void Update()
     {
-        BossEnemy_Health = BossEnemy.GetComponent<Enemy_Controller>().GetHealth();
-        if (BossEnemy_Health <= 0)
+        if (BossEnemy != null) 
         {
-            game_Canvas.active = false;
-            Pause_Canvas.active = false;
-            Lose_Canvas.active = false;
-            Win_Canvas.active = true;
+            BossEnemy_Health = BossEnemy.GetComponent<Enemy_Controller>().GetHealth();
+            if (BossEnemy_Health <= 0)
+            {
+                game_Canvas.active = false;
+                Pause_Canvas.active = false;
+                Lose_Canvas.active = false;
+                Win_Canvas.active = true;
+            }
         }
+
 
         Player_Health = Player_Controller.playerPos.GetComponent<Player_Controller>().GetHealth();
 
