@@ -4898,7 +4898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: normal_rooms_Prefab.Array.size
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: boss_rooms_Prefab.Array.data[0]
@@ -4928,6 +4928,26 @@ PrefabInstance:
       propertyPath: normal_rooms_Prefab.Array.data[1]
       value: 
       objectReference: {fileID: 5991330738004835114, guid: 893e5708cb93316439a5781932ee6182, type: 3}
+    - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
+      propertyPath: normal_rooms_Prefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 5991330738004835114, guid: ec3ea5ccede88c54a97f64e209c0fdb5, type: 3}
+    - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
+      propertyPath: normal_rooms_Prefab.Array.data[3]
+      value: 
+      objectReference: {fileID: 5991330738004835114, guid: 4910ca5432aa4a84ba2aa30b62f6bb24, type: 3}
+    - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
+      propertyPath: normal_rooms_Prefab.Array.data[4]
+      value: 
+      objectReference: {fileID: 5991330738004835114, guid: 6ce7e9e3a63533648a475fc52ce664f3, type: 3}
+    - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
+      propertyPath: normal_rooms_Prefab.Array.data[5]
+      value: 
+      objectReference: {fileID: 5991330738004835114, guid: fb4e6ba69e9d1524bba5eb0c3dc7c182, type: 3}
+    - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
+      propertyPath: normal_rooms_Prefab.Array.data[6]
+      value: 
+      objectReference: {fileID: 5991330738004835114, guid: fde3afcba35a8db4e8fedbaab2810bda, type: 3}
     - target: {fileID: 6673351024770648121, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: m_Name
       value: wfc_Dungeon_Generator
