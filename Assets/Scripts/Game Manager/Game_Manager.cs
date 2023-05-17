@@ -66,8 +66,8 @@ public class Game_Manager : MonoBehaviour
         {
             game_Canvas.active = false;
             Pause_Canvas.active = false;
-            Lose_Canvas.active = true;
-            Win_Canvas.active = false;
+            Lose_Canvas.active = false;
+            Win_Canvas.active = true;
         }
 
         Player_Health = Player_Controller.playerPos.GetComponent<Player_Controller>().GetHealth();
@@ -76,8 +76,8 @@ public class Game_Manager : MonoBehaviour
         {
             game_Canvas.active = false;
             Pause_Canvas.active = false;
-            Lose_Canvas.active = false;
-            Win_Canvas.active = true;
+            Lose_Canvas.active = true;
+            Win_Canvas.active = false;
         }
 
         if (Pause_Canvas.active)
