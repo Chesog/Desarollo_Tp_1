@@ -66,8 +66,8 @@ public class Enemy_Controller : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, target.position);
 
-        if(distance <= lookRad || distance <= stopDistance)
-        faceTarget();
+        if (distance <= lookRad || distance <= stopDistance)
+            faceTarget();
 
         CheckHealth();
     }
@@ -128,16 +128,16 @@ public class Enemy_Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (health >= 0)
+        if (other.CompareTag("Player_Weapon"))
         {
-            if (other.CompareTag("Player_Weapon"))
+            if (health > 0)
             {
                 TakeDamage(other.GetComponent<Weapon_Stats>().GetDamage());
             }
         }
     }
 
-    public float GetHealth() 
+    public float GetHealth()
     {
         return health;
     }
