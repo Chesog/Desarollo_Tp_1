@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +15,22 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] GameObject Win_Canvas;
 
     private void Start()
+    {
+        game_Canvas.active = true;
+        Pause_Canvas.active = false;
+        Lose_Canvas.active = false;
+        Win_Canvas.active = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        SoundManager.Instance.StopMusic();
+        SoundManager.Instance.PlayMusic(GameMusic);
+        BossEnemy = GameObject.FindGameObjectWithTag("Boss");
+
+        Player_Controller.playerPos.OnPlayerPause += PlayerPos_OnPlayerPause;
+    }
+
+    private void OnEnable()
     {
         game_Canvas.active = true;
         Pause_Canvas.active = false;
@@ -112,5 +126,15 @@ public class Game_Manager : MonoBehaviour
     {
         healthBar.maxValue = health;
         healthBar.value = health;
+    }
+
+    private void OnDisable()
+    {
+        Player_Controller.playerPos.OnPlayerPause -= PlayerPos_OnPlayerPause;
+    }
+
+    private void OnDestroy()
+    {
+        Player_Controller.playerPos.OnPlayerPause -= PlayerPos_OnPlayerPause;
     }
 }

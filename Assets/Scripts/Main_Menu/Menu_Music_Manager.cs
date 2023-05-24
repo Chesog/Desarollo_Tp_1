@@ -9,6 +9,13 @@ public class Menu_Music_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.Instance.StopMusic();
+        SoundManager.Instance.PlayMusic(musicClip);
+    }
+
+    private void OnEnable()
+    {
+        SoundManager.Instance.StopMusic();
         SoundManager.Instance.PlayMusic(musicClip);
     }
 
