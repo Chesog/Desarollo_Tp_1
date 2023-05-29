@@ -12,6 +12,7 @@ public class Player_Controller : MonoBehaviour
     Player_Movement movement;
     float health;
     [SerializeField] private Player_Setings setings;
+    [SerializeField] private PlayerInput input;
     [SerializeField] private AudioClip swing;
     public Game_Manager _Manager;
 
@@ -30,7 +31,15 @@ public class Player_Controller : MonoBehaviour
     public Transform playerHolder;
 
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    playerPos = this;
+    //
+    //    _Manager.SetMaxHealth(setings.health);
+    //    health = setings.health;
+    //}
+
+    private void OnEnable()
     {
         playerPos = this;
 
@@ -79,7 +88,7 @@ public class Player_Controller : MonoBehaviour
         if (OnPlayerBlock != null)
             OnPlayerBlock.Invoke(input.isPressed);
         else
-            Debug.LogWarning($"On Sprint: event has no listeners");
+            Debug.LogWarning($"OnR_Click: event has no listeners");
     }
 
     public void OnL_Click(InputValue input)
@@ -90,7 +99,7 @@ public class Player_Controller : MonoBehaviour
             SoundManager.Instance.PlaySound(swing);
 
         else
-            Debug.LogWarning($"On Sprint: event has no listeners");
+            Debug.LogWarning($"OnL_Click: event has no listeners");
     }
 
     public void OnPickUp(InputValue input) 
@@ -165,4 +174,5 @@ public class Player_Controller : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
 }
