@@ -7,11 +7,11 @@ public class Menu_Music_Manager : MonoBehaviour
     [SerializeField] AudioClip musicClip;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        SoundManager.Instance.StopMusic();
-        SoundManager.Instance.PlayMusic(musicClip);
-    }
+    //void Start()
+    //{
+    //    SoundManager.Instance.StopMusic();
+    //    SoundManager.Instance.PlayMusic(musicClip);
+    //}
 
     private void OnEnable()
     {

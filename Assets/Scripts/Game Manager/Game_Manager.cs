@@ -22,11 +22,11 @@ public class Game_Manager : MonoBehaviour
         Win_Canvas.active = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+    
         SoundManager.Instance.StopMusic();
         SoundManager.Instance.PlayMusic(GameMusic);
         BossEnemy = GameObject.FindGameObjectWithTag("Boss");
-
+    
         Player_Controller.playerPos.OnPlayerPause += PlayerPos_OnPlayerPause;
     }
 
@@ -108,12 +108,14 @@ public class Game_Manager : MonoBehaviour
     public void BackToMenu() 
     {
         Time.timeScale = 1;
+        SoundManager.Instance.StopMusic();
         SceneManager.LoadScene("Main_Menu");
     }
 
     public void ReloadScene() 
     {
         Time.timeScale = 1;
+        SoundManager.Instance.StopMusic();
         SceneManager.LoadScene("wfc_Test");
     }
 

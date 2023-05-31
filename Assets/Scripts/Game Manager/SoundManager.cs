@@ -13,7 +13,21 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
 
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    if (Instance == null)
+    //    {
+    //        Instance = this;
+    //        DontDestroyOnLoad(this.gameObject);
+    //    }
+    //    else
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
+    //
+    //}
+
+    private void OnEnable()
     {
         if (Instance == null)
         {
@@ -24,7 +38,6 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 
     private void Update()

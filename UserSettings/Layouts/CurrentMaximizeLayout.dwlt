@@ -87,7 +87,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 42
+  controlID: 1288
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 43
+  controlID: 1289
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,23 +226,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 1c200100
-      m_LastClickedID: 73756
-      m_ExpandedIDs: 8826ffff1c28ffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 58fcfdffb826ffff1c28ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Game Manager
+        m_OriginalName: Game Manager
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 95248
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 5}
       m_SearchString: 
@@ -540,9 +540,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.8608971, y: -10.475589, z: 28.59927}
+    m_Target: {x: 5.074974, y: 11.103118, z: 1.1310318}
     speed: 2
-    m_Value: {x: -1.8608971, y: -10.475589, z: 28.59927}
+    m_Value: {x: 5.074974, y: 11.103118, z: 1.1310318}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -589,13 +589,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.16749728, y: 0.015065174, z: -0.002561303, w: -0.9857572}
+    m_Target: {x: -0.043817073, y: -0.6854255, z: 0.04138781, w: -0.7256451}
     speed: 2
-    m_Value: {x: -0.16897522, y: 0.01506127, z: -0.0025838905, w: -0.9855019}
+    m_Value: {x: -0.043817032, y: -0.68542486, z: 0.04138777, w: -0.7256444}
   m_Size:
-    m_Target: 24.24871
+    m_Target: 10
     speed: 2
-    m_Value: 24.24871
+    m_Value: 10
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1286,7 +1286,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 107
+  controlID: 1223
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1355,22 +1355,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Game Manager
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Game Manager
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\Aula 2\Desktop\Desarollo 2\Desarollo_Tp_1
+  m_LastProjectPath: C:\Users\Aula 2\Desktop\Desarollo\Desarollo_Tp_1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 821f0100
-    m_LastClickedID: 73602
-    m_ExpandedIDs: 00000000741f010000ca9a3bffffff7f
+    m_SelectedIDs: a2290100
+    m_LastClickedID: 76194
+    m_ExpandedIDs: 00000000741f0100841f010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1398,7 +1398,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000741f010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1423,24 +1423,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 1c200100
-    m_LastClickedInstanceID: 73756
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300004c6c0000465c00009efa0000889300003a00010008fc0000d09d0000a464000040960000aeb4000024fb00000000000038330100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Scripts
+      m_OriginalName: Scripts
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 73604
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 13}
     m_CreateAssetUtility:
@@ -1664,7 +1664,7 @@ MonoBehaviour:
     m_CachedPref: -151
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 73654
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 1

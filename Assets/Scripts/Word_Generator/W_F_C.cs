@@ -110,7 +110,7 @@ public class W_F_C : MonoBehaviour
         }
 
         int rand = UnityEngine.Random.Range(0, index);
-        Debug.Log(sorted_Grid[0].possible_Types.Count);
+        //Debug.Log(sorted_Grid[0].possible_Types.Count);
         Vector3Int randpos = sorted_Grid[rand].gridpos;
         CollapseSelection(ref grid.grid[randpos.x, randpos.y, randpos.z]);
     }
