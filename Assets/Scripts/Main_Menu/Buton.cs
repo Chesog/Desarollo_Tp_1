@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//TODO: TP2 - Syntax - Consistency in naming convention
 public class Buton : MonoBehaviour
 {
     [SerializeField] GameObject windowPrefab;
@@ -13,6 +14,7 @@ public class Buton : MonoBehaviour
 
     public void OnClickStart() 
     {
+        //TODO - Fix - Hardcoded value
         SceneManager.LoadScene("wfc_Test");
         SceneManager.UnloadScene("Main_Menu");
     }

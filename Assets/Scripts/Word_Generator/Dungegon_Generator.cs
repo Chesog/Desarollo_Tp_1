@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Directions {Up,Down,Right,Left}
+//TODO: TP2 - Remove unused methods/variables
 public enum RoomType { Spawn_Room,Medium_Room,L_Room,Large_Room}
 public class Dungegon_Generator : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Dungegon_Generator : MonoBehaviour
     [SerializeField] private Room_Rule[] rooms;
     [SerializeField] private List<Room_Behaviour> dungegonRooms;
     [SerializeField] private Transform player;
+    //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
     List<Cell> board;
 
 
@@ -41,6 +43,7 @@ public class Dungegon_Generator : MonoBehaviour
         checkPlayerPos();
     }
 
+    //TODO: TP2 - Syntax - Consistency in naming convention
     private IEnumerator _SpawnCorutine() 
     {
         for (int i = 0; i < mazeSize.x; i++)
@@ -50,6 +53,7 @@ public class Dungegon_Generator : MonoBehaviour
                 Cell currentCell = board[(i + j * mazeSize.x)];
                 if (currentCell.visited)
                 {
+                    //TODO - Fix - Code is in Spanish or is trash code
                     int randomRoom = -1;
                     List<int> availableRoom = new List<int>();
 

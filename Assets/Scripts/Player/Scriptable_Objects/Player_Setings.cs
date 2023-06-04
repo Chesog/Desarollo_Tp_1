@@ -13,6 +13,7 @@ public class Player_Setings : ScriptableObject
     [Range(0, 500)] public float jumpForce;
     public float maxDistance;
     public float minJumpDistance;
+    //TODO: TP2 - Remove unused methods/variables
     public bool isAttacking;
     public bool isBlocking;
     [Header("Player Jump Timers")]

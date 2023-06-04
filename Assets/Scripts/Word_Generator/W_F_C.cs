@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//TODO: TP2 - Syntax - Consistency in naming convention
 public class W_F_C : MonoBehaviour
 {
     [SerializeField] private Grid grid;
     private bool stopWFC;
+    //TODO - Fix - Wtf?
     //1. var model.now Overlappingodeimovt.N:3, width:48 height:48, periodicinput:true, pertedic:false,
     //    symmetry:8 ground:0 ):
     //2. model.Rum(random.Next, limit:#):
@@ -110,6 +112,7 @@ public class W_F_C : MonoBehaviour
         }
 
         int rand = UnityEngine.Random.Range(0, index);
+        //TODO: TP2 - Remove unused methods/variables
         //Debug.Log(sorted_Grid[0].possible_Types.Count);
         Vector3Int randpos = sorted_Grid[rand].gridpos;
         CollapseSelection(ref grid.grid[randpos.x, randpos.y, randpos.z]);
@@ -119,6 +122,7 @@ public class W_F_C : MonoBehaviour
     {
         List<RNode_Type> rNode_Types = new List<RNode_Type>();
 
+        //TODO - Fix - Code is in Spanish or is trash code
         // Le asigna un valor aleatorio entre los valores que posee el nodo 
         int randType = (UnityEngine.Random.Range(0, currentNode.possible_Types.Count));
         RNode_Type selectedType = currentNode.possible_Types[randType];

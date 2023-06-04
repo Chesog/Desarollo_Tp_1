@@ -8,6 +8,7 @@ public class Player_Animations_Controller : MonoBehaviour
     [Header("Anim Setup")]
     [SerializeField] private Animator anim;
     private Player_Controller controller;
+    //TODO: TP2 - Syntax - Consistency in naming convention
     private Player_Movement movement_Controller;
 
     private void OnEnable()
@@ -43,8 +44,10 @@ public class Player_Animations_Controller : MonoBehaviour
 
     private void Update()
     {
+        //TODO: TP2 - SOLID
         if (movement_Controller.isGrounded())
         {
+            //TODO - Fix - Hardcoded value
             anim.SetBool("IsJumping",false);
         }
         else
@@ -56,6 +59,7 @@ public class Player_Animations_Controller : MonoBehaviour
     private void Controller_OnPlayerMove(Vector2 obj)
     {
         Vector3 pos = new Vector3(obj.x,0f,obj.y);
+        //TODO - Fix - Hardcoded value
         anim.SetFloat("VelocityX/Z", pos.magnitude - pos.y);
     }
 
@@ -63,6 +67,7 @@ public class Player_Animations_Controller : MonoBehaviour
     private void Controller_OnPlayerJump(bool obj)
     {
         anim.SetBool("IsJumping", obj);
+        //TODO: TP2 - Remove unused methods/variables
         //anim.Play("Jump");
     }
 

@@ -16,6 +16,7 @@ public class Weapon_Interaction_Controller : MonoBehaviour
     [SerializeField] private float dropUpwardForce;
 
     [SerializeField] private bool equiped;
+    //TODO: TP2 - Syntax - Consistency in naming convention
     [SerializeField] private static bool slotFull;
 
 

@@ -15,6 +15,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private Transform playerCamera;
     [SerializeField] private float jumpBufferTimeCounter;
     [SerializeField] private float turnSmoothVelocity;
+    //TODO: TP2 - Syntax - Fix declaration order
     private float lastAngle;
     private Coroutine _jumpCorutine;
     [Header("Movement")]
@@ -28,6 +29,7 @@ public class Player_Movement : MonoBehaviour
     [Header("Coyote Time Setup")]
     [SerializeField] private float coyoteTimerCounter;
 
+    //TODO - Documentation - Add summary
     public event Action<float> OnPlayerJump;
     public event Action<float> OnPlayerAttack;
     public event Action<float> OnPlayerBlock;
@@ -130,6 +132,7 @@ public class Player_Movement : MonoBehaviour
             }
 
         }
+        //TODO: TP2 - Remove unused methods/variables
         //else 
         //{
         //    rigidbody.drag = 10f;
@@ -149,6 +152,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Controller_OnPlayerMove(Vector2 obj)
     {
+        //TODO: TP2 - FSM
         if (!isGrounded())
             return;
 
@@ -173,6 +177,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Controller_OnPlayerSprint(bool obj)
     {
+        //TODO: TP2 - Remove unused methods/variables
         //Debug.Log(obj);
         isSprinting = obj;
     }

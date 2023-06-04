@@ -16,6 +16,7 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private bool deathLoop;
     [SerializeField] private Transform target;
     [SerializeField] private Transform bulletSpawn;
+    //TODO: TP2 - Syntax - Consistency in naming convention
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float health;
@@ -40,6 +41,7 @@ public class Enemy_Controller : MonoBehaviour
             enabled = false;
         }
 
+        //TODO: TP2 - Remove unused methods/variables
         //rb ??= GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -103,6 +105,7 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
 
+    //TODO: TP2 - Syntax - Consistency in naming convention
     private void faceTarget()
     {
         transform.LookAt(target.position);
@@ -120,6 +123,7 @@ public class Enemy_Controller : MonoBehaviour
     }
 
 
+    //TODO: TP2 - SOLID
     private void ResetAttack()
     {
         alreadyAttacked = false;
@@ -128,6 +132,7 @@ public class Enemy_Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //TODO: TP2 - SOLID
         if (health >= 0)
         {
             if (other.CompareTag("Player_Weapon"))
@@ -137,6 +142,7 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
 
+    //TODO - Fix - Should be native Setter/Getter
     public float GetHealth() 
     {
         return health;
@@ -146,6 +152,7 @@ public class Enemy_Controller : MonoBehaviour
     {
         health -= damage;
         OnEnemyHit.Invoke();
+        //TODO - Fix - Bad log/Log out of context
         Debug.Log(health);
     }
 

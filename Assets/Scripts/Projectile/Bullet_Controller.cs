@@ -17,6 +17,7 @@ public class Bullet_Controller : MonoBehaviour
 
     void Update()
     {
+        //TODO - Fix - Code is in Spanish or is trash code
         // move the bullet forward at a constant speed
         transform.position += transform.forward * speed * Time.deltaTime;
 

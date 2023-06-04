@@ -7,6 +7,7 @@ using UnityEngine.Windows;
 
 public class Player_Controller : MonoBehaviour
 {
+    //TODO: TP2 - Remove unused methods/variables
     // private CharacterController controller;
 
     Player_Movement movement;
@@ -16,6 +17,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] private AudioClip swing;
     public Game_Manager _Manager;
 
+    //TODO - Documentation - Add summary
     public event Action<Vector2> OnPlayerMove;
     public event Action<bool> OnPlayerJump;
     public event Action<bool> OnPlayerSprint;
@@ -31,6 +33,7 @@ public class Player_Controller : MonoBehaviour
     public Transform playerHolder;
 
 
+    //TODO: TP2 - Remove unused methods/variables
     //private void Awake()
     //{
     //    playerPos = this;
@@ -57,6 +60,7 @@ public class Player_Controller : MonoBehaviour
         return setings;
     }
 
+    //TODO - Fix - Using Input related logic outside of an input responsible class (or input related class controls health)
     public void OnMove(InputValue input)
     {
         if (OnPlayerMove != null)
@@ -106,6 +110,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (input.isPressed) 
         {
+            //TODO: TP2 - SOLID
             Debug.Log("OnPlayerPickUp");
             OnPlayerPickUp.Invoke();
         }
@@ -128,6 +133,7 @@ public class Player_Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //TODO - Fix - Hardcoded value
         if (other.CompareTag("Bullet"))
         {
             if (!setings.isBlocking)
@@ -148,6 +154,7 @@ public class Player_Controller : MonoBehaviour
 
     private void Update()
     {
+        //TODO - Fix - Should be event based
         CheckHealth();
     }
 
@@ -156,6 +163,7 @@ public class Player_Controller : MonoBehaviour
         if (health <= 0)
         {
             OnPlayerDead.Invoke();
+            //TODO: TP2 - Remove unused methods/variables
             //Invoke(nameof(DestroyPlayer), 0.5f);
         }
         _Manager.SetHealth(health);
@@ -163,6 +171,7 @@ public class Player_Controller : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        //TODO: TP2 - FSM
         if (health <= 0)
             return;
 
