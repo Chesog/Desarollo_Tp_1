@@ -124,11 +124,26 @@ namespace Word_Generator.Editor
             var labelStyle = new GUIStyle(EditorStyles.label);
             labelStyle.alignment = TextAnchor.MiddleCenter;
             GUILayout.Label("Options", labelStyle);
+
+            // Type popup
             var normalWidth = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = 50;
             var nodeSelection = _grid[selection % _grid.Size.y, selection/_grid.Size.x];
             nodeSelection.type = (RNode_Type) EditorGUILayout.EnumPopup("Type", nodeSelection.type);
             EditorGUIUtility.labelWidth = normalWidth;
+
+            // State Popup
+            normalWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 50;
+            nodeSelection.state = (Node_States)EditorGUILayout.EnumPopup("State", nodeSelection.state);
+            EditorGUIUtility.labelWidth = normalWidth;
+
+            // State Popup
+            normalWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 50;
+            EditorGUILayout.IntField("Possible_Types",nodeSelection.possible_Types.Count);
+            EditorGUIUtility.labelWidth = normalWidth;
+
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }

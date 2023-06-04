@@ -1,14 +1,19 @@
 using System;
+using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class Player_Controller : MonoBehaviour
 {
     // private CharacterController controller;
 
     Player_Movement movement;
+    float health;
     [SerializeField] private Player_Setings setings;
+    [SerializeField] private PlayerInput input;
+    [SerializeField] private AudioClip swing;
     public Game_Manager _Manager;
 
     public event Action<Vector2> OnPlayerMove;
@@ -18,12 +23,33 @@ public class Player_Controller : MonoBehaviour
     public event Action<bool> OnPlayerBlock;
     public event Action OnPlayerTakeDamage;
     public event Action OnPlayerDead;
-    
+    public event Action OnPlayerPickUp;
+    public event Action OnPlayerDrop;
+    public event Action OnPlayerPause;
+
+    public static Player_Controller playerPos;
+    public Transform playerHolder;
 
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    playerPos = this;
+    //
+    //    _Manager.SetMaxHealth(setings.health);
+    //    health = setings.health;
+    //}
+
+    private void OnEnable()
     {
+        playerPos = this;
+
         _Manager.SetMaxHealth(setings.health);
+        health = setings.health;
+    }
+
+    public float GetHealth() 
+    {
+        return health;
     }
 
     public Player_Setings GetPlayerSetings()
@@ -62,15 +88,42 @@ public class Player_Controller : MonoBehaviour
         if (OnPlayerBlock != null)
             OnPlayerBlock.Invoke(input.isPressed);
         else
-            Debug.LogWarning($"On Sprint: event has no listeners");
+            Debug.LogWarning($"OnR_Click: event has no listeners");
     }
 
     public void OnL_Click(InputValue input)
     {
         if (OnPlayerAttack != null)
             OnPlayerAttack.Invoke(input.isPressed);
+        if (input.isPressed)
+            SoundManager.Instance.PlaySound(swing);
+
         else
-            Debug.LogWarning($"On Sprint: event has no listeners");
+            Debug.LogWarning($"OnL_Click: event has no listeners");
+    }
+
+    public void OnPickUp(InputValue input) 
+    {
+        if (input.isPressed) 
+        {
+            Debug.Log("OnPlayerPickUp");
+            OnPlayerPickUp.Invoke();
+        }
+
+    }
+
+    public void OnDrop(InputValue input) 
+    {
+        if (input.isPressed) 
+        {
+            Debug.Log("OnPlayerDrop");
+            OnPlayerDrop.Invoke();
+        }
+    }
+
+    public void OnPause() 
+    {
+        OnPlayerPause.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -100,25 +153,26 @@ public class Player_Controller : MonoBehaviour
 
     private void CheckHealth()
     {
-        if (setings.health <= 0)
+        if (health <= 0)
         {
             OnPlayerDead.Invoke();
             //Invoke(nameof(DestroyPlayer), 0.5f);
         }
-        _Manager.SetHealth(setings.health);
+        _Manager.SetHealth(health);
     }
 
     public void TakeDamage(float damage)
     {
-        if (setings.health <= 0)
+        if (health <= 0)
             return;
 
-        setings.health -= damage;
-        Debug.Log("Player Health " + setings.health);
+        health -= damage;
+        Debug.Log("Player Health " + health);
     }
 
     private void DestroyPlayer()
     {
         Destroy(gameObject);
     }
+
 }

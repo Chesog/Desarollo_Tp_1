@@ -10,7 +10,7 @@ public class Player_Animations_Controller : MonoBehaviour
     private Player_Controller controller;
     private Player_Movement movement_Controller;
 
-    private void Awake()
+    private void OnEnable()
     {
         controller ??= GetComponent<Player_Controller>();
         if (!controller)
@@ -29,10 +29,7 @@ public class Player_Animations_Controller : MonoBehaviour
         {
             Debug.LogError(message: $"{name}: (logError){nameof(anim)} is null");
         }
-    }
 
-    private void Start()
-    {
         controller.OnPlayerMove += Controller_OnPlayerMove;
         controller.OnPlayerJump += Controller_OnPlayerJump;
         controller.OnPlayerSprint += Controller_OnPlayerSprint;
@@ -97,6 +94,20 @@ public class Player_Animations_Controller : MonoBehaviour
     private void Controller_OnPlayerDead()
     {
         anim.Play("Death");
+    }
+
+
+    private void OnDisable()
+    {
+        controller.OnPlayerMove -= Controller_OnPlayerMove;
+        controller.OnPlayerJump -= Controller_OnPlayerJump;
+        controller.OnPlayerSprint -= Controller_OnPlayerSprint;
+        controller.OnPlayerAttack -= Controller_OnPlayerAttack;
+        controller.OnPlayerBlock -= Controller_OnPlayerBlock;
+        controller.OnPlayerTakeDamage -= Controller_OnPlayerTakeDamage;
+        controller.OnPlayerDead -= Controller_OnPlayerDead;
+
+        movement_Controller.OnPlayerJump -= Controller_OnPlayerJump;
     }
 
     private void OnDestroy()

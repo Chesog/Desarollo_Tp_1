@@ -61,14 +61,40 @@ public class Player_Movement : MonoBehaviour
         Debug.Log("Player Speed : " + setings.speed);
     }
 
-    private void Start()
+    private void OnEnable()
     {
         controller.OnPlayerMove += Controller_OnPlayerMove;
         controller.OnPlayerJump += Controller_OnPlayerJump;
         controller.OnPlayerSprint += Controller_OnPlayerSprint;
         controller.OnPlayerAttack += Controller_OnPlayerAttack;
         controller.OnPlayerBlock += Controller_OnPlayerBlock;
+
+        rigidbody ??= GetComponent<Rigidbody>();
+        if (!rigidbody)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(rigidbody)} is null");
+            enabled = false;
+        }
+
+        feet_Pivot ??= GetComponent<Transform>();
+        if (!feet_Pivot)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(feet_Pivot)} is null");
+        }
+
+        controller ??= GetComponent<Player_Controller>();
+        if (!controller)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(controller)} is null");
+        }
+
+        setings = controller.GetPlayerSetings();
+
+        isJumping = false;
+        isSprinting = false;
+        initialSpeed = setings.speed;
     }
+
 
     public void FixedUpdate()
     {
@@ -147,7 +173,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Controller_OnPlayerSprint(bool obj)
     {
-        Debug.Log(obj);
+        //Debug.Log(obj);
         isSprinting = obj;
     }
 
@@ -189,9 +215,24 @@ public class Player_Movement : MonoBehaviour
             timeElapsed += Time.fixedDeltaTime;
         }
     }
+
+    public void SetSpawnPos(Vector3 pos) 
+    {
+        this.rigidbody.position = pos;
+
+    }
     public bool isGrounded()
     {
         return Physics.Raycast(feet_Pivot.position, Vector3.down, out var hit, setings.maxDistance) && hit.distance <= setings.minJumpDistance;
+    }
+
+    private void OnDisable()
+    {
+        controller.OnPlayerMove -= Controller_OnPlayerMove;
+        controller.OnPlayerJump -= Controller_OnPlayerJump;
+        controller.OnPlayerSprint -= Controller_OnPlayerSprint;
+        controller.OnPlayerAttack -= Controller_OnPlayerAttack;
+        controller.OnPlayerBlock -= Controller_OnPlayerBlock;
     }
     private void OnDestroy()
     {

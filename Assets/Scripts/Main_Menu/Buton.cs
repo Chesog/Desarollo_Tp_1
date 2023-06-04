@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,7 +13,7 @@ public class Buton : MonoBehaviour
 
     public void OnClickStart() 
     {
-        SceneManager.LoadScene("Test_Scene");
+        SceneManager.LoadScene("wfc_Test");
         SceneManager.UnloadScene("Main_Menu");
     }
 

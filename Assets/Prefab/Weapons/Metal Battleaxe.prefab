@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3309572345892585102}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -4.74, y: 0.9, z: -6.99}
-  m_LocalScale: {x: 0.1466664, y: 0.1466664, z: 0.1466664}
+  m_LocalScale: {x: 0.14666644, y: 0.14666636, z: 0.1466664}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b0803428c7942468c0de8027462ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponDamage: 15
+  WeaponDamage: 30
 --- !u!114 &3309572345892585103
 MonoBehaviour:
   m_ObjectHideFlags: 0
