@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
+    //TODO: TP2 - SOLID
     [SerializeField] Slider healthBar;
     [SerializeField] AudioClip GameMusic;
     [SerializeField] GameObject BossEnemy;
@@ -14,8 +15,10 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] GameObject Lose_Canvas;
     [SerializeField] GameObject Win_Canvas;
 
+    //TODO - Documentation - Add summary
     private void Start()
     {
+        //TODO: TP2 - FSM
         game_Canvas.active = true;
         Pause_Canvas.active = false;
         Lose_Canvas.active = false;
@@ -25,6 +28,7 @@ public class Game_Manager : MonoBehaviour
     
         SoundManager.Instance.StopMusic();
         SoundManager.Instance.PlayMusic(GameMusic);
+        //TODO: TP2 - SOLID
         BossEnemy = GameObject.FindGameObjectWithTag("Boss");
     
         Player_Controller.playerPos.OnPlayerPause += PlayerPos_OnPlayerPause;
@@ -32,6 +36,7 @@ public class Game_Manager : MonoBehaviour
 
     private void OnEnable()
     {
+        //TODO - Fix - Repeated code
         game_Canvas.active = true;
         Pause_Canvas.active = false;
         Lose_Canvas.active = false;
@@ -48,6 +53,7 @@ public class Game_Manager : MonoBehaviour
 
     private void PlayerPos_OnPlayerPause()
     {
+        //TODO: TP2 - FSM
         if (Pause_Canvas.active == true)
         {
             if (Player_Health > 0)
@@ -107,6 +113,7 @@ public class Game_Manager : MonoBehaviour
 
     public void BackToMenu() 
     {
+        //TODO - Fix - Hardcoded values
         Time.timeScale = 1;
         SoundManager.Instance.StopMusic();
         SceneManager.LoadScene("Main_Menu");
@@ -119,6 +126,7 @@ public class Game_Manager : MonoBehaviour
         SceneManager.LoadScene("wfc_Test");
     }
 
+    //TODO - Fix - Should be native Setter/Getter
     public void SetHealth(float health) 
     {
         healthBar.value = health;

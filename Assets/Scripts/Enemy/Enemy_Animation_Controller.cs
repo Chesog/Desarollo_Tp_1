@@ -7,10 +7,12 @@ public class Enemy_Animation_Controller : MonoBehaviour
 {
     [Header("Anim Setup")]
     [SerializeField] private Animator anim;
+    //TODO: TP2 - Syntax - Consistency in naming convention
     [SerializeField] private Enemy_Controller controller;
 
     public event Action OnBulletSpawn;
     // Start is called before the first frame update
+    //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
     void Start()
     {
         
@@ -39,6 +41,7 @@ public class Enemy_Animation_Controller : MonoBehaviour
     private void Controller_OnEnemyMove(Vector2 obj)
     {
         Vector3 pos = new Vector3(obj.x, 0f, obj.y);
+        //TODO - Fix - shouldn't it be (pos * new Vector3(1, 0, 1).magnitude ?
         anim.SetFloat("Velocity_X/Z",pos.magnitude - pos.y);
     }
 

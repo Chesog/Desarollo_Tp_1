@@ -3,9 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
+//TODO - Documentation - Add summary
 public class Buttons_Controller : MonoBehaviour
 {
     [SerializeField] GameObject windowMaster;
+    //TODO: TP2 - Syntax - Consistency in naming convention
     [SerializeField] CinemachineVirtualCamera cam;
 
     [Header("Main Menu Set Up")]
@@ -24,6 +26,7 @@ public class Buttons_Controller : MonoBehaviour
     [SerializeField] EventSystem system;
 
 
+    //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
     // Start is called before the first frame update
     void Start()
     {
@@ -34,12 +37,14 @@ public class Buttons_Controller : MonoBehaviour
         credits_Canvas.active = false;
     }
 
+    //TODO: TP2 - Remove unused methods/variables
     // Update is called once per frame
     void Update()
     {
         
     }
 
+    //TODO: TP2 - SOLID
     public void LookOptions() 
     {
         menu_Canvas.active = false;

@@ -18,6 +18,7 @@ public class Grid : MonoBehaviour
     public float pointsInGridSize = 0.1f;
     public static float delta = 1f;
 
+    //TODO: TP2 - Remove unused methods/variables
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +70,7 @@ public class Grid : MonoBehaviour
                     if (grid[x, y, z].state != Node_States.UnCollapsed)
                     {
                         Gizmos.color = Color.black;
+                        //TODO: TP2 - Remove unused methods/variables
                         //Gizmos.DrawWireSphere(grid[x, y, z].pos, pointsInGridSize);
                         Gizmos.DrawSphere(grid[x, y, z].pos, pointsInGridSize);
                     }

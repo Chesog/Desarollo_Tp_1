@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
 
 
+    //TODO: TP2 - Remove unused methods/variables
     //private void Awake()
     //{
     //    if (Instance == null)

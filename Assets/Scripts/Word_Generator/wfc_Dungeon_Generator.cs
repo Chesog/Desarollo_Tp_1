@@ -37,6 +37,7 @@ public class wfc_Dungeon_Generator : MonoBehaviour
 
         foreach (Transform item in rooms)
         {
+            //TODO - Fix - Hardcoded value
             if (item.CompareTag("Respawn"))
             {
                 player_m.SetSpawnPos(item.position);
@@ -174,6 +175,7 @@ public class wfc_Dungeon_Generator : MonoBehaviour
                     wordPOs.y = gr.grid[x, y, z].pos.y * ofset.y;
                     wordPOs.z = gr.grid[x, y, z].pos.z * ofset.z;
 
+                    //TODO: TP2 - SOLID
                     switch (gr.grid[x, y, z].type)
                     {
                         case RNode_Type.Empty:

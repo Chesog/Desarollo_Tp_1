@@ -7,6 +7,7 @@ public class Room_Behaviour : MonoBehaviour
     [Header("Room SetUp")]
     [SerializeField] private GameObject[] walls;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
     [SerializeField] private GameObject[] doors;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
+    //TODO: TP2 - Remove unused methods/variables
     [SerializeField] public Transform playerPos;
     [SerializeField] public Transform playerContainer;
     [SerializeField] private float updateTimer = 2.0f;
@@ -105,11 +106,13 @@ public class Room_Behaviour : MonoBehaviour
     {
         RaycastHit hit;
 
+        //TODO - Fix - This could be an enum with the values.
         // 0 = Up
         // 1 = Down
         // 2 = Right
         // 3 = Left
 
+        //TODO: TP2 - SOLID
         if (doors[0].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.forward, out hit, rayDistance))
@@ -151,6 +154,7 @@ public class Room_Behaviour : MonoBehaviour
         }
     }
 
+    //TODO: TP2 - Syntax - Consistency in naming convention
     public void ShowAdjRooms() 
     {
         foreach (var item in adjRooms)
@@ -163,6 +167,7 @@ public class Room_Behaviour : MonoBehaviour
     public void Hide()
     {
 
+        //TODO - Fix - Code is in Spanish or is trash code
         MeshRenderer[] mesh = GetComponentsInChildren<MeshRenderer>();
 
         for (int i = 0; i < mesh.Length; i++)
@@ -173,6 +178,7 @@ public class Room_Behaviour : MonoBehaviour
 
     public void Show()
     {
+        //TODO - Fix - Code is in Spanish or is trash code
         MeshRenderer[] mesh = GetComponentsInChildren<MeshRenderer>();
 
         for (int i = 0; i < mesh.Length; i++)
@@ -181,6 +187,7 @@ public class Room_Behaviour : MonoBehaviour
         }
     }
 
+    //TODO: TP2 - Remove unused methods/variables
     public void SetPlayerReference(Transform playerPos) 
     {
         this.playerPos = playerPos;

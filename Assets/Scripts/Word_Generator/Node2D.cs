@@ -18,6 +18,7 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
     public RNode_Type type;
     public Dictionary<string, RNode_Type[]>[] Possible_Neighbors =  
     {
+        //TODO - Fix - Code is in Spanish or is trash code
         // Faltaria Forward y back para la 3 dimension
 
         // RNode_Type Empty
@@ -67,6 +68,7 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
     };
     public Vector3Int gridpos;
 
+    //TODO: TP2 - Remove unused methods/variables
     private void Start()
     {
         
@@ -82,6 +84,8 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
         }
     }
 
+    //TODO - Documentation - Add summary
+    //TODO - Fix - Shouldn't this class implement IComparable then?
     public int CompareTo(Node2D obj)
     {
         //Before -> -1
