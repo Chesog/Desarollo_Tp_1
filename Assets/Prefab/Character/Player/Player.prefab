@@ -952,7 +952,51 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5503618086157593141}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 30ae05a6-f9b2-491c-9201-7035e713bfe4
+    m_ActionName: Player/Mouse_Look[/Mouse/delta,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b0092dd3-5ce5-455b-a9b4-e8e5dc5cddd1
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 09ca6ba7-1a0f-42bc-9bd3-c36f3aab3e61
+    m_ActionName: Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e0c064d-e725-4241-895a-aa9215eabb9d
+    m_ActionName: Player/Sprint[/Keyboard/shift,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79ac2e10-a4c7-4353-a5e7-3929ee427e21
+    m_ActionName: Player/L_Click[/Mouse/leftButton,/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8547632b-a088-4865-a850-112ec3a1ca10
+    m_ActionName: Player/R_Click[/Mouse/rightButton,/XInputControllerWindows/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fb5e06b7-3bde-4df0-b662-c9c28bac9038
+    m_ActionName: Player/PickUp[/Keyboard/e,/XInputControllerWindows/buttonEast,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: beaf721e-c99f-4730-8708-53398c672fae
+    m_ActionName: Player/Drop[/Keyboard/q,/XInputControllerWindows/buttonWest,/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1007,7 +1051,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setings: {fileID: 11400000, guid: 6f2974fcb1c2af742a90b8259bc2cc97, type: 2}
-  swing: {fileID: 0}
+  input: {fileID: 656559978401318380}
+  swing: {fileID: 8300000, guid: 5a89fe2d2780b5e4db9539895f06c90d, type: 3}
   _Manager: {fileID: 0}
   playerHolder: {fileID: 1989077402}
 --- !u!1 &1281370389992057380
