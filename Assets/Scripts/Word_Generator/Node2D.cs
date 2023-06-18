@@ -68,11 +68,6 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
     };
     public Vector3Int gridpos;
 
-    //TODO: TP2 - Remove unused methods/variables
-    private void Start()
-    {
-        
-    }
     public Node2D(Vector3 pos, Vector3Int gridpos)
     {
         this.pos = pos;
@@ -85,7 +80,6 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
     }
 
     //TODO - Documentation - Add summary
-    //TODO - Fix - Shouldn't this class implement IComparable then?
     public int CompareTo(Node2D obj)
     {
         //Before -> -1
