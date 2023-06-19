@@ -12,12 +12,26 @@ public class State_Machine : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        currentState = GetInitialState();
+        if (currentState != null)
+            currentState.OnEnter();
     }
 
     private void Update()
     {
-        
+        if (currentState != null)
+            currentState.UpdateLogic();
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentState != null)
+            currentState.UpdatePhysics();
+    }
+
+    protected virtual BaseState GetInitialState()
+    {
+        return null;
     }
 
     public void SetState(BaseState newState) 
@@ -32,5 +46,13 @@ public class State_Machine : MonoBehaviour
 
         onStateEnter?.Invoke();
         currentState.OnExit();
+    }
+
+    private void ShowSate() 
+    {
+        if (currentState != null)
+            Debug.Log("Current State : " + currentState.name);
+        else
+            Debug.Log("No Current State");
     }
 }

@@ -9,6 +9,9 @@ public enum CharacterState
     DEAD
 }
 
+/// <summary>
+/// Base Class For The States That We Create
+/// </summary>
 public class BaseState
 {
     public string name;
@@ -19,8 +22,24 @@ public class BaseState
         this.name = name;
         this.state_Machine = state_Machine;
     }
+
+    /// <summary>
+    /// This Is Called When We Enter A State
+    /// </summary>
     public virtual void OnEnter() { }
+
+    /// <summary>
+    /// Fuction To Update The Logic of A State (Update)
+    /// </summary>
     public virtual void UpdateLogic() { }
+
+    /// <summary>
+    /// Fuction To Update The Pgysics of A State (Fixed Update)
+    /// </summary>
     public virtual void UpdatePhysics() { }
+
+    /// <summary>
+    /// This Is Called When We Exit A State
+    /// </summary>
     public virtual void OnExit() { }
 }
