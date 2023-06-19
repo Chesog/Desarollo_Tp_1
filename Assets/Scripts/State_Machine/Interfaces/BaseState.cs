@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public enum CharacterState
 {
     IDLE,
@@ -15,6 +11,14 @@ public enum CharacterState
 
 public class BaseState
 {
+    public string name;
+    protected State_Machine state_Machine;
+
+    public BaseState(string name,State_Machine state_Machine) 
+    {
+        this.name = name;
+        this.state_Machine = state_Machine;
+    }
     public virtual void OnEnter() { }
     public virtual void UpdateLogic() { }
     public virtual void UpdatePhysics() { }

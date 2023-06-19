@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class State_Machine : MonoBehaviour
 {
-    [SerializeField] IState currentState;
+    [SerializeField] BaseState currentState;
 
     public UnityEvent onStateEnter;
     public UnityEvent onStateExit;
@@ -20,17 +20,17 @@ public class State_Machine : MonoBehaviour
         
     }
 
-    public void SetState(IState newState) 
+    public void SetState(BaseState newState) 
     {
         if (newState == currentState)
             return;
 
         onStateExit?.Invoke();
-        currentState.onStateExit();
+        currentState.OnEnter();
 
         currentState = newState;
 
         onStateEnter?.Invoke();
-        currentState.onStateEnter();
+        currentState.OnExit();
     }
 }
