@@ -1,19 +1,20 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Class For The Enemy Animation Logic
+/// </summary>
 public class Enemy_Animation_Controller : MonoBehaviour
 {
     [Header("Anim Setup")]
-    [SerializeField] private Animator anim;
+    [SerializeField] private Animator animator;
     //TODO: TP2 - Syntax - Consistency in naming convention
     [SerializeField] private Enemy_Controller controller;
 
     public event Action OnBulletSpawn;
-    // Start is called before the first frame update
-    //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
-    void Start()
+)
+    private void Start()
     {
         
 
@@ -23,31 +24,46 @@ public class Enemy_Animation_Controller : MonoBehaviour
         controller.OnEnemyDeath += Controller_OnEnemyDeath;
     }
 
+    /// <summary>
+    /// Function To Play The Death Animation
+    /// </summary>
     private void Controller_OnEnemyDeath()
     {
-        anim.Play("Standing React Death Backward");
+        animator.Play("Standing React Death Backward");
     }
 
+    /// <summary>
+    /// Function To Play The Hit Animation
+    /// </summary>
     private void Controller_OnEnemyHit()
     {
-        anim.Play("Get_Hit");
+        animator.Play("Get_Hit");
     }
 
+    /// <summary>
+    /// Function To Play The Enemy Attack
+    /// </summary>
     private void Controller_OnEnemyAttack()
     {
-        anim.Play("Standing 1H Magic Attack 01");
+        animator.Play("Standing 1H Magic Attack 01");
     }
 
+    /// <summary>
+    /// Function To Play The Enemy Movement Animation
+    /// </summary>
+    /// <param name="obj"></param>
     private void Controller_OnEnemyMove(Vector2 obj)
     {
         Vector3 pos = new Vector3(obj.x, 0f, obj.y);
         //TODO - Fix - shouldn't it be (pos * new Vector3(1, 0, 1).magnitude ?
-        anim.SetFloat("Velocity_X/Z",pos.magnitude - pos.y);
+        animator.SetFloat("Velocity_X/Z",pos.magnitude - pos.y);
     }
 
+    /// <summary>
+    /// Event To Spaen The Enemy Bullet
+    /// </summary>
     public void Spawn_Bullet() 
     {
-        Debug.Log("Bullet Invoke");
         OnBulletSpawn.Invoke();
     }
 

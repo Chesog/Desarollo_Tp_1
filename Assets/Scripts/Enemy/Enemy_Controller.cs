@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
+
+/// <summary>
+/// Class For The Enemy Logic
+/// </summary>
 public class Enemy_Controller : MonoBehaviour
 {
     [SerializeField] private float lookRad = 20f;
@@ -16,8 +17,8 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private bool deathLoop;
     [SerializeField] private Transform target;
     [SerializeField] private Transform bulletSpawn;
-    //TODO: TP2 - Syntax - Consistency in naming convention
-    [SerializeField] private Rigidbody rb;
+
+    [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float health;
     [SerializeField] private Enemy_Animation_Controller enemyAnimController;
@@ -41,21 +42,23 @@ public class Enemy_Controller : MonoBehaviour
             enabled = false;
         }
 
-        //TODO: TP2 - Remove unused methods/variables
-        //rb ??= GetComponent<Rigidbody>();
-        if (rb == null)
+        if (rigidBody == null)
         {
-            rb = GetComponent<Rigidbody>();
+            rigidBody = GetComponent<Rigidbody>();
         }
-        if (!rb)
+        if (!rigidBody)
         {
-            Debug.LogError(message: $"{name}: (logError){nameof(rb)} is null");
+            Debug.LogError(message: $"{name}: (logError){nameof(rigidBody)} is null");
             enabled = false;
         }
 
         deathLoop = false;
     }
 
+
+    /// <summary>
+    /// Spawn A Bullet Prefab
+    /// </summary>
     private void EnemyAnimController_OnBulletSpawn()
     {
         Debug.Log("Bullet Spawn");
@@ -69,7 +72,7 @@ public class Enemy_Controller : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
 
         if(distance <= lookRad || distance <= stopDistance)
-        faceTarget();
+        FaceTarget();
 
         CheckHealth();
     }
@@ -82,21 +85,25 @@ public class Enemy_Controller : MonoBehaviour
             if (distance <= lookRad)
             {
                 //transform.Translate(Vector3.forward * Time.deltaTime * speed);
-                rb.velocity = gameObject.transform.forward * speed;
+                rigidBody.velocity = gameObject.transform.forward * speed;
                 if (distance <= stopDistance)
                 {
                     AttackPlayer();
 
-                    rb.velocity = new Vector3(0f, 0f, 0f);
+                    rigidBody.velocity = new Vector3(0f, 0f, 0f);
                 }
 
-                Vector2 pos = new Vector2(rb.velocity.x, rb.velocity.z);
+                Vector2 pos = new Vector2(rigidBody.velocity.x, rigidBody.velocity.z);
                 OnEnemyMove.Invoke(pos);
             }
 
         }
     }
 
+
+    /// <summary>
+    /// Checks If The Enemy Is Alive
+    /// </summary>
     private void CheckHealth()
     {
         if (health <= 0)
@@ -105,12 +112,19 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
 
-    //TODO: TP2 - Syntax - Consistency in naming convention
-    private void faceTarget()
+    
+    /// <summary>
+    /// Make The Enemy Loock At The Target
+    /// </summary>
+    private void FaceTarget()
     {
         transform.LookAt(target.position);
     }
 
+
+    /// <summary>
+    /// Function To Handle The Attack Of The Enemy
+    /// </summary>
     private void AttackPlayer()
     {
         if (!alreadyAttacked)
@@ -124,6 +138,9 @@ public class Enemy_Controller : MonoBehaviour
 
 
     //TODO: TP2 - SOLID
+    /// <summary>
+    /// Reset The Player Attack
+    /// </summary>
     private void ResetAttack()
     {
         alreadyAttacked = false;
@@ -148,14 +165,20 @@ public class Enemy_Controller : MonoBehaviour
         return health;
     }
 
+    /// <summary>
+    /// Make The Enemy Take Damage Based On The Damage Param
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
         health -= damage;
         OnEnemyHit.Invoke();
-        //TODO - Fix - Bad log/Log out of context
-        Debug.Log(health);
     }
 
+
+    /// <summary>
+    /// Destroy The Enemy After The Dead Animation
+    /// </summary>
     private void DestroyEnemy()
     {
         if (!deathLoop)
