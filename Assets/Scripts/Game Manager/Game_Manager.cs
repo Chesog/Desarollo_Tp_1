@@ -16,23 +16,7 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] GameObject Win_Canvas;
 
     //TODO - Documentation - Add summary
-    private void Start()
-    {
-        //TODO: TP2 - FSM
-        game_Canvas.active = true;
-        Pause_Canvas.active = false;
-        Lose_Canvas.active = false;
-        Win_Canvas.active = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    
-        SoundManager.Instance.StopMusic();
-        SoundManager.Instance.PlayMusic(GameMusic);
-        //TODO: TP2 - SOLID
-        BossEnemy = GameObject.FindGameObjectWithTag("Boss");
-    
-        Player_Controller.playerPos.OnPlayerPause += PlayerPos_OnPlayerPause;
-    }
+    //TODO: TP2 - FSM
 
     private void OnEnable()
     {
@@ -51,6 +35,9 @@ public class Game_Manager : MonoBehaviour
         Player_Controller.playerPos.OnPlayerPause += PlayerPos_OnPlayerPause;
     }
 
+    /// <summary>
+    /// Fuction To Handle The Canbas On Pause State
+    /// </summary>
     private void PlayerPos_OnPlayerPause()
     {
         //TODO: TP2 - FSM
@@ -111,6 +98,9 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function To Change The Current Scene To The Menu Scene
+    /// </summary>
     public void BackToMenu() 
     {
         //TODO - Fix - Hardcoded values
@@ -119,6 +109,9 @@ public class Game_Manager : MonoBehaviour
         SceneManager.LoadScene("Main_Menu");
     }
 
+    /// <summary>
+    /// Function To Reload The Current Scene
+    /// </summary>
     public void ReloadScene() 
     {
         Time.timeScale = 1;
@@ -127,11 +120,19 @@ public class Game_Manager : MonoBehaviour
     }
 
     //TODO - Fix - Should be native Setter/Getter
+    /// <summary>
+    /// Function To Set The Value For The On Screen Health Bar
+    /// </summary>
+    /// <param name="health"></param>
     public void SetHealth(float health) 
     {
         healthBar.value = health;
     }
 
+    /// <summary>
+    /// Set The Max Value Of The On Screen Health Bar
+    /// </summary>
+    /// <param name="health"></param>
     public void SetMaxHealth(float health)
     {
         healthBar.maxValue = health;
