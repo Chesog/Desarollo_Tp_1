@@ -13,7 +13,7 @@ public class Enemy_Animation_Controller : MonoBehaviour
     [SerializeField] private Enemy_Controller controller;
 
     public event Action OnBulletSpawn;
-)
+
     private void Start()
     {
         
