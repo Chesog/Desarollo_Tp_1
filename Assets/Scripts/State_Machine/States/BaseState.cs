@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
+
 public enum CharacterState
 {
     IDLE,
@@ -16,6 +19,7 @@ public class BaseState
 {
     public string name;
     protected State_Machine state_Machine;
+    protected Dictionary<string, BaseState> transitions;
 
     public BaseState(string name,State_Machine state_Machine) 
     {
@@ -42,4 +46,11 @@ public class BaseState
     /// This Is Called When We Exit A State
     /// </summary>
     public virtual void OnExit() { }
+
+    /// <summary>
+    ///  Function To Add The Posible Transitions For A State
+    /// </summary>
+    /// <param name="transitionName"></param>
+    /// <param name="transitionState"></param>
+    public virtual void AddStateTransitions(string transitionName,BaseState transitionState) { }
 }

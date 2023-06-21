@@ -61,21 +61,21 @@
                 },
                 {
                     "name": "PickUp",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "fb5e06b7-3bde-4df0-b662-c9c28bac9038",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Drop",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "beaf721e-c99f-4730-8708-53398c672fae",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pause",

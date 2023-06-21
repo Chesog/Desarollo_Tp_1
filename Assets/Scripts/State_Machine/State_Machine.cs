@@ -7,8 +7,8 @@ public class State_Machine : MonoBehaviour
 {
     [SerializeField] BaseState currentState;
 
-    public UnityEvent onStateEnter;
-    public UnityEvent onStateExit;
+    public UnityEvent OnStateEnter;
+    public UnityEvent OnStateExit;
 
     private void OnEnable()
     {
@@ -21,12 +21,14 @@ public class State_Machine : MonoBehaviour
     {
         if (currentState != null)
             currentState.UpdateLogic();
+        ShowSate();
     }
 
     private void FixedUpdate()
     {
         if (currentState != null)
             currentState.UpdatePhysics();
+        ShowSate();
     }
 
     protected virtual BaseState GetInitialState()
@@ -39,12 +41,12 @@ public class State_Machine : MonoBehaviour
         if (newState == currentState)
             return;
 
-        onStateExit?.Invoke();
+        OnStateExit?.Invoke();
         currentState.OnEnter();
 
         currentState = newState;
 
-        onStateEnter?.Invoke();
+        OnStateEnter?.Invoke();
         currentState.OnExit();
     }
 
