@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Windows;
 
+/// <summary>
+/// Class For Controling The Player Movement Logic
+/// </summary>
 public class Player_Movement : MonoBehaviour
 {
     private Player_Controller controller;
@@ -30,38 +31,21 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float coyoteTimerCounter;
 
     //TODO - Documentation - Add summary
+    /// <summary>
+    /// Action Event For The Player Jump Event
+    /// </summary>
     public event Action<float> OnPlayerJump;
+
+    /// <summary>
+    /// Action Event For The Player Attack Event
+    /// </summary>
     public event Action<float> OnPlayerAttack;
+
+    /// <summary>
+    /// Action Event For The Player Block Event
+    /// </summary>
     public event Action<float> OnPlayerBlock;
 
-    private void Awake()
-    {
-        rigidbody ??= GetComponent<Rigidbody>();
-        if (!rigidbody)
-        {
-            Debug.LogError(message: $"{name}: (logError){nameof(rigidbody)} is null");
-            enabled = false;
-        }
-
-        feet_Pivot ??= GetComponent<Transform>();
-        if (!feet_Pivot)
-        {
-            Debug.LogError(message: $"{name}: (logError){nameof(feet_Pivot)} is null");
-        }
-
-        controller ??= GetComponent<Player_Controller>();
-        if (!controller)
-        {
-            Debug.LogError(message: $"{name}: (logError){nameof(controller)} is null");
-        }
-
-        setings = controller.GetPlayerSetings();
-
-        isJumping = false;
-        isSprinting = false;
-        initialSpeed = setings.speed;
-        Debug.Log("Player Speed : " + setings.speed);
-    }
 
     private void OnEnable()
     {
@@ -132,12 +116,6 @@ public class Player_Movement : MonoBehaviour
             }
 
         }
-        //TODO: TP2 - Remove unused methods/variables
-        //else 
-        //{
-        //    rigidbody.drag = 10f;
-        //}
-
 
         if (isSprinting)
         {
@@ -150,6 +128,10 @@ public class Player_Movement : MonoBehaviour
         OnPlayerJump.Invoke(rigidbody.velocity.y);
     }
 
+    /// <summary>
+    /// Function For The player Movemet Event
+    /// </summary>
+    /// <param name="obj"></param>
     private void Controller_OnPlayerMove(Vector2 obj)
     {
         //TODO: TP2 - FSM
@@ -160,6 +142,10 @@ public class Player_Movement : MonoBehaviour
         _CurrentMovement = new Vector3(movement.x, 0f, movement.y).normalized;
     }
 
+    /// <summary>
+    /// Function For The player Jump Event
+    /// </summary>
+    /// <param name="obj"></param>
     private void Controller_OnPlayerJump(bool obj)
     {
 
@@ -175,6 +161,10 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function For The player Sprint Event
+    /// </summary>
+    /// <param name="obj"></param>
     private void Controller_OnPlayerSprint(bool obj)
     {
         //TODO: TP2 - Remove unused methods/variables
@@ -182,16 +172,29 @@ public class Player_Movement : MonoBehaviour
         isSprinting = obj;
     }
 
+    /// <summary>
+    /// Function For The player Block Event
+    /// </summary>
+    /// <param name="obj"></param>
     private void Controller_OnPlayerBlock(bool obj)
     {
         setings.isBlocking = obj;
     }
 
+    /// <summary>
+    /// Function For The player Attack Event
+    /// </summary>
+    /// <param name="obj"></param>
     private void Controller_OnPlayerAttack(bool obj)
     {
         setings.isAttacking = obj;
     }
 
+    /// <summary>
+    /// Function For The Jump Corutine
+    /// </summary>
+    /// <param name="bufferTime"></param>
+    /// <returns></returns>
     private IEnumerator JumpCorutine(float bufferTime)
     {
         if (!feet_Pivot)
@@ -221,11 +224,20 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function For The player Spawn
+    /// </summary>
+    /// <param name="pos"></param>
     public void SetSpawnPos(Vector3 pos) 
     {
         this.rigidbody.position = pos;
 
     }
+
+    /// <summary>
+    /// Check If The Player Is At Ground Level
+    /// </summary>
+    /// <returns></returns>
     public bool isGrounded()
     {
         return Physics.Raycast(feet_Pivot.position, Vector3.down, out var hit, setings.maxDistance) && hit.distance <= setings.minJumpDistance;

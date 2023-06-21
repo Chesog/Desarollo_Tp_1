@@ -1,46 +1,70 @@
 using System;
-using System.Net.NetworkInformation;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
+/// <summary>
+/// Class For Controling The PLayer Logic
+/// </summary>
 public class Player_Controller : MonoBehaviour
 {
-    //TODO: TP2 - Remove unused methods/variables
-    // private CharacterController controller;
-
-    Player_Movement movement;
     float health;
     [SerializeField] private Player_Setings setings;
     [SerializeField] private PlayerInput input;
     [SerializeField] private AudioClip swing;
     public Game_Manager _Manager;
 
-    //TODO - Documentation - Add summary
+    /// <summary>
+    /// Action Event For The Player Movement
+    /// </summary>
     public event Action<Vector2> OnPlayerMove;
+
+    /// <summary>
+    /// Action Event For The Player Jump
+    /// </summary>
     public event Action<bool> OnPlayerJump;
+
+    /// <summary>
+    /// Action Event For The Player Sprint
+    /// </summary>
     public event Action<bool> OnPlayerSprint;
+
+    /// <summary>
+    /// Action Event For The Player Attack
+    /// </summary>
     public event Action<bool> OnPlayerAttack;
+
+    /// <summary>
+    /// Action Event For The Player Block
+    /// </summary>
     public event Action<bool> OnPlayerBlock;
+
+    /// <summary>
+    /// Action Event For The Player Take Damage
+    /// </summary>
     public event Action OnPlayerTakeDamage;
+
+    /// <summary>
+    /// Action Event For The Player Dead
+    /// </summary>
     public event Action OnPlayerDead;
+
+    /// <summary>
+    /// Action Event For The Player PickUp
+    /// </summary>
     public event Action OnPlayerPickUp;
+
+    /// <summary>
+    /// Action Event For The Player Drop
+    /// </summary>
     public event Action OnPlayerDrop;
+
+    /// <summary>
+    /// Action Event For The Player Pause
+    /// </summary>
     public event Action OnPlayerPause;
 
     public static Player_Controller playerPos;
     public Transform playerHolder;
-
-
-    //TODO: TP2 - Remove unused methods/variables
-    //private void Awake()
-    //{
-    //    playerPos = this;
-    //
-    //    _Manager.SetMaxHealth(setings.health);
-    //    health = setings.health;
-    //}
 
     private void OnEnable()
     {
@@ -50,17 +74,29 @@ public class Player_Controller : MonoBehaviour
         health = setings.health;
     }
 
+    /// <summary>
+    /// Get The Player Health
+    /// </summary>
+    /// <returns></returns>
     public float GetHealth() 
     {
         return health;
     }
 
+    /// <summary>
+    /// Get The Player Setings
+    /// </summary>
+    /// <returns></returns>
     public Player_Setings GetPlayerSetings()
     {
         return setings;
     }
 
     //TODO - Fix - Using Input related logic outside of an input responsible class (or input related class controls health)
+    /// <summary>
+    /// Triggers The Movement Event
+    /// </summary>
+    /// <param name="input"></param>
     public void OnMove(InputValue input)
     {
         if (OnPlayerMove != null)
@@ -71,6 +107,10 @@ public class Player_Controller : MonoBehaviour
             Debug.LogWarning($"On Move: event has no listeners");
     }
 
+    /// <summary>
+    /// Triggers The Jumping Event
+    /// </summary>
+    /// <param name="input"></param>
     public void OnJump(InputValue input)
     {
         if (OnPlayerJump != null)
@@ -79,6 +119,10 @@ public class Player_Controller : MonoBehaviour
             Debug.LogWarning($"On Jump: event has no listeners");
     }
 
+    /// <summary>
+    /// Triggers The Sprint Event
+    /// </summary>
+    /// <param name="input"></param>
     public void OnSprint(InputValue input)
     {
         if (OnPlayerSprint != null)
@@ -87,6 +131,10 @@ public class Player_Controller : MonoBehaviour
             Debug.LogWarning($"On Sprint: event has no listeners");
     }
 
+    /// <summary>
+    /// Triggers The Block Event
+    /// </summary>
+    /// <param name="input"></param>
     public void OnR_Click(InputValue input)
     {
         if (OnPlayerBlock != null)
@@ -95,6 +143,10 @@ public class Player_Controller : MonoBehaviour
             Debug.LogWarning($"OnR_Click: event has no listeners");
     }
 
+    /// <summary>
+    /// Triggers The Attack Event
+    /// </summary>
+    /// <param name="input"></param>
     public void OnL_Click(InputValue input)
     {
         if (OnPlayerAttack != null)
@@ -106,6 +158,10 @@ public class Player_Controller : MonoBehaviour
             Debug.LogWarning($"OnL_Click: event has no listeners");
     }
 
+    /// <summary>
+    /// Triggers The PickUp Event
+    /// </summary>
+    /// <param name="input"></param>
     public void OnPickUp(InputValue input) 
     {
         if (input.isPressed) 
@@ -117,6 +173,10 @@ public class Player_Controller : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Triggers The Drop Event
+    /// </summary>
+    /// <param name="input"></param>
     public void OnDrop(InputValue input) 
     {
         if (input.isPressed) 
@@ -126,6 +186,9 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Triggers The Pause Event
+    /// </summary>
     public void OnPause() 
     {
         OnPlayerPause.Invoke();
@@ -158,17 +221,22 @@ public class Player_Controller : MonoBehaviour
         CheckHealth();
     }
 
+    /// <summary>
+    /// Check The Player Health
+    /// </summary>
     private void CheckHealth()
     {
         if (health <= 0)
         {
             OnPlayerDead.Invoke();
-            //TODO: TP2 - Remove unused methods/variables
-            //Invoke(nameof(DestroyPlayer), 0.5f);
         }
         _Manager.SetHealth(health);
     }
 
+    /// <summary>
+    /// Decrease The Player Health
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
         //TODO: TP2 - FSM
@@ -178,10 +246,4 @@ public class Player_Controller : MonoBehaviour
         health -= damage;
         Debug.Log("Player Health " + health);
     }
-
-    private void DestroyPlayer()
-    {
-        Destroy(gameObject);
-    }
-
 }
