@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lenguaje_Select : MonoBehaviour
+/// <summary>
+/// Class For The Lenguage Selection
+/// </summary>
+public class Language_Select : MonoBehaviour
 {
     [SerializeField] GameObject ls_Screen;
     //TODO - Fix - Code is in Spanish or is trash code
-    enum lenguaje
+    enum Language
     {
         Spanish,English
     }
@@ -23,24 +26,25 @@ public class Lenguaje_Select : MonoBehaviour
         }
     }
 
-    //TODO: TP2 - Remove unused methods/variables
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //TODO: TP2 - SOLID
+
+    /// <summary>
+    /// Function For The Spanish Language Selection
+    /// </summary>
     public void SelectSpanish() 
     {
         //TODO - Fix - Hardcoded value
-        PlayerPrefs.SetString("Lenguaje",lenguaje.Spanish.ToString());
+        PlayerPrefs.SetString("Lenguaje",Language.Spanish.ToString());
         ls_Screen.SetActive(false);
     }
+
+    /// <summary>
+    /// Function For The English Language Selection
+    /// </summary>
     public void SelectEnglish()
     {
         //TODO - Fix - Hardcoded value
-        PlayerPrefs.SetString("Lenguaje", lenguaje.English.ToString());
+        PlayerPrefs.SetString("Lenguaje", Language.English.ToString());
         ls_Screen.SetActive(false);
     }
 }

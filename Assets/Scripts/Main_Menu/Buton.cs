@@ -1,17 +1,26 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//TODO: TP2 - Syntax - Consistency in naming convention
+
+/// <summary>
+/// Class For The Menu Buttons
+/// </summary>
 public class Buton : MonoBehaviour
 {
     [SerializeField] GameObject windowPrefab;
     [SerializeField] GameObject panelParent;
 
+    /// <summary>
+    /// Instantiate A Window Prefab On ClICK
+    /// </summary>
     public void Onclick() 
     {
         panelParent.GetComponent<Buttons_Controller>().InstantiateWindow(windowPrefab);
     }
 
+    /// <summary>
+    /// Load The Gameplay Scene && Unloads The Menu Scene
+    /// </summary>
     public void OnClickStart() 
     {
         //TODO - Fix - Hardcoded value
@@ -19,7 +28,10 @@ public class Buton : MonoBehaviour
         SceneManager.UnloadScene("Main_Menu");
     }
 
-    public void CloseWindow() 
+    /// <summary>
+    /// Destroy The Prefab Of The Pannel
+    /// </summary>
+    public void OnWindowClose() 
     {
         Destroy(windowPrefab);
     }
