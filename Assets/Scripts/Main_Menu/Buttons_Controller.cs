@@ -30,11 +30,11 @@ public class Buttons_Controller : MonoBehaviour
 
     private void OnEnable()
     {
-        cinemachine_Camera.Follow = mainMenu;
-        cinemachine_Camera.LookAt = mainMenu;
         menu_Canvas.active = true;
         options_Canvas.active = false;
         credits_Canvas.active = false;
+        cinemachine_Camera.Follow = mainMenu;
+        cinemachine_Camera.LookAt = mainMenu;
     }
 
     //TODO: TP2 - SOLID

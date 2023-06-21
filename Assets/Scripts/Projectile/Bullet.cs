@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO - Fix - Wtf is this class?...
+/// <summary>
+/// Class For The Bullet Logic
+/// </summary>
 public class Bullet : MonoBehaviour
 {
     //TODO: TP2 - Remove unused methods/variables
-    [SerializeField] private float speed;
     [SerializeField] private bool isShoot;
     [SerializeField] private Transform target;
     [SerializeField] private Transform parent;
@@ -14,9 +15,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private Rigidbody rb;
 
-    //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //TODO - Fix - Hardcoded value
         target ??= GameObject.FindGameObjectWithTag("Player").transform;
@@ -34,8 +33,8 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         if (isShoot)
         {
@@ -47,36 +46,65 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Add Force To The Bullet RigidBody
+    /// </summary>
+    /// <param name="force"></param>
+    /// <param name="mode"></param>
     public void AddBulletForce(Vector3 force, ForceMode mode)
     {
         rb.AddForce(force, mode);
     }
 
+    /// <summary>
+    /// Set If The Bullet Is Shoot
+    /// </summary>
+    /// <param name="value"></param>
     public void SetIsShoot(bool value) 
     {
         isShoot = value;
     }
 
+    /// <summary>
+    /// Return If The Bullet Was Shoot
+    /// </summary>
+    /// <returns></returns>
     public bool GetIsShoot() 
     {
         return isShoot;
     }
 
+    /// <summary>
+    /// Return The Bullet Prefab
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetBulletPrefab() 
     {
         return bullet;
     }
 
+    /// <summary>
+    /// Set The Bullet RigidBody Velocity
+    /// </summary>
+    /// <param name="newVelocity"></param>
     public void SetRbVelocity(Vector3 newVelocity)
     {
         rb.velocity = newVelocity;
     }
 
+    /// <summary>
+    /// Set The Bullet Target
+    /// </summary>
+    /// <param name="target"></param>
     public void SetTarget(Transform target)
     {
         this.target = target;
     }
 
+    /// <summary>
+    /// Set The Parent for The Bullet to Spawn From
+    /// </summary>
+    /// <param name="parent"></param>
     public void SetParent(Transform parent)
     {
         this.parent = parent;
@@ -90,6 +118,9 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroy The Bullet GameObject
+    /// </summary>
     private void DestroyBullet()
     {
         Destroy(gameObject);
