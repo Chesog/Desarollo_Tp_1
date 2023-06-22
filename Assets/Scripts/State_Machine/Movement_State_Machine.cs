@@ -1,17 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement_State_Machine : State_Machine
 {
-    public Player_Idle idleState;
+    [HideInInspector]
+    public Player_Idle_State idleState;
+    [HideInInspector]
+    public Player_Movement_State movement_State;
+    public Rigidbody player_Rigid_Body;
+    [SerializeField] public Player_Input_Manager Player_Input;
+    [SerializeField] public Player_Setings setings;
+    [SerializeField] public Vector3 player_Movement;
+    [SerializeField] public Transform player_Transform;
+    [SerializeField] public Transform player_Camera;
+    [SerializeField] public float turn_Smooth_Velocity;
+    [SerializeField] public float lastAngle;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        idleState = new Player_Idle(this);
+        idleState = new Player_Idle_State(this);
+        movement_State = new Player_Movement_State(this);
+        idleState.AddStateTransitions(nameof(Player_Movement_State),movement_State);
+        Player_Input = GetComponent<Player_Input_Manager>();
+        player_Rigid_Body = GetComponent<Rigidbody>();
+        base.OnEnable();
     }
 
-    protected override BaseState GetInitialState()
+    protected override State GetInitialState()
     {
         return idleState;
     }

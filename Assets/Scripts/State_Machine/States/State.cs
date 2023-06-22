@@ -15,13 +15,13 @@ public enum CharacterState
 /// <summary>
 /// Base Class For The States That We Create
 /// </summary>
-public class BaseState
+public class State
 {
     public string name;
     protected State_Machine state_Machine;
-    protected Dictionary<string, BaseState> transitions;
+    protected Dictionary<string, State> transitions = new();
 
-    public BaseState(string name,State_Machine state_Machine) 
+    public State(string name,State_Machine state_Machine) 
     {
         this.name = name;
         this.state_Machine = state_Machine;
@@ -52,5 +52,5 @@ public class BaseState
     /// </summary>
     /// <param name="transitionName"></param>
     /// <param name="transitionState"></param>
-    public virtual void AddStateTransitions(string transitionName,BaseState transitionState) { }
+    public virtual void AddStateTransitions(string transitionName,State transitionState) { }
 }

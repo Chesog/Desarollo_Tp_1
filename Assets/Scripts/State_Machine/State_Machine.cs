@@ -5,12 +5,13 @@ using UnityEngine.Events;
 
 public class State_Machine : MonoBehaviour
 {
-    [SerializeField] BaseState currentState;
-
+    [SerializeField] State currentState;
+    [HideInInspector]
     public UnityEvent OnStateEnter;
+    [HideInInspector]
     public UnityEvent OnStateExit;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         currentState = GetInitialState();
         if (currentState != null)
@@ -21,23 +22,24 @@ public class State_Machine : MonoBehaviour
     {
         if (currentState != null)
             currentState.UpdateLogic();
-        ShowSate();
     }
 
     private void FixedUpdate()
     {
         if (currentState != null)
             currentState.UpdatePhysics();
-        ShowSate();
     }
 
-    protected virtual BaseState GetInitialState()
+    protected virtual State GetInitialState()
     {
         return null;
     }
 
-    public void SetState(BaseState newState) 
+    public void SetState(State newState) 
     {
+        if (newState == null)
+            Debug.LogError($"{name}:New State Is Null",this);
+
         if (newState == currentState)
             return;
 

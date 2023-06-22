@@ -7,6 +7,7 @@ public class Player_Setings : ScriptableObject
     public float health;
     [Range(0, 500)] public float speed;
     [Range(0, 500)] public float jumpForce;
+    [SerializeField] private float turn_Smooth_Velocity;
     public float maxDistance;
     public float minJumpDistance;
     //TODO: TP2 - Remove unused methods/variables
