@@ -23,6 +23,7 @@ public class Movement_State_Machine : State_Machine
         idleState = new Player_Idle_State(this);
         movement_State = new Player_Movement_State(this);
         idleState.AddStateTransitions(nameof(Player_Movement_State),movement_State);
+        movement_State.AddStateTransitions(nameof(Player_Idle_State), idleState);
         Player_Input = GetComponent<Player_Input_Manager>();
         player_Rigid_Body = GetComponent<Rigidbody>();
         base.OnEnable();

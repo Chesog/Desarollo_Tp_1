@@ -22,6 +22,8 @@ public class Player_Movement_State : State
     public override void UpdateLogic()
     {
         base.UpdateLogic();
+        if (((Movement_State_Machine)state_Machine).player_Movement == Vector3.zero)
+            base.state_Machine.SetState(base.transitions[nameof(Player_Idle_State)]);
     }
 
     public override void UpdatePhysics()
