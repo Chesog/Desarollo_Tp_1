@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Class For Controling The PLayer Logic
 /// </summary>
-public class Player_Controller : MonoBehaviour
+[Obsolete]public class Player_Controller : MonoBehaviour
 {
     float health;
     [SerializeField] private Player_Setings setings;

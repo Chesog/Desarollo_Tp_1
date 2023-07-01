@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Enemy_Controller : MonoBehaviour
 {
+    private Character_Component container;
     [SerializeField] private float lookRad = 20f;
     [SerializeField] private float stopDistance = 5f;
     [SerializeField] private float speed = 5f;

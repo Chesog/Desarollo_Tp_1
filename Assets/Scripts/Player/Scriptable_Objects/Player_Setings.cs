@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scripts/Player/Player Setings")]
-public class Player_Setings : ScriptableObject
+[Obsolete]public class Player_Setings : ScriptableObject
 {
     [Header("Player SetUps")]
     public float health;
