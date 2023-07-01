@@ -111,7 +111,6 @@ public class Player_Movement : MonoBehaviour
             else
             {
                 Vector3 moveDir = Quaternion.Euler(0f, lastAngle, 0f) * Vector3.forward;
-                //rigidbody.drag = 0f;
                 rigidbody.velocity = moveDir.normalized * setings.speed + Vector3.up * rigidbody.velocity.y;
             }
 

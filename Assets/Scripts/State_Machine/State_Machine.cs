@@ -38,7 +38,7 @@ public class State_Machine : MonoBehaviour
     public void SetState(State newState) 
     {
         if (newState == null)
-            Debug.LogError($"{name}:New State Is Null",this);
+            Debug.LogError($"{name} : New State Is Null",this);
 
         if (newState == currentState)
             return;
@@ -50,13 +50,7 @@ public class State_Machine : MonoBehaviour
 
         OnStateEnter?.Invoke();
         currentState.OnExit();
-    }
 
-    private void ShowSate() 
-    {
-        if (currentState != null)
-            Debug.Log("Current State : " + currentState.name);
-        else
-            Debug.Log("No Current State");
+        Debug.Log($"Current State : {currentState.name}");
     }
 }

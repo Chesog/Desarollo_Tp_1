@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class Player_Idle_State : State
 {
     private Vector2 movement;
+    private Movement_State_Machine machine;
 
     public Player_Idle_State(Movement_State_Machine movementSM) : base(nameof(Player_Idle_State), movementSM) { }
 
@@ -12,13 +13,14 @@ public class Player_Idle_State : State
     {
         base.OnEnter();
         movement = Vector2.zero;
-        ((Movement_State_Machine)state_Machine).Player_Input.OnPlayerMove += OnPlayerMove;
-        Debug.Log("Abemus Idle");
+        machine = ((Movement_State_Machine)state_Machine);
+        machine.Player_Input.OnPlayerMove += OnPlayerMove;
     }
 
     private void OnPlayerMove(Vector2 newMovement) 
     {
         movement = newMovement;
+
     }
 
     public override void UpdateLogic()

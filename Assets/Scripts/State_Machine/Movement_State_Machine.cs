@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,14 @@ public class Movement_State_Machine : State_Machine
     public Player_Idle_State idleState;
     [HideInInspector]
     public Player_Movement_State movement_State;
-    public Rigidbody player_Rigid_Body;
-    [SerializeField] public Player_Input_Manager Player_Input;
-    [SerializeField] public Player_Setings setings;
-    [SerializeField] public Vector3 player_Movement;
-    [SerializeField] public Transform player_Transform;
-    [SerializeField] public Transform player_Camera;
-    [SerializeField] public float turn_Smooth_Velocity;
-    [SerializeField] public float lastAngle;
-
+    [Obsolete] public Rigidbody player_Rigid_Body;
+    [Obsolete] [SerializeField] public Player_Input_Manager Player_Input;
+    [Obsolete] [SerializeField] public Player_Setings setings;
+    [Obsolete] [SerializeField] public Vector3 player_Movement;
+    [Obsolete] [SerializeField] public Transform player_Transform;
+    [Obsolete] [SerializeField] public Transform player_Camera;
+    [Obsolete] [SerializeField] public float turn_Smooth_Velocity;
+    [Obsolete] [SerializeField] public float lastAngle;
     protected override void OnEnable()
     {
         idleState = new Player_Idle_State(this);
