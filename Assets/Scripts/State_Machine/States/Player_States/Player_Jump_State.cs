@@ -44,7 +44,7 @@ public class Player_Jump_State : Player_Base_State
 
     public bool isGrounded()
     {
-        return Physics.Raycast(player.feet_Pivot.transform.position, Vector3.down, out var hit, player.maxDistance) && hit.distance <= player.minJumpDistance;
+        return Physics.Raycast(player.feet_Pivot.position, Vector3.down, out var hit, player.maxDistance) && hit.distance <= player.minJumpDistance;
     }
 
     public override void AddStateTransitions(string transitionName, State transitionState)

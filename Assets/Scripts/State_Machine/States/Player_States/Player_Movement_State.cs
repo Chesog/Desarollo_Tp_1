@@ -9,6 +9,7 @@ public class Player_Movement_State : Player_Base_State
     public override void OnEnter()
     {
         base.OnEnter();
+
         player.input.OnPlayerMove += Player_Input_OnPlayerMove;
         player.input.OnPlayerJump += Input_OnPlayerJump;
     }
@@ -26,8 +27,11 @@ public class Player_Movement_State : Player_Base_State
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        if (player.movement == Vector3.zero)
+        if (player.movement == Vector3.zero) 
+        {
+            Debug.Log("UpdateLogic");
             base.state_Machine.SetState(base.transitions[nameof(Player_Idle_State)]);
+        }
     }
 
     public override void UpdatePhysics()
@@ -49,6 +53,7 @@ public class Player_Movement_State : Player_Base_State
     public override void OnExit()
     {
         base.OnExit();
+        player.movement = Vector3.zero;
         player.input.OnPlayerMove -= Player_Input_OnPlayerMove;
         player.input.OnPlayerJump -= Input_OnPlayerJump;
     }

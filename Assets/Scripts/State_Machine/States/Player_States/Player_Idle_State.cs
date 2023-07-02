@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player_Idle_State : Player_Base_State
 {
-    public Player_Idle_State(Player_State_Machine playerSM,Player_Component player) : base(nameof(Player_Idle_State), playerSM,player) {}
+    public Player_Idle_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Idle_State), playerSM, player) { }
 
     public override void OnEnter()
     {
@@ -15,10 +15,10 @@ public class Player_Idle_State : Player_Base_State
 
 
 
-    private void OnPlayerMove(Vector2 newMovement) 
+    private void OnPlayerMove(Vector2 newMovement)
     {
-        if (newMovement != Vector2.zero)
-            base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
+        player.movement = new Vector3(newMovement.x, 0f, newMovement.y).normalized;
+        base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
     }
 
     private void Input_OnPlayerJump(bool obj)
@@ -46,6 +46,6 @@ public class Player_Idle_State : Player_Base_State
     public override void AddStateTransitions(string transitionName, State transitionState)
     {
         base.AddStateTransitions(transitionName, transitionState);
-        transitions.Add(transitionName,transitionState);
+        transitions.Add(transitionName, transitionState);
     }
 }

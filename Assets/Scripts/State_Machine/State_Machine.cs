@@ -47,12 +47,12 @@ public class State_Machine : MonoBehaviour
             return;
 
         OnStateExit?.Invoke();
-        currentState.OnEnter();
+        currentState.OnExit();
 
         currentState = newState;
 
         OnStateEnter?.Invoke();
-        currentState.OnExit();
+        currentState.OnEnter();
 
         Debug.Log($"Current State : {currentState.name}");
     }
