@@ -14,6 +14,7 @@ public class Character_Component : MonoBehaviour
     public Rigidbody rigidbody;
     [Header("Character Jump Timers")]
     public float jumpBufferTime;
+    public float jumpBufferTimeCounter;
 
     public void SetCharacter_Component(Health_Component _health, float speed, float initialSpeed, float jumpForce, Animator anim, Rigidbody rigidbody, float jumpBufferTime) 
     {

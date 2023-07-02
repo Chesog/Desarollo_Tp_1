@@ -12,6 +12,8 @@ public class Player_Component : Character_Component
     public Transform camera;
     public float turnSmoothTime;
     public float lastAngle;
+    public float maxDistance;
+    public float minJumpDistance;
     [Header("Character Coyote Time Setup")]
     public float coyoteTime;
     public float coyoteTimerCounter;

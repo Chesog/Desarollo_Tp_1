@@ -10,6 +10,12 @@ public class Player_Movement_State : Player_Base_State
     {
         base.OnEnter();
         player.input.OnPlayerMove += Player_Input_OnPlayerMove;
+        player.input.OnPlayerJump += Input_OnPlayerJump;
+    }
+
+    private void Input_OnPlayerJump(bool obj)
+    {
+        base.state_Machine.SetState(base.transitions[nameof(Player_Jump_State)]);
     }
 
     private void Player_Input_OnPlayerMove(Vector2 newMovement)
@@ -38,6 +44,13 @@ public class Player_Movement_State : Player_Base_State
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
         player.rigidbody.velocity = moveDir.normalized * player.speed + Vector3.up * player.rigidbody.velocity.y;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.input.OnPlayerMove -= Player_Input_OnPlayerMove;
+        player.input.OnPlayerJump -= Input_OnPlayerJump;
     }
 
     public override void AddStateTransitions(string transitionName, State transitionState)
