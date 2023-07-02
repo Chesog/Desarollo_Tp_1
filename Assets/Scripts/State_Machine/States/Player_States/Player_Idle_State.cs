@@ -1,33 +1,25 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Player_Idle_State : State
+public class Player_Idle_State : Player_Base_State
 {
-    private Vector2 movement;
-    private Movement_State_Machine machine;
-
-    public Player_Idle_State(Movement_State_Machine movementSM) : base(nameof(Player_Idle_State), movementSM) { }
+    public Player_Idle_State(Player_State_Machine playerSM,Player_Component player) : base(nameof(Player_Idle_State), playerSM,player) {}
 
     public override void OnEnter()
     {
         base.OnEnter();
-        movement = Vector2.zero;
-        machine = ((Movement_State_Machine)state_Machine);
-        machine.Player_Input.OnPlayerMove += OnPlayerMove;
+        player.movement = Vector3.zero;
+        player.input.OnPlayerMove += OnPlayerMove;
     }
 
     private void OnPlayerMove(Vector2 newMovement) 
     {
-        movement = newMovement;
-
+        if (newMovement != Vector2.zero)
+            base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        if (movement != Vector2.zero)
-            base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
     }
 
     public override void UpdatePhysics()

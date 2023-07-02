@@ -35,10 +35,13 @@ public class State_Machine : MonoBehaviour
         return null;
     }
 
-    public void SetState(State newState) 
+    public void SetState(State newState)
     {
         if (newState == null)
-            Debug.LogError($"{name} : New State Is Null",this);
+        {
+            Debug.LogError($"{name} : New State Is Null", this);
+            return;
+        }
 
         if (newState == currentState)
             return;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement_State_Machine : State_Machine
+[Obsolete]public class Movement_State_Machine : State_Machine
 {
     [HideInInspector]
     public Player_Idle_State idleState;
@@ -20,8 +20,8 @@ public class Movement_State_Machine : State_Machine
     [Obsolete] [SerializeField] public float lastAngle;
     protected override void OnEnable()
     {
-        idleState = new Player_Idle_State(this);
-        movement_State = new Player_Movement_State(this);
+        //idleState = new Player_Idle_State(this);
+        //movement_State = new Player_Movement_State(this);
         idleState.AddStateTransitions(nameof(Player_Movement_State),movement_State);
         movement_State.AddStateTransitions(nameof(Player_Idle_State), idleState);
         Player_Input = GetComponent<Player_Input_Manager>();
