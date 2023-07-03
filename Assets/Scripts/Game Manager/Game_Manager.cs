@@ -70,7 +70,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (BossEnemy != null) 
         {
-            BossEnemy_Health = BossEnemy.GetComponent<Enemy_Controller>().GetHealth();
+            BossEnemy_Health = BossEnemy.GetComponent<Enemy_Controller>().character_Health_Component._health;
             if (BossEnemy_Health <= 0)
             {
                 game_Canvas.active = false;

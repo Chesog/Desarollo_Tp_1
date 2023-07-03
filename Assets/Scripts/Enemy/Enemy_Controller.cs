@@ -5,12 +5,10 @@ using UnityEngine;
 /// <summary>
 /// Class For The Enemy Logic
 /// </summary>
-public class Enemy_Controller : MonoBehaviour
+public class Enemy_Controller : Character_Component
 {
-    private Character_Component container;
     [SerializeField] private float lookRad = 20f;
     [SerializeField] private float stopDistance = 5f;
-    [SerializeField] private float speed = 5f;
     [SerializeField] private float timeBetweenAttacks = 0.5f;
     [SerializeField] private float destroyTime;
     [SerializeField] private float destroyTimer;
@@ -20,9 +18,7 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private Transform bulletSpawn;
 
     [SerializeField] private Player_Data_Source player_Source;
-    [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float health;
     [SerializeField] private Enemy_Animation_Controller enemyAnimController;
 
     public event Action<Vector2> OnEnemyMove;
@@ -34,6 +30,8 @@ public class Enemy_Controller : MonoBehaviour
     {
         enemyAnimController.OnBulletSpawn += EnemyAnimController_OnBulletSpawn;
 
+        character_Health_Component._health = 100;
+
         if (target == null)
         {
             target = player_Source._player.transform;
@@ -43,14 +41,14 @@ public class Enemy_Controller : MonoBehaviour
             Debug.LogError(message: $"{name}: (logError){nameof(target)} is null");
             enabled = false;
         }
-
-        if (rigidBody == null)
+        
+        if (rigidbody == null)
         {
-            rigidBody = GetComponent<Rigidbody>();
+            rigidbody = GetComponent<Rigidbody>();
         }
-        if (!rigidBody)
+        if (!rigidbody)
         {
-            Debug.LogError(message: $"{name}: (logError){nameof(rigidBody)} is null");
+            Debug.LogError(message: $"{name}: (logError){nameof(rigidbody)} is null");
             enabled = false;
         }
 
@@ -63,7 +61,6 @@ public class Enemy_Controller : MonoBehaviour
     /// </summary>
     private void EnemyAnimController_OnBulletSpawn()
     {
-        Debug.Log("Bullet Spawn");
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, transform.rotation);
         Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
         bulletScript.Fire();
@@ -87,16 +84,16 @@ public class Enemy_Controller : MonoBehaviour
             if (distance <= lookRad)
             {
                 //transform.Translate(Vector3.forward * Time.deltaTime * speed);
-                rigidBody.velocity = gameObject.transform.forward * speed;
+                rigidbody.velocity = gameObject.transform.forward * speed;
                 if (distance <= stopDistance)
                 {
                     AttackPlayer();
 
-                    rigidBody.velocity = new Vector3(0f, 0f, 0f);
+                    rigidbody.velocity = new Vector3(0f, 0f, 0f);
                 }
 
-                Vector2 pos = new Vector2(rigidBody.velocity.x, rigidBody.velocity.z);
-                OnEnemyMove.Invoke(pos);
+                Vector2 pos = new Vector2(rigidbody.velocity.x, rigidbody.velocity.z);
+                OnEnemyMove.Invoke(pos); 
             }
 
         }
@@ -108,7 +105,7 @@ public class Enemy_Controller : MonoBehaviour
     /// </summary>
     private void CheckHealth()
     {
-        if (health <= 0)
+        if (character_Health_Component._health <= 0)
         {
             Invoke(nameof(DestroyEnemy), 0.5f);
         }
@@ -152,7 +149,7 @@ public class Enemy_Controller : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //TODO: TP2 - SOLID
-        if (health >= 0)
+        if (character_Health_Component._health >= 0)
         {
             if (other.CompareTag("Player_Weapon"))
             {
@@ -161,19 +158,13 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
 
-    //TODO - Fix - Should be native Setter/Getter
-    public float GetHealth() 
-    {
-        return health;
-    }
-
     /// <summary>
     /// Make The Enemy Take Damage Based On The Damage Param
     /// </summary>
     /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        character_Health_Component._health -= damage;
         OnEnemyHit.Invoke();
     }
 

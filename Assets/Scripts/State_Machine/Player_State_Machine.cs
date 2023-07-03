@@ -50,6 +50,7 @@ public class Player_State_Machine : State_Machine
     protected override State GetInitialState()
     {
         return idleState;
+
     }
 
     private void OnDrawGizmos()

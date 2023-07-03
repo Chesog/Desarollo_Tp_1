@@ -5,7 +5,7 @@ using UnityEngine;
 public class Character_Component : MonoBehaviour
 {
     [Header("Character SetUps")]
-    public Health_Component character_Health_Component;
+    [SerializeField] public Health_Component character_Health_Component;
     public float speed;
     public float initialSpeed;
     public float jumpForce;

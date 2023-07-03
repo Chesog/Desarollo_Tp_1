@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Health_Component : MonoBehaviour
 {
-    public float _health {get; set;}
-    public float _maxHealth {get; set;}
+    [SerializeField] public float _health {get; set;}
+    [SerializeField] public float _maxHealth {get; set;}
 
     private void OnEnable()
     {
