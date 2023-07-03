@@ -52,5 +52,8 @@ public class State
     /// </summary>
     /// <param name="transitionName"></param>
     /// <param name="transitionState"></param>
-    public virtual void AddStateTransitions(string transitionName,State transitionState) { }
+    public virtual void AddStateTransitions(string transitionName,State transitionState)
+    {
+        transitions.Add(transitionName, transitionState);
+    }
 }

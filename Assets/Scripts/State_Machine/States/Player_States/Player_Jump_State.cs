@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player_Jump_State : Player_Base_State
 {
@@ -22,13 +21,18 @@ public class Player_Jump_State : Player_Base_State
 
     private void Input_OnPlayerJump(bool obj)
     {
-        player.rigidbody.AddForce(Vector3.up * player.jumpForce, ForceMode.Impulse);
+        if (isGrounded())
+        {
+            player.rigidbody.AddForce(Vector3.up * player.jumpForce, ForceMode.Impulse);
+            PlayJumpAnimation();
+        }
+
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        PlayJumpAnimation();
+
         if (isGrounded() && player.rigidbody.velocity.y == 0)
             base.state_Machine.SetState(base.transitions[nameof(Player_Idle_State)]);
 
@@ -37,7 +41,6 @@ public class Player_Jump_State : Player_Base_State
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-
     }
 
     public void PlayJumpAnimation()
@@ -53,7 +56,7 @@ public class Player_Jump_State : Player_Base_State
     public override void AddStateTransitions(string transitionName, State transitionState)
     {
         base.AddStateTransitions(transitionName, transitionState);
-        transitions.Add(transitionName, transitionState);
+        //transitions.Add(transitionName, transitionState);
     }
 
 

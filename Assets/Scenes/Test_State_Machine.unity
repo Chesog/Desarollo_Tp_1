@@ -5886,7 +5886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 656559978401318382, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1270577669987283354, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
       propertyPath: m_Name
@@ -6012,7 +6012,7 @@ MonoBehaviour:
   character_Health_Component: {fileID: 1901866633}
   speed: 5
   initialSpeed: 5
-  jumpForce: 120
+  jumpForce: 10
   movement: {x: 0, y: 0, z: 0}
   anim: {fileID: 1901866631}
   rigidbody: {fileID: 1901866630}

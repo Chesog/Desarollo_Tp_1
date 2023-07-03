@@ -13,9 +13,13 @@ public class Player_Idle_State : Player_Base_State
         player.movement = Vector3.zero;
         player.input.OnPlayerMove += OnPlayerMove;
         player.input.OnPlayerJump += Input_OnPlayerJump;
+        player.input.OnPlayerAttack += Input_OnPlayerAttack;
     }
 
-
+    private void Input_OnPlayerAttack(bool obj)
+    {
+        base.state_Machine.SetState(base.transitions[nameof(Player_Attack_State)]);
+    }
 
     private void OnPlayerMove(Vector2 newMovement)
     {
@@ -57,11 +61,12 @@ public class Player_Idle_State : Player_Base_State
         base.OnExit();
         player.input.OnPlayerMove -= OnPlayerMove;
         player.input.OnPlayerJump -= Input_OnPlayerJump;
+        player.input.OnPlayerAttack -= Input_OnPlayerAttack;
     }
 
     public override void AddStateTransitions(string transitionName, State transitionState)
     {
         base.AddStateTransitions(transitionName, transitionState);
-        transitions.Add(transitionName, transitionState);
+        //transitions.Add(transitionName, transitionState);
     }
 }

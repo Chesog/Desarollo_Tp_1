@@ -13,6 +13,12 @@ public class Player_Movement_State : Player_Base_State
 
         player.input.OnPlayerMove += Player_Input_OnPlayerMove;
         player.input.OnPlayerJump += Input_OnPlayerJump;
+        player.input.OnPlayerAttack += Input_OnPlayerAttack;
+    }
+
+    private void Input_OnPlayerAttack(bool obj)
+    {
+        base.state_Machine.SetState(base.transitions[nameof(Player_Attack_State)]);
     }
 
     private void Input_OnPlayerJump(bool obj)
@@ -66,6 +72,6 @@ public class Player_Movement_State : Player_Base_State
     public override void AddStateTransitions(string transitionName, State transitionState)
     {
         base.AddStateTransitions(transitionName, transitionState);
-        transitions.Add(transitionName, transitionState);
+        //transitions.Add(transitionName, transitionState);
     }
 }
