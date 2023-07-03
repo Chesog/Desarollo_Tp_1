@@ -14,6 +14,12 @@ public class Player_Movement_State : Player_Base_State
         player.input.OnPlayerMove += Player_Input_OnPlayerMove;
         player.input.OnPlayerJump += Input_OnPlayerJump;
         player.input.OnPlayerAttack += Input_OnPlayerAttack;
+        player.input.OnPlayerBlock += Input_OnPlayerBlock;
+    }
+
+    private void Input_OnPlayerBlock(bool obj)
+    {
+        base.state_Machine.SetState(base.transitions[nameof(Player_Block_State)]);
     }
 
     private void Input_OnPlayerAttack(bool obj)
@@ -67,6 +73,8 @@ public class Player_Movement_State : Player_Base_State
         player.movement = Vector3.zero;
         player.input.OnPlayerMove -= Player_Input_OnPlayerMove;
         player.input.OnPlayerJump -= Input_OnPlayerJump;
+        player.input.OnPlayerAttack -= Input_OnPlayerAttack;
+        player.input.OnPlayerBlock -= Input_OnPlayerBlock;
     }
 
     public override void AddStateTransitions(string transitionName, State transitionState)

@@ -1,42 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Attack_State : Player_Base_State
+public class Player_Block_State : Player_Base_State
 {
-    private float attkCounter;
-    private float attkTimer;
-    public Player_Attack_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Attack_State), playerSM, player) { }
+    private bool blocking;
+    public Player_Block_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Block_State), playerSM, player) { }
 
-    public override void OnEnter() 
+    public override void OnEnter()
     {
         base.OnEnter();
-        PlayAttackAnimation();
+        PlayBlockAnimation();
 
-        attkCounter = 1.5f;
-        attkTimer = 0.0f;
+        blocking = true;
 
+        player.input.OnPlayerBlock += Input_OnPlayerBlock;
         player.input.OnPlayerAttack += Input_OnPlayerAttack;
         player.input.OnPlayerMove += Input_OnPlayerMove;
         player.input.OnPlayerJump += Input_OnPlayerJump;
-        player.input.OnPlayerBlock += Input_OnPlayerBlock;
     }
 
     private void Input_OnPlayerBlock(bool obj)
     {
-        if (attkTimer >= attkCounter)
-            base.state_Machine.SetState(base.transitions[nameof(Player_Block_State)]);
+        blocking = obj;
     }
 
     private void Input_OnPlayerJump(bool obj)
     {
-        if (attkTimer >= attkCounter)
+        if (!blocking)
             base.state_Machine.SetState(base.transitions[nameof(Player_Jump_State)]);
     }
 
     private void Input_OnPlayerMove(Vector2 obj)
     {
-        if (attkTimer >= attkCounter) 
+        if (!blocking)
         {
             player.movement = new Vector3(obj.x, 0f, obj.y).normalized;
             base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
@@ -45,18 +40,14 @@ public class Player_Attack_State : Player_Base_State
 
     private void Input_OnPlayerAttack(bool obj)
     {
-        PlayAttackAnimation();
+        base.state_Machine.SetState(base.transitions[nameof(Player_Attack_State)]);
     }
 
     public override void UpdateLogic()
     {
-        if (attkTimer >= attkCounter)
+        if (!blocking)
         {
             base.state_Machine.SetState(base.transitions[nameof(Player_Idle_State)]);
-        }
-        else
-        {
-            attkTimer += Time.deltaTime;
         }
     }
 
@@ -65,17 +56,18 @@ public class Player_Attack_State : Player_Base_State
 
     }
 
-    public void PlayAttackAnimation()
+    public void PlayBlockAnimation()
     {
-        player.anim.Play("Sword And Shield Slash");
+        player.anim.SetBool("Blocking",blocking);
     }
 
     public override void OnExit()
     {
+        base.OnExit();
+        blocking = false;
         player.input.OnPlayerAttack -= Input_OnPlayerAttack;
         player.input.OnPlayerMove -= Input_OnPlayerMove;
         player.input.OnPlayerJump -= Input_OnPlayerJump;
-        player.input.OnPlayerBlock -= Input_OnPlayerBlock;
     }
 
     public virtual void AddStateTransitions(string transitionName, State transitionState)
