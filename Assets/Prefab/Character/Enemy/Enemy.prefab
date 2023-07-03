@@ -119,7 +119,8 @@ MonoBehaviour:
   deathLoop: 0
   target: {fileID: 0}
   bulletSpawn: {fileID: 4205553605035641860}
-  rb: {fileID: 1391027550116362418}
+  player_Source: {fileID: 11400000, guid: 88bdf9c4296836b46a7dbe877999d610, type: 2}
+  rigidBody: {fileID: 1391027550116362418}
   bulletPrefab: {fileID: 6330706891537420384, guid: 598ef64c9d852b6408d6e4982442fd43, type: 3}
   health: 100
   enemyAnimController: {fileID: 1057172128}
@@ -250,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07beffdf10349d04da2d7d2f800c1569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 8329165050019950566}
+  animator: {fileID: 8329165050019950566}
   controller: {fileID: 1391027550116362417}
 --- !u!95 &8329165050019950566 stripped
 Animator:

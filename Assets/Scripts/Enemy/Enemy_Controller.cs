@@ -19,6 +19,7 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Transform bulletSpawn;
 
+    [SerializeField] private Player_Data_Source player_Source;
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float health;
@@ -35,7 +36,7 @@ public class Enemy_Controller : MonoBehaviour
 
         if (target == null)
         {
-            target = Player_Controller.playerPos.transform;
+            target = player_Source._player.transform;
         }
         if (!target)
         {

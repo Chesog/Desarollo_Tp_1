@@ -771,7 +771,7 @@ MonoBehaviour:
   coll: {fileID: 1963441942}
   player: {fileID: 0}
   weapon_Container: {fileID: 0}
-  pickUp_Range: 2
+  pickUp_Range: 3
   dropForwardForce: 8
   dropUpwardForce: 7
 --- !u!1 &5008004983819521525
