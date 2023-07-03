@@ -33,4 +33,10 @@ public class Player_State_Machine : State_Machine
     {
         return idleState;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(player.feet_Pivot.position, Vector3.down * player.maxDistance);
+    }
 }

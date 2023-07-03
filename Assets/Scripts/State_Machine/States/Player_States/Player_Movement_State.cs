@@ -10,6 +10,7 @@ public class Player_Movement_State : Player_Base_State
     {
         base.OnEnter();
 
+
         player.input.OnPlayerMove += Player_Input_OnPlayerMove;
         player.input.OnPlayerJump += Input_OnPlayerJump;
     }
@@ -27,11 +28,10 @@ public class Player_Movement_State : Player_Base_State
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        if (player.movement == Vector3.zero) 
-        {
-            Debug.Log("UpdateLogic");
+        if (player.movement == Vector3.zero)
             base.state_Machine.SetState(base.transitions[nameof(Player_Idle_State)]);
-        }
+
+        PlayMovementAnimation();
     }
 
     public override void UpdatePhysics()
@@ -48,6 +48,11 @@ public class Player_Movement_State : Player_Base_State
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
         player.rigidbody.velocity = moveDir.normalized * player.speed + Vector3.up * player.rigidbody.velocity.y;
+    }
+
+    public void PlayMovementAnimation() 
+    {
+        player.anim.SetFloat("VelocityX/Z", player.movement.magnitude - player.movement.y);
     }
 
     public override void OnExit()

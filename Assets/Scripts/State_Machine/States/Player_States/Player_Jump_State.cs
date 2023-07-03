@@ -1,19 +1,23 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player_Jump_State : Player_Base_State
 {
-    public Player_Jump_State(State_Machine state_Machine, Player_Component player) : base(nameof(Player_Jump_State), state_Machine, player) {}
+    public Player_Jump_State(State_Machine state_Machine, Player_Component player) : base(nameof(Player_Jump_State), state_Machine, player) { }
 
     public override void OnEnter()
     {
         base.OnEnter();
+        player.rigidbody.AddForce(Vector3.up * player.jumpForce, ForceMode.Impulse);
+        PlayJumpAnimation();
         player.input.OnPlayerJump += Input_OnPlayerJump;
         player.input.OnPlayerMove += Input_OnPlayerMove;
     }
 
     private void Input_OnPlayerMove(Vector2 obj)
     {
-        base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
+        if (player.rigidbody.velocity.y == 0)
+            base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
     }
 
     private void Input_OnPlayerJump(bool obj)
@@ -24,9 +28,10 @@ public class Player_Jump_State : Player_Base_State
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-
-        if (isGrounded())
+        PlayJumpAnimation();
+        if (isGrounded() && player.rigidbody.velocity.y == 0)
             base.state_Machine.SetState(base.transitions[nameof(Player_Idle_State)]);
+
     }
 
     public override void UpdatePhysics()
@@ -35,11 +40,9 @@ public class Player_Jump_State : Player_Base_State
 
     }
 
-    public override void OnExit()
+    public void PlayJumpAnimation()
     {
-        base.OnExit();
-        player.input.OnPlayerJump -= Input_OnPlayerJump;
-        player.input.OnPlayerMove -= Input_OnPlayerMove;
+        player.anim.SetFloat("VelocityY", player.rigidbody.velocity.y);
     }
 
     public bool isGrounded()
@@ -51,5 +54,13 @@ public class Player_Jump_State : Player_Base_State
     {
         base.AddStateTransitions(transitionName, transitionState);
         transitions.Add(transitionName, transitionState);
+    }
+
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        player.input.OnPlayerJump -= Input_OnPlayerJump;
+        player.input.OnPlayerMove -= Input_OnPlayerMove;
     }
 }
