@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Class For The Enemy Logic
 /// </summary>
-public class Enemy_Controller : Character_Component
+[Obsolete]public class Enemy_Controller : Character_Component
 {
     [SerializeField] private float lookRad = 20f;
     [SerializeField] private float stopDistance = 5f;
