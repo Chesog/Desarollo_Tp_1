@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494a12e36006ae54980b33a97ff70a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEquiped: 0
+  player_Source: {fileID: 11400000, guid: 88bdf9c4296836b46a7dbe877999d610, type: 2}
   weapon: {fileID: 9078599062214292020}
   rb: {fileID: 9078599062214292022}
   coll: {fileID: 6513072303524917227}
@@ -120,7 +122,6 @@ MonoBehaviour:
   pickUp_Range: 2
   dropForwardForce: 8
   dropUpwardForce: 7
-  equiped: 0
 --- !u!114 &9078599062214292020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b0803428c7942468c0de8027462ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponDamage: 25
 --- !u!54 &9078599062214292022
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -155,7 +155,7 @@ public class Enemy_Controller : MonoBehaviour
         {
             if (other.CompareTag("Player_Weapon"))
             {
-                TakeDamage(other.GetComponent<Weapon_Stats>().GetDamage());
+                TakeDamage(other.GetComponent<Weapon_Stats>().WeaponDamage);
             }
         }
     }

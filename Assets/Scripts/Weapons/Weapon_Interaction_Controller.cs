@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 public class Weapon_Interaction_Controller : MonoBehaviour
 {
+    private static bool isSlotFull;
+    [SerializeField] private bool isEquiped;
+
+    [SerializeField] private Player_Data_Source player_Source;
     [SerializeField] private Weapon_Stats weapon;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private BoxCollider coll;
@@ -15,17 +19,13 @@ public class Weapon_Interaction_Controller : MonoBehaviour
     [SerializeField] private float dropForwardForce;
     [SerializeField] private float dropUpwardForce;
 
-    [SerializeField] private bool equiped;
-    //TODO: TP2 - Syntax - Consistency in naming convention
-    [SerializeField] private static bool slotFull;
-
-
     private void Start()
     {
+        isEquiped = false;
 
         if (player == null)
         {
-            player = Player_Controller.playerPos.transform;
+            player = player_Source._player.transform;
         }
         if (!player)
         {
@@ -33,22 +33,20 @@ public class Weapon_Interaction_Controller : MonoBehaviour
             enabled = false;
         }
 
-        //weapon_Container ??= Player_Controller.playerPos.playerHolder;
         if (weapon_Container == null)
         {
-            weapon_Container = Player_Controller.playerPos.playerHolder;
+            weapon_Container = player_Source._player.weaponHolder;
 
         }
-        if (!player)
+        if (!weapon_Container)
         {
             Debug.LogError(message: $"{name}: (logError){nameof(weapon_Container)} is null");
             enabled = false;
         }
 
-        if (!equiped)
+        if (!isEquiped)
         {
             weapon.enabled = false;
-            //rb.isKinematic = false;
             coll.isTrigger = false;
         }
         else
@@ -56,28 +54,29 @@ public class Weapon_Interaction_Controller : MonoBehaviour
             weapon.enabled = true;
             rb.isKinematic = true;
             coll.isTrigger = true;
-            slotFull = true;
+            isSlotFull = true;
         }
+
+
+        if (player_Source._player == null)
+            return;
+
+        player_Source._player.input.OnPlayerPickUp += Input_OnPlayerPickUp;
+        player_Source._player.input.OnPlayerDrop += Input_OnPlayerDrop;
     }
 
-    private void Awake()
+    private void Input_OnPlayerDrop()
     {
-        Player_Controller.playerPos.OnPlayerPickUp += PlayerPos_OnPlayerPickUp;
-        Player_Controller.playerPos.OnPlayerDrop += PlayerPos_OnPlayerDrop;
-    }
-
-    private void PlayerPos_OnPlayerDrop()
-    {
-        if (equiped)
+        if (isEquiped)
         {
             Drop_Weapon();
         }
     }
 
-    private void PlayerPos_OnPlayerPickUp()
+    private void Input_OnPlayerPickUp()
     {
         Vector3 distance = player.position - transform.position;
-        if (!equiped && distance.magnitude <= pickUp_Range && !slotFull)
+        if (!isEquiped && distance.magnitude <= pickUp_Range && !isSlotFull)
         {
             PickUp_Weapon();
         }
@@ -85,7 +84,7 @@ public class Weapon_Interaction_Controller : MonoBehaviour
 
     private void Update()
     {
-        if (equiped)
+        if (isEquiped)
         {
             UpdateEquipedPos();
         }
@@ -98,8 +97,8 @@ public class Weapon_Interaction_Controller : MonoBehaviour
 
     private void PickUp_Weapon()
     {
-        equiped = true;
-        slotFull = true;
+        isEquiped = true;
+        isSlotFull = true;
 
         rb.isKinematic = true;
         coll.isTrigger = true;
@@ -113,8 +112,8 @@ public class Weapon_Interaction_Controller : MonoBehaviour
 
     private void Drop_Weapon()
     {
-        equiped = false;
-        slotFull = false;
+        isEquiped = false;
+        isSlotFull = false;
 
         transform.SetParent(null);
 
@@ -130,15 +129,18 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         weapon.enabled = false;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        Player_Controller.playerPos.OnPlayerPickUp -= PlayerPos_OnPlayerPickUp;
-        Player_Controller.playerPos.OnPlayerDrop -= PlayerPos_OnPlayerDrop;
+        if (player_Source._player == null)
+            return;
+
+        player_Source._player.input.OnPlayerPickUp -= Input_OnPlayerPickUp;
+        player_Source._player.input.OnPlayerDrop -= Input_OnPlayerDrop;
     }
 
     private void OnDrawGizmos()
     {
-        if (!equiped)
+        if (!isEquiped)
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, pickUp_Range);

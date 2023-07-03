@@ -14,6 +14,7 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] GameObject Pause_Canvas;
     [SerializeField] GameObject Lose_Canvas;
     [SerializeField] GameObject Win_Canvas;
+    [SerializeField] Player_Component player;
 
     //TODO - Documentation - Add summary
     //TODO: TP2 - FSM
@@ -32,18 +33,17 @@ public class Game_Manager : MonoBehaviour
         SoundManager.Instance.PlayMusic(GameMusic);
         BossEnemy = GameObject.FindGameObjectWithTag("Boss");
 
-        Player_Controller.playerPos.OnPlayerPause += PlayerPos_OnPlayerPause;
+        player.input.OnPlayerPause += Input_OnPlayerPause;
     }
 
     /// <summary>
     /// Fuction To Handle The Canbas On Pause State
     /// </summary>
-    private void PlayerPos_OnPlayerPause()
+    private void Input_OnPlayerPause()
     {
-        //TODO: TP2 - FSM
         if (Pause_Canvas.active == true)
         {
-            if (Player_Health > 0)
+            if (player.character_Health_Component._health > 0)
             {
                 Pause_Canvas.active = false;
                 game_Canvas.active = true;
@@ -83,7 +83,7 @@ public class Game_Manager : MonoBehaviour
 
         Player_Health = Player_Controller.playerPos.GetComponent<Player_Controller>().GetHealth();
 
-        if (Player_Health <= 0)
+        if (player.character_Health_Component._health <= 0)
         {
             game_Canvas.active = false;
             Pause_Canvas.active = false;
@@ -119,33 +119,25 @@ public class Game_Manager : MonoBehaviour
         SceneManager.LoadScene("wfc_Test");
     }
 
-    //TODO - Fix - Should be native Setter/Getter
     /// <summary>
     /// Function To Set The Value For The On Screen Health Bar
     /// </summary>
-    /// <param name="health"></param>
-    public void SetHealth(float health) 
+    public void SetHealth() 
     {
-        healthBar.value = health;
+        healthBar.value = player.character_Health_Component._health;
     }
 
     /// <summary>
     /// Set The Max Value Of The On Screen Health Bar
     /// </summary>
-    /// <param name="health"></param>
-    public void SetMaxHealth(float health)
+    public void SetMaxHealth()
     {
-        healthBar.maxValue = health;
-        healthBar.value = health;
+        healthBar.maxValue = player.character_Health_Component._maxHealth;
+        healthBar.value = player.character_Health_Component._maxHealth;
     }
 
     private void OnDisable()
     {
-        Player_Controller.playerPos.OnPlayerPause -= PlayerPos_OnPlayerPause;
-    }
-
-    private void OnDestroy()
-    {
-        Player_Controller.playerPos.OnPlayerPause -= PlayerPos_OnPlayerPause;
+        player.input.OnPlayerPause -= Input_OnPlayerPause;
     }
 }

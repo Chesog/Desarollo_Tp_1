@@ -118,7 +118,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// </summary>
     public void OnPickUp()
     {
-        OnPlayerPickUp.Invoke();
+        OnPlayerPickUp?.Invoke();
     }
 
     /// <summary>
@@ -126,7 +126,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// </summary>
     public void OnDrop()
     {
-        OnPlayerDrop.Invoke();
+        OnPlayerDrop?.Invoke();
     }
 
     /// <summary>

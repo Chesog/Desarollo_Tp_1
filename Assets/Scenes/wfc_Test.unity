@@ -239,6 +239,7 @@ MonoBehaviour:
   Pause_Canvas: {fileID: 956283540}
   Lose_Canvas: {fileID: 1706611014}
   Win_Canvas: {fileID: 663951885}
+  player: {fileID: 722760000}
 --- !u!4 &45368881
 Transform:
   m_ObjectHideFlags: 0
@@ -2024,22 +2025,22 @@ PrefabInstance:
       objectReference: {fileID: 45368880}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
---- !u!114 &722759996 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 656559978401318381, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
-  m_PrefabInstance: {fileID: 722759995}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68bbf0c06ab18af42ab98393f7d3bc9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &722759997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1939414284527397664, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
   m_PrefabInstance: {fileID: 722759995}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &722760000 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1901866632, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
+  m_PrefabInstance: {fileID: 722759995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2e3a681ddcb9049a3d07d664ebcc5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &770582460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,15 +2778,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7279614904407507172, guid: 51e09f9d47c2cce40a9673454086b76d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.023195704
+      value: -0.023195684
       objectReference: {fileID: 0}
     - target: {fileID: 7279614904407507172, guid: 51e09f9d47c2cce40a9673454086b76d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000029802319
+      value: 0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 7279614904407507172, guid: 51e09f9d47c2cce40a9673454086b76d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000002235174
+      value: 0.000000007450581
       objectReference: {fileID: 0}
     - target: {fileID: 7279614904720790321, guid: 51e09f9d47c2cce40a9673454086b76d, type: 3}
       propertyPath: m_Name
@@ -4688,7 +4689,7 @@ PrefabInstance:
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: player_m
       value: 
-      objectReference: {fileID: 722759996}
+      objectReference: {fileID: 0}
     - target: {fileID: 6673351024770648120, guid: 40b5c7d00fea7a842a1926d0f962cfc3, type: 3}
       propertyPath: gridHolder
       value: 
