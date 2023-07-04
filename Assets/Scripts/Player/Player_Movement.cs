@@ -7,30 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Player_Movement : MonoBehaviour
 {
-    private Player_Controller controller;
 
-    [Header("SetUp")]
-    private Player_Setings setings;
-    [SerializeField] private Rigidbody rigidbody;
-    [SerializeField] private Transform feet_Pivot;
-    [SerializeField] private Transform playerCamera;
-    [SerializeField] private float jumpBufferTimeCounter;
-    [SerializeField] private float turnSmoothVelocity;
-    //TODO: TP2 - Syntax - Fix declaration order
-    private float lastAngle;
-    private Coroutine _jumpCorutine;
-    [Header("Movement")]
-    [SerializeField] Vector3 _CurrentMovement;
-
-    [SerializeField] float initialSpeed;
-    [SerializeField] private bool isJumping;
-    [SerializeField] private bool wasJumping;
-    [SerializeField] private bool isSprinting;
-
-    [Header("Coyote Time Setup")]
-    [SerializeField] private float coyoteTimerCounter;
-
-    //TODO - Documentation - Add summary
     /// <summary>
     /// Action Event For The Player Jump Event
     /// </summary>
@@ -46,6 +23,27 @@ public class Player_Movement : MonoBehaviour
     /// </summary>
     public event Action<float> OnPlayerBlock;
 
+    private Player_Controller controller;
+
+    [Header("SetUp")]
+    [SerializeField] private Player_Setings setings;
+    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private Transform feet_Pivot;
+    [SerializeField] private Transform playerCamera;
+    [SerializeField] private float jumpBufferTimeCounter;
+    [SerializeField] private float turnSmoothVelocity;
+    [SerializeField] private float lastAngle;
+    [SerializeField] private Coroutine _jumpCorutine;
+    [Header("Movement")]
+    [SerializeField] Vector3 _CurrentMovement;
+
+    [SerializeField] private float initialSpeed;
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool wasJumping;
+    [SerializeField] private bool isSprinting;
+
+    [Header("Coyote Time Setup")]
+    [SerializeField] private float coyoteTimerCounter;
 
     private void OnEnable()
     {

@@ -7,12 +7,6 @@ using UnityEngine.InputSystem;
 /// </summary>
 [Obsolete]public class Player_Controller : MonoBehaviour
 {
-    float health;
-    [SerializeField] private Player_Setings setings;
-    [SerializeField] private PlayerInput input;
-    [SerializeField] private AudioClip swing;
-    public Game_Manager _Manager;
-
     /// <summary>
     /// Action Event For The Player Movement
     /// </summary>
@@ -66,6 +60,14 @@ using UnityEngine.InputSystem;
     public static Player_Controller playerPos;
     public Transform playerHolder;
 
+    public Game_Manager _Manager;
+    [SerializeField] private float health;
+    [SerializeField] private Player_Setings setings;
+    [SerializeField] private PlayerInput input;
+    [SerializeField] private AudioClip swing;
+
+    
+
     private void OnEnable()
     {
         playerPos = this;
@@ -92,7 +94,6 @@ using UnityEngine.InputSystem;
         return setings;
     }
 
-    //TODO - Fix - Using Input related logic outside of an input responsible class (or input related class controls health)
     /// <summary>
     /// Triggers The Movement Event
     /// </summary>
@@ -166,7 +167,6 @@ using UnityEngine.InputSystem;
     {
         if (input.isPressed) 
         {
-            //TODO: TP2 - SOLID
             Debug.Log("OnPlayerPickUp");
             OnPlayerPickUp.Invoke();
         }
@@ -217,7 +217,6 @@ using UnityEngine.InputSystem;
 
     private void Update()
     {
-        //TODO - Fix - Should be event based
         CheckHealth();
     }
 
