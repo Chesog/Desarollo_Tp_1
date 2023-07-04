@@ -11,7 +11,20 @@ public class Player_Jump_State : Player_Base_State
         PlayJumpAnimation();
         player.input.OnPlayerJump += Input_OnPlayerJump;
         player.input.OnPlayerMove += Input_OnPlayerMove;
+        player.character_Health_Component.OnDecrease_Health += Character_Health_Component_OnDecrease_Health;
+        player.character_Health_Component.OnInsufficient_Health += Character_Health_Component_OnInsufficient_Health;
     }
+
+    private void Character_Health_Component_OnInsufficient_Health()
+    {
+        base.state_Machine.SetState(base.transitions[nameof(Player_Dead_State)]);
+    }
+
+    private void Character_Health_Component_OnDecrease_Health()
+    {
+        base.state_Machine.SetState(base.transitions[nameof(Player_Hit_State)]);
+    }
+
 
     private void Input_OnPlayerMove(Vector2 obj)
     {
@@ -65,5 +78,7 @@ public class Player_Jump_State : Player_Base_State
         base.OnExit();
         player.input.OnPlayerJump -= Input_OnPlayerJump;
         player.input.OnPlayerMove -= Input_OnPlayerMove;
+        player.character_Health_Component.OnDecrease_Health -= Character_Health_Component_OnDecrease_Health;
+        player.character_Health_Component.OnInsufficient_Health -= Character_Health_Component_OnInsufficient_Health;
     }
 }

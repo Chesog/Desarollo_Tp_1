@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class State_Machine : MonoBehaviour
 {
-    [SerializeField] State currentState;
+    [SerializeField] public State currentState;
     [HideInInspector]
     public UnityEvent OnStateEnter;
     [HideInInspector]
