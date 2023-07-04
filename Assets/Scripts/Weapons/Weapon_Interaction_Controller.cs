@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Class for The Management of the Interaction Between the Player && the Weapon
+/// </summary>
 public class Weapon_Interaction_Controller : MonoBehaviour
 {
     private static bool isSlotFull;
@@ -65,6 +68,9 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         player_Source._player.input.OnPlayerDrop += Input_OnPlayerDrop;
     }
 
+    /// <summary>
+    /// Event for The Player Drop Input
+    /// </summary>
     private void Input_OnPlayerDrop()
     {
         if (isEquiped)
@@ -73,6 +79,9 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Event for The Player PickUp Input
+    /// </summary>
     private void Input_OnPlayerPickUp()
     {
         Vector3 distance = player.position - transform.position;
@@ -90,11 +99,17 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update The Position of The Equiped Weapon
+    /// </summary>
     private void UpdateEquipedPos() 
     {
         transform.localPosition = Vector3.zero;
     }
 
+    /// <summary>
+    /// PickUp The Current Weapon
+    /// </summary>
     private void PickUp_Weapon()
     {
         isEquiped = true;
@@ -110,6 +125,9 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
+    /// <summary>
+    /// Drop The Current Weapon
+    /// </summary>
     private void Drop_Weapon()
     {
         isEquiped = false;
