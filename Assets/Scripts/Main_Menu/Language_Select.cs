@@ -7,16 +7,15 @@ using UnityEngine;
 /// </summary>
 public class Language_Select : MonoBehaviour
 {
-    [SerializeField] GameObject ls_Screen;
-    //TODO - Fix - Code is in Spanish or is trash code
+    private const string Key = "Lenguaje";
+    [SerializeField] private GameObject ls_Screen;
     enum Language
     {
         Spanish,English
     }
-    void Start()
+    public void Start()
     {
-        //TODO - Fix - Hardcoded value
-        if (PlayerPrefs.HasKey("Lenguaje"))
+        if (PlayerPrefs.HasKey(Key))
         {
             ls_Screen.SetActive(false);
         }
@@ -26,15 +25,13 @@ public class Language_Select : MonoBehaviour
         }
     }
 
-    //TODO: TP2 - SOLID
-
     /// <summary>
     /// Function For The Spanish Language Selection
     /// </summary>
     public void SelectSpanish() 
     {
         //TODO - Fix - Hardcoded value
-        PlayerPrefs.SetString("Lenguaje",Language.Spanish.ToString());
+        PlayerPrefs.SetString(Key, Language.Spanish.ToString());
         ls_Screen.SetActive(false);
     }
 
@@ -44,7 +41,7 @@ public class Language_Select : MonoBehaviour
     public void SelectEnglish()
     {
         //TODO - Fix - Hardcoded value
-        PlayerPrefs.SetString("Lenguaje", Language.English.ToString());
+        PlayerPrefs.SetString(Key, Language.English.ToString());
         ls_Screen.SetActive(false);
     }
 }

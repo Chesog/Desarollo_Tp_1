@@ -3,36 +3,35 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-//TODO - Documentation - Add summary
 /// <summary>
 /// Clas For The Management Of The Buttons
 /// </summary>
 public class Buttons_Controller : MonoBehaviour
 {
-    [SerializeField] GameObject windowMaster;
-    [SerializeField] CinemachineVirtualCamera cinemachine_Camera;
+    [SerializeField] private GameObject windowMaster;
+    [SerializeField] private CinemachineVirtualCamera cinemachine_Camera;
 
     [Header("Main Menu Set Up")]
-    [SerializeField] Transform mainMenu;
-    [SerializeField] GameObject menu_Canvas;
-    [SerializeField] GameObject menu_firstButton;
+    [SerializeField] private Transform mainMenu;
+    [SerializeField] private GameObject menu_Canvas;
+    [SerializeField] private GameObject menu_firstButton;
     [Header("Options Menu Set Up")]
-    [SerializeField] Transform options;
-    [SerializeField] GameObject options_Canvas;
-    [SerializeField] GameObject options_firstButton;
+    [SerializeField] private Transform options;
+    [SerializeField] private GameObject options_Canvas;
+    [SerializeField] private GameObject options_firstButton;
     [Header("Credits Menu Set Up")]
-    [SerializeField] Transform credits;
-    [SerializeField] GameObject credits_Canvas;
-    [SerializeField] GameObject credits_firstButton;
+    [SerializeField] private Transform credits;
+    [SerializeField] private GameObject credits_Canvas;
+    [SerializeField] private GameObject credits_firstButton;
     [Header("EventSystem Set Up")]
-    [SerializeField] EventSystem system;
+    [SerializeField] private EventSystem system;
 
     private void Start()
     {
         menu_Canvas.active = true;
         options_Canvas.active = false;
         credits_Canvas.active = false;
-        cinemachine_Camera.Follow = mainMenu; //Fix
+        cinemachine_Camera.Follow = mainMenu;
         cinemachine_Camera.LookAt = mainMenu;
     }
 
@@ -44,7 +43,7 @@ public class Buttons_Controller : MonoBehaviour
         menu_Canvas.active = false;
         options_Canvas.active = true;
         credits_Canvas.active = false;
-        cinemachine_Camera.Follow = options; // Fix
+        cinemachine_Camera.Follow = options;
         cinemachine_Camera.LookAt = options;
         system.SetSelectedGameObject(options_firstButton);
     }
@@ -57,7 +56,7 @@ public class Buttons_Controller : MonoBehaviour
         menu_Canvas.active = true;
         options_Canvas.active = false;
         credits_Canvas.active = false;
-        cinemachine_Camera.Follow = mainMenu; // Fix
+        cinemachine_Camera.Follow = mainMenu;
         cinemachine_Camera.LookAt = mainMenu;
         system.SetSelectedGameObject(menu_firstButton);
     }
@@ -70,7 +69,7 @@ public class Buttons_Controller : MonoBehaviour
         menu_Canvas.active = false;
         options_Canvas.active = false;
         credits_Canvas.active = true;
-        cinemachine_Camera.Follow = credits; // Fix
+        cinemachine_Camera.Follow = credits;
         cinemachine_Camera.LookAt = credits;
         system.SetSelectedGameObject(credits_firstButton);
     }

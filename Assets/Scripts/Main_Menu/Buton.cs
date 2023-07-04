@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class Buton : MonoBehaviour
 {
-    [SerializeField] GameObject windowPrefab;
-    [SerializeField] GameObject panelParent;
+    private const string game_Scene_Name = "wfc_Test";
+    private const string main_Menu_Scene_Name = "Main_Menu";
+    [SerializeField] private GameObject windowPrefab;
+    [SerializeField] private GameObject panelParent;
 
     /// <summary>
     /// Instantiate A Window Prefab On ClICK
@@ -23,9 +25,8 @@ public class Buton : MonoBehaviour
     /// </summary>
     public void OnClickStart() 
     {
-        //TODO - Fix - Hardcoded value
-        SceneManager.LoadScene("wfc_Test");
-        SceneManager.UnloadScene("Main_Menu");
+        SceneManager.LoadScene(game_Scene_Name);
+        SceneManager.UnloadScene(main_Menu_Scene_Name);
     }
 
     /// <summary>
