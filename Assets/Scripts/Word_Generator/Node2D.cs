@@ -7,7 +7,9 @@ using UnityEngine;
 public enum Node_States { UnCollapsed, Collapsed }
 public enum RNode_Type { Empty, Spawn, Trap, Normal, Boss }
 
-
+/// <summary>
+/// Class To Handle All The Information Of The Nodes For The Grid
+/// </summary>
 [Serializable]
 public class Node2D : MonoBehaviour, IComparable<Node2D>
 {
@@ -18,10 +20,6 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
     public RNode_Type type;
     public Dictionary<string, RNode_Type[]>[] Possible_Neighbors =  
     {
-        //TODO - Fix - Code is in Spanish or is trash code
-        // Faltaria Forward y back para la 3 dimension
-
-        // RNode_Type Empty
         new Dictionary<string, RNode_Type[]>
         {
             {"Up",new RNode_Type[]{RNode_Type.Normal,RNode_Type.Trap, RNode_Type.Boss} },
@@ -79,7 +77,11 @@ public class Node2D : MonoBehaviour, IComparable<Node2D>
         }
     }
 
-    //TODO - Documentation - Add summary
+   /// <summary>
+   /// Compares a Node Whit the Posible Types of The Node obj
+   /// </summary>
+   /// <param name="obj"></param>
+   /// <returns></returns>
     public int CompareTo(Node2D obj)
     {
         //Before -> -1

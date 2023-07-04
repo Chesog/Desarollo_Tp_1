@@ -1,12 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Wave Function Collapse Algorithm
+/// </summary>
 public class wfc_Dungeon_Generator : MonoBehaviour
 {
+    [SerializeField] public Transform player;
+    [SerializeField] public Transform playerContainer;
+
     [SerializeField] private Grid gr;
     [SerializeField] private W_F_C wave;
     [SerializeField] private Vector3 ofset;
@@ -17,16 +20,15 @@ public class wfc_Dungeon_Generator : MonoBehaviour
     [SerializeField] private List<GameObject> trap_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
     [SerializeField] private List<GameObject> normal_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
     [SerializeField] private List<GameObject> boss_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
-
-
+    [SerializeField] private List<Room_Behaviour> dungegonRooms;
     [SerializeField] private Player_Data_Source player_data;
-    [SerializeField] public Transform player;
-    [SerializeField] public Transform playerContainer;
     private int currentRoomIndex = -1;
     private Room_Behaviour currentRoom;
 
 
-    [SerializeField] private List<Room_Behaviour> dungegonRooms;
+
+
+
     void Start()
     {
         wave.StartWFC();
@@ -49,13 +51,15 @@ public class wfc_Dungeon_Generator : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        checkPlayerPos();
+        CheckPlayerPos();
     }
 
-    void checkPlayerPos()
+    /// <summary>
+    /// Check If The Player Is Inside a Room To Make it Visible
+    /// </summary>
+    void CheckPlayerPos()
     {
         var aux = currentRoom;
         var count = 0f;
@@ -85,6 +89,10 @@ public class wfc_Dungeon_Generator : MonoBehaviour
         }
         currentRoom.ShowAdjRooms();
     }
+
+    /// <summary>
+    /// Check The Specifics Room amount of Boos and Spawn Rooms so they Spawn Only a specific amount
+    /// </summary>
     private void CheckRoomCant()
     {
         List<Node2D> boss_Rooms = new List<Node2D>();
@@ -159,6 +167,9 @@ public class wfc_Dungeon_Generator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Instantiate The Rooms Prefab
+    /// </summary>
     private void InstantiatePrefabs()
     {
         for (int x = 0; x < gr.grid.GetLength(0); x++)

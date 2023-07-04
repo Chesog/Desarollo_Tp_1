@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Class For The Word Grid Calculation
+/// </summary>
 [Serializable]
 public class Grid : MonoBehaviour
 {
@@ -18,13 +22,9 @@ public class Grid : MonoBehaviour
     public float pointsInGridSize = 0.1f;
     public static float delta = 1f;
 
-    //TODO: TP2 - Remove unused methods/variables
-    // Start is called before the first frame update
-    void Start()
-    {
-        //StartGrid();
-    }
-
+    /// <summary>
+    /// Start Generating a Grid Of Nodes
+    /// </summary>
     public void StartGrid() 
     {
         grid = new Node2D[sizeX, sizeY, sizeZ];
@@ -70,14 +70,11 @@ public class Grid : MonoBehaviour
                     if (grid[x, y, z].state != Node_States.UnCollapsed)
                     {
                         Gizmos.color = Color.black;
-                        //TODO: TP2 - Remove unused methods/variables
-                        //Gizmos.DrawWireSphere(grid[x, y, z].pos, pointsInGridSize);
                         Gizmos.DrawSphere(grid[x, y, z].pos, pointsInGridSize);
                     }
                     else
                     {
                         Gizmos.color = Color.green;
-                        //Gizmos.DrawWireSphere(grid[x, y, z].pos, pointsInGridSize);
                         Gizmos.DrawSphere(grid[x, y, z].pos, pointsInGridSize);
                     }
                 }

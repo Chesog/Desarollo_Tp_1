@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//TODO: TP2 - Syntax - Consistency in naming convention
+/// <summary>
+/// Class To Generate The Wave Function Collapse Algorithm
+/// </summary>
 public class W_F_C : MonoBehaviour
 {
     [SerializeField] private Grid grid;

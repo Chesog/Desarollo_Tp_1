@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum Directions {Up,Down,Right,Left}
-//TODO: TP2 - Remove unused methods/variables
-public enum RoomType { Spawn_Room,Medium_Room,L_Room,Large_Room}
-public class Dungegon_Generator : MonoBehaviour
+
+/// <summary>
+/// Class To create A Dungegon Tipe Map whit a dungegon snake Generation Algorithm
+/// </summary>
+[Obsolete]public class Dungegon_Generator : MonoBehaviour
 {
     public class Cell
     {
@@ -23,28 +26,32 @@ public class Dungegon_Generator : MonoBehaviour
     [SerializeField] private Room_Rule[] rooms;
     [SerializeField] private List<Room_Behaviour> dungegonRooms;
     [SerializeField] private Transform player;
-    //TODO: TP2 - Syntax - Consistency in access modifiers (private/protected/public/etc)
-    List<Cell> board;
+    [SerializeField] private List<Cell> board;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         MazeGenerator();
     }
 
+    /// <summary>
+    /// Completes The Dungegon Generation Procees by Spawning The Rooms
+    /// </summary>
     private void DungegonGenerator() 
     {
-        StartCoroutine(_SpawnCorutine());
+        StartCoroutine(SpawnCorutine());
     }
 
     private void Update()
     {
-        checkPlayerPos();
+        CheckPlayerPos();
     }
 
-    //TODO: TP2 - Syntax - Consistency in naming convention
-    private IEnumerator _SpawnCorutine() 
+    /// <summary>
+    /// Instantiate The Room Prefabs
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SpawnCorutine() 
     {
         for (int i = 0; i < mazeSize.x; i++)
         {
@@ -53,7 +60,6 @@ public class Dungegon_Generator : MonoBehaviour
                 Cell currentCell = board[(i + j * mazeSize.x)];
                 if (currentCell.visited)
                 {
-                    //TODO - Fix - Code is in Spanish or is trash code
                     int randomRoom = -1;
                     List<int> availableRoom = new List<int>();
 
@@ -76,7 +82,7 @@ public class Dungegon_Generator : MonoBehaviour
                     {
                         if (availableRoom.Count > 0)
                         {
-                            randomRoom = availableRoom[Random.Range(0, availableRoom.Count)];
+                            randomRoom = availableRoom[UnityEngine.Random.Range(0, availableRoom.Count)];
                         }
                         else
                         {
@@ -101,7 +107,10 @@ public class Dungegon_Generator : MonoBehaviour
         yield return null;
     }
 
-    void checkPlayerPos()
+    /// <summary>
+    /// Check If The Player Is Inside a Room To Make it Visible
+    /// </summary>
+    void CheckPlayerPos()
     {
         var aux = currentRoom;
         var count = 0f;
@@ -133,6 +142,9 @@ public class Dungegon_Generator : MonoBehaviour
         currentRoom.ShowAdjRooms();
     }
 
+    /// <summary>
+    /// Generate The Maze in a Board Whit The Snake ALgorithm
+    /// </summary>
     private void MazeGenerator() 
     {
         board = new List<Cell>();
@@ -180,7 +192,7 @@ public class Dungegon_Generator : MonoBehaviour
             {
                 path.Push(currentCell);
 
-                int newCell = neightbors[Random.Range(0, neightbors.Count)];
+                int newCell = neightbors[UnityEngine.Random.Range(0, neightbors.Count)];
 
                 if (newCell > currentCell)
                 {
