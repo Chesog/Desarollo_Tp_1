@@ -2,18 +2,24 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Class For The Management Of Canvas And Some Audio
+/// </summary>
 public class Game_Manager : MonoBehaviour
 {
-    //TODO: TP2 - SOLID
-    [SerializeField] Slider healthBar;
-    [SerializeField] AudioClip GameMusic;
-    [SerializeField] GameObject BossEnemy;
-    [SerializeField] float BossEnemy_Health;
-    [SerializeField] GameObject game_Canvas;
-    [SerializeField] GameObject Pause_Canvas;
-    [SerializeField] GameObject Lose_Canvas;
-    [SerializeField] GameObject Win_Canvas;
-    [SerializeField] public Player_Data_Source player;
+    public Player_Data_Source player;
+
+    private const string main_Menu_Name = "Main_Menu";
+    private const string boss_Tag = "Boss";
+    private const string game_Scene_Name = "wfc_Test";
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private AudioClip GameMusic;
+    [SerializeField] private GameObject BossEnemy;
+    [SerializeField] private float BossEnemy_Health;
+    [SerializeField] private GameObject game_Canvas;
+    [SerializeField] private GameObject Pause_Canvas;
+    [SerializeField] private GameObject Lose_Canvas;
+    [SerializeField] private GameObject Win_Canvas;
 
 
     private void Start()
@@ -32,41 +38,11 @@ public class Game_Manager : MonoBehaviour
 
         SoundManager.Instance.StopMusic();
         SoundManager.Instance.PlayMusic(GameMusic);
-        BossEnemy = GameObject.FindGameObjectWithTag("Boss");
+        BossEnemy = GameObject.FindGameObjectWithTag(boss_Tag);
 
         SetMaxHealth();
 
         //player._player.input.OnPlayerPause += Input_OnPlayerPause;
-    }
-
-    /// <summary>
-    /// Fuction To Handle The Canbas On Pause State
-    /// </summary>
-    private void Input_OnPlayerPause()
-    {
-        if (Pause_Canvas.active == true)
-        {
-            if (player._player.character_Health_Component._health > 0)
-            {
-                Pause_Canvas.active = false;
-                game_Canvas.active = true;
-                Lose_Canvas.active = false;
-                Win_Canvas.active = false;
-                Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0;
-            Pause_Canvas.active = true;
-            game_Canvas.active = false;
-            Lose_Canvas.active = false;
-            Win_Canvas.active = false;
-        }
     }
 
     public void Update()
@@ -105,10 +81,9 @@ public class Game_Manager : MonoBehaviour
     /// </summary>
     public void BackToMenu()
     {
-        //TODO - Fix - Hardcoded values
         Time.timeScale = 1;
         SoundManager.Instance.StopMusic();
-        SceneManager.LoadScene("Main_Menu");
+        SceneManager.LoadScene(main_Menu_Name);
     }
 
     /// <summary>
@@ -118,7 +93,7 @@ public class Game_Manager : MonoBehaviour
     {
         Time.timeScale = 1;
         SoundManager.Instance.StopMusic();
-        SceneManager.LoadScene("wfc_Test");
+        SceneManager.LoadScene(game_Scene_Name);
     }
 
     /// <summary>
@@ -137,6 +112,38 @@ public class Game_Manager : MonoBehaviour
         healthBar.maxValue = player._player.character_Health_Component._maxHealth;
         healthBar.value = player._player.character_Health_Component._maxHealth;
     }
+
+    /// <summary>
+    /// Fuction To Handle The Canbas On Pause State
+    /// </summary>
+    private void Input_OnPlayerPause()
+    {
+        if (Pause_Canvas.active == true)
+        {
+            if (player._player.character_Health_Component._health > 0)
+            {
+                Pause_Canvas.active = false;
+                game_Canvas.active = true;
+                Lose_Canvas.active = false;
+                Win_Canvas.active = false;
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+            Pause_Canvas.active = true;
+            game_Canvas.active = false;
+            Lose_Canvas.active = false;
+            Win_Canvas.active = false;
+        }
+    }
+
+  
 
     private void OnDisable()
     {

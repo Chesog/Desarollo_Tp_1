@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class For The Managemet of The Music and SFX
+/// </summary>
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
+
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource effectSource;
     [SerializeField] private Slider musicSlider;
@@ -24,11 +28,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        musicSource.volume = musicSlider.value;
-        effectSource.volume = sfxSlider.value;
-    }
 
     /// <summary>
     /// Function To PLay An One Shot Of a Audio Clip That you Give it By Parameterr
@@ -44,7 +43,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="clip"></param>
     /// <param name="volume"></param>
-    public void PlaySound(AudioClip clip,float volume)
+    public void PlaySound(AudioClip clip, float volume)
     {
         effectSource.PlayOneShot(clip, volume);
     }
@@ -53,7 +52,7 @@ public class SoundManager : MonoBehaviour
     /// Play A Music That you Give it By Parameter
     /// </summary>
     /// <param name="clip"></param>
-    public void PlayMusic(AudioClip clip) 
+    public void PlayMusic(AudioClip clip)
     {
         musicSource.clip = clip;
         musicSource.Play();
@@ -62,7 +61,7 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// Stops The Current Music Audio Clip
     /// </summary>
-    public void StopMusic() 
+    public void StopMusic()
     {
         musicSource.Stop();
     }
@@ -85,4 +84,9 @@ public class SoundManager : MonoBehaviour
         musicSource.mute = !musicSource.mute;
     }
 
+    private void Update()
+    {
+        musicSource.volume = musicSlider.value;
+        effectSource.volume = sfxSlider.value;
+    }
 }

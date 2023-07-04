@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Class For The Enemy Animation Logic
 /// </summary>
-public class Enemy_Animation_Controller : MonoBehaviour
+[Obsolete]public class Enemy_Animation_Controller : MonoBehaviour
 {
     [Header("Anim Setup")]
     [SerializeField] private Animator animator;
