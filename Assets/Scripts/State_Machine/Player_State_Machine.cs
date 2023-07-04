@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Player State Machine
+/// </summary>
 public class Player_State_Machine : State_Machine
 {
     [SerializeField] public Player_Component player;

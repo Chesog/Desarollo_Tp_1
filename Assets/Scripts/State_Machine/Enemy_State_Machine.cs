@@ -1,15 +1,18 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Player State Machine
+/// </summary>
 public class Enemy_State_Machine : State_Machine
 {
-    [SerializeField] Enemy_Component enemy;
+    [SerializeField] public Enemy_Component enemy;
 
-    [SerializeField] Enemy_Idle_State idle_State;
-    [SerializeField] Enemy_Move_State move_State;
-    [SerializeField] Enemy_Attack_State attack_State;
-    [SerializeField] Enemy_Hit_State hit_State;
-    [SerializeField] Enemy_Dead_State dead_State;
+    [SerializeField] private Enemy_Idle_State idle_State;
+    [SerializeField] private Enemy_Move_State move_State;
+    [SerializeField] private Enemy_Attack_State attack_State;
+    [SerializeField] private Enemy_Hit_State hit_State;
+    [SerializeField] private Enemy_Dead_State dead_State;
 
     protected override void OnEnable()
     {

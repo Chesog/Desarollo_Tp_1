@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Base Class For The State Machine That We Create
+/// </summary>
 public class State_Machine : MonoBehaviour
 {
     [SerializeField] public State currentState;
@@ -30,11 +31,19 @@ public class State_Machine : MonoBehaviour
             currentState.UpdatePhysics();
     }
 
+    /// <summary>
+    /// Get The Initial State of The State Machine
+    /// </summary>
+    /// <returns></returns>
     protected virtual State GetInitialState()
     {
         return null;
     }
 
+    /// <summary>
+    /// Set a New State For the State Machine
+    /// </summary>
+    /// <param name="newState"></param>
     public void SetState(State newState)
     {
         if (newState == null)
