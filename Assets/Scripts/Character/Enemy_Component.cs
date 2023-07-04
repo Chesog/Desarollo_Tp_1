@@ -2,125 +2,70 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Enemy_Component : Character_Component
 {
-    [SerializeField] private float lookRad = 20f;
-    [SerializeField] private float stopDistance = 5f;
-    [SerializeField] private float timeBetweenAttacks = 0.5f;
-    [SerializeField] private float destroyTime;
-    [SerializeField] private float destroyTimer;
-    [SerializeField] private bool alreadyAttacked;
-    [SerializeField] private bool deathLoop;
-    [SerializeField] private Transform target;
-    [SerializeField] private Transform bulletSpawn;
+    public float lookRad = 20f;
+    public float stopDistance = 5f;
+    public float timeBetweenAttacks = 3.0f;
+    public float destroyTime;
+    public float destroyTimer;
+    public bool ready_To_Attack;
+    public bool deathLoop;
+    public Transform target;
+    public Transform bulletSpawn;
 
-    [SerializeField] private Player_Data_Source player_Source;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Enemy_Animation_Controller enemyAnimController;
+    public Player_Data_Source player_Source;
+    public GameObject bulletPrefab;
 
     public event Action<Vector2> OnEnemyMove;
     public event Action OnEnemyAttack;
     public event Action OnEnemyHit;
     public event Action OnEnemyDeath;
 
-    private void OnEnable()
+    private void Start()
     {
         character_Health_Component._maxHealth = 100f;
         initialSpeed = speed;
-        anim = GetComponent<Animator>();
-        rigidbody = GetComponent<Rigidbody>();
-    }
 
-    private void EnemyAnimController_OnBulletSpawn()
-    {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, transform.rotation);
-        Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
-        bulletScript.Fire();
-    }
+        ready_To_Attack = true;
 
-    private void Update()
-    {
-        float distance = Vector3.Distance(transform.position, target.position);
-
-        if (distance <= lookRad || distance <= stopDistance)
-            FaceTarget();
-
-        CheckHealth();
-    }
-
-    private void FixedUpdate()
-    {
-        if (!deathLoop)
+        if (anim == null)
         {
-            float distance = Vector3.Distance(transform.position, target.position);
-            if (distance <= lookRad)
-            {
-                rigidbody.velocity = gameObject.transform.forward * speed;
-                if (distance <= stopDistance)
-                {
-                    AttackPlayer();
-
-                    rigidbody.velocity = new Vector3(0f, 0f, 0f);
-                }
-
-                Vector2 pos = new Vector2(rigidbody.velocity.x, rigidbody.velocity.z);
-                OnEnemyMove.Invoke(pos);
-            }
-
+            anim = GetComponent<Animator>();
         }
-    }
-
-
-    /// <summary>
-    /// Checks If The Enemy Is Alive
-    /// </summary>
-    private void CheckHealth()
-    {
-        if (character_Health_Component._health <= 0)
+        if (!anim)
         {
-            Invoke(nameof(DestroyEnemy), 0.5f);
+            Debug.LogError(message: $"{name}: (logError){nameof(anim)} is null");
+            enabled = false;
         }
-    }
 
-
-    /// <summary>
-    /// Make The Enemy Loock At The Target
-    /// </summary>
-    private void FaceTarget()
-    {
-        transform.LookAt(target.position);
-    }
-
-
-    /// <summary>
-    /// Function To Handle The Attack Of The Enemy
-    /// </summary>
-    private void AttackPlayer()
-    {
-        if (!alreadyAttacked)
+        if (target == null)
         {
-            OnEnemyAttack.Invoke();
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            target = player_Source._player.transform;
         }
+        if (!target)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(target)} is null");
+            enabled = false;
+        }
+
+        if (rigidbody == null)
+        {
+            rigidbody = GetComponent<Rigidbody>();
+        }
+        if (!rigidbody)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(rigidbody)} is null");
+            enabled = false;
+        }
+
+        deathLoop = false;
     }
-
-
-    //TODO: TP2 - SOLID
-    /// <summary>
-    /// Reset The Player Attack
-    /// </summary>
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO: TP2 - SOLID
         if (character_Health_Component._health >= 0)
         {
             if (other.CompareTag("Player_Weapon"))
@@ -136,40 +81,15 @@ public class Enemy_Component : Character_Component
     /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
-        character_Health_Component._health -= damage;
-        OnEnemyHit.Invoke();
+        character_Health_Component.DecreaseHealth(damage);
     }
 
-
-    /// <summary>
-    /// Destroy The Enemy After The Dead Animation
-    /// </summary>
-    private void DestroyEnemy()
-    {
-        if (!deathLoop)
-        {
-            OnEnemyDeath.Invoke();
-            deathLoop = true;
-        }
-
-        destroyTimer += Time.deltaTime;
-        if (destroyTimer >= destroyTime)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRad);
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, stopDistance);
-    }
-
-    private void OnDestroy()
-    {
-        enemyAnimController.OnBulletSpawn -= EnemyAnimController_OnBulletSpawn;
     }
 }

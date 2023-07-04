@@ -12,7 +12,7 @@ using UnityEngine;
     [SerializeField] private float timeBetweenAttacks = 0.5f;
     [SerializeField] private float destroyTime;
     [SerializeField] private float destroyTimer;
-    [SerializeField] private bool alreadyAttacked;
+    [SerializeField] private bool ready_To_Attack;
     [SerializeField] private bool deathLoop;
     [SerializeField] private Transform target;
     [SerializeField] private Transform bulletSpawn;
@@ -29,6 +29,8 @@ using UnityEngine;
     private void Start()
     {
         enemyAnimController.OnBulletSpawn += EnemyAnimController_OnBulletSpawn;
+
+        ready_To_Attack = true;
 
         character_Health_Component._health = 100;
 
@@ -87,7 +89,6 @@ using UnityEngine;
                 rigidbody.velocity = gameObject.transform.forward * speed;
                 if (distance <= stopDistance)
                 {
-                    AttackPlayer();
 
                     rigidbody.velocity = new Vector3(0f, 0f, 0f);
                 }
@@ -119,32 +120,6 @@ using UnityEngine;
     {
         transform.LookAt(target.position);
     }
-
-
-    /// <summary>
-    /// Function To Handle The Attack Of The Enemy
-    /// </summary>
-    private void AttackPlayer()
-    {
-        if (!alreadyAttacked)
-        {
-            OnEnemyAttack.Invoke();
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-
-
-    //TODO: TP2 - SOLID
-    /// <summary>
-    /// Reset The Player Attack
-    /// </summary>
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {
