@@ -1,13 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum Directionss
+{
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT
+}
+
+/// <summary>
+/// Clas To Manage The Room Behaviour
+/// </summary>
 public class Room_Behaviour : MonoBehaviour
 {
     [Header("Room SetUp")]
     [SerializeField] private GameObject[] walls;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
     [SerializeField] private GameObject[] doors;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
-    //TODO: TP2 - Remove unused methods/variables
     [SerializeField] public Transform playerPos;
     [SerializeField] public Transform playerContainer;
     [SerializeField] private float updateTimer = 2.0f;
@@ -73,26 +82,46 @@ public class Room_Behaviour : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Set a Room Visibility
+    /// </summary>
+    /// <param name="value"></param>
     public void SetRoomVisible(bool value) 
     {
         isRoomVisible = value;
     }
 
+    /// <summary>
+    /// Set if We Already Check The Current Room
+    /// </summary>
+    /// <param name="value"></param>
     public void SetRoomCheked(bool value)
     {
         isRoomCheked = value;
     }
 
+    /// <summary>
+    /// Get if the Room is Visible
+    /// </summary>
+    /// <returns></returns>
     public bool GetRoomVisible() 
     {
         return isRoomVisible;
     }
 
+    /// <summary>
+    /// Get if the Room is Cheked
+    /// </summary>
+    /// <returns></returns>
     public bool GetRoomCheked() 
     {
         return isRoomCheked;
     }
 
+    /// <summary>
+    /// Update The Door && Wals Activation
+    /// </summary>
+    /// <param name="status"></param>
     public void UpdateRoom(bool[] status) 
     {
         for (int i = 0; i < status.Length; i++)
@@ -102,59 +131,57 @@ public class Room_Behaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the Neighbors of the Current Room
+    /// </summary>
     public void SetAdjRooms() 
     {
         RaycastHit hit;
 
-        //TODO - Fix - This could be an enum with the values.
-        // 0 = Up
-        // 1 = Down
-        // 2 = Right
-        // 3 = Left
-
-        //TODO: TP2 - SOLID
-        if (doors[0].activeInHierarchy)
+        if (doors[(int)Directionss.UP].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.forward, out hit, rayDistance))
             {
-                hit.collider.GetComponentInParent<Room_Behaviour>().doors[1].SetActive(true);
-                hit.collider.GetComponentInParent<Room_Behaviour>().walls[1].SetActive(false);
+                hit.collider.GetComponentInParent<Room_Behaviour>().doors[(int)Directionss.DOWN].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().walls[(int)Directionss.DOWN].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
 
-        if (doors[1].activeInHierarchy)
+        if (doors[(int)Directionss.DOWN].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, -Vector3.forward, out hit, rayDistance))
             {
-                hit.collider.GetComponentInParent<Room_Behaviour>().doors[0].SetActive(true);
-                hit.collider.GetComponentInParent<Room_Behaviour>().walls[0].SetActive(false);
+                hit.collider.GetComponentInParent<Room_Behaviour>().doors[(int)Directionss.UP].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().walls[(int)Directionss.UP].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
 
-        if (doors[2].activeInHierarchy)
+        if (doors[(int)Directionss.RIGHT].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.right, out hit, rayDistance))
             {
-                hit.collider.GetComponentInParent<Room_Behaviour>().doors[3].SetActive(true);
-                hit.collider.GetComponentInParent<Room_Behaviour>().walls[3].SetActive(false);
+                hit.collider.GetComponentInParent<Room_Behaviour>().doors[(int)Directionss.LEFT].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().walls[(int)Directionss.LEFT].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
 
-        if (doors[3].activeInHierarchy)
+        if (doors[(int)Directionss.LEFT].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.left, out hit, rayDistance))
             {
-                hit.collider.GetComponentInParent<Room_Behaviour>().doors[2].SetActive(true);
-                hit.collider.GetComponentInParent<Room_Behaviour>().walls[2].SetActive(false);
+                hit.collider.GetComponentInParent<Room_Behaviour>().doors[(int)Directionss.RIGHT].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().walls[(int)Directionss.RIGHT].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
     }
 
-    //TODO: TP2 - Syntax - Consistency in naming convention
+    /// <summary>
+    /// Show the neighbors of his Room
+    /// </summary>
     public void ShowAdjRooms() 
     {
         foreach (var item in adjRooms)
@@ -164,10 +191,11 @@ public class Room_Behaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hide The Current Room
+    /// </summary>
     public void Hide()
     {
-
-        //TODO - Fix - Code is in Spanish or is trash code
         MeshRenderer[] mesh = GetComponentsInChildren<MeshRenderer>();
 
         for (int i = 0; i < mesh.Length; i++)
@@ -176,21 +204,17 @@ public class Room_Behaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Show The Current Room
+    /// </summary>
     public void Show()
     {
-        //TODO - Fix - Code is in Spanish or is trash code
         MeshRenderer[] mesh = GetComponentsInChildren<MeshRenderer>();
 
         for (int i = 0; i < mesh.Length; i++)
         {
             mesh[i].enabled = true;
         }
-    }
-
-    //TODO: TP2 - Remove unused methods/variables
-    public void SetPlayerReference(Transform playerPos) 
-    {
-        this.playerPos = playerPos;
     }
 
     private void OnDrawGizmos()
