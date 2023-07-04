@@ -7962,7 +7962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowMaster: {fileID: 1453725382}
-  cam: {fileID: 1679835702}
+  cinemachine_Camera: {fileID: 1679835702}
   mainMenu: {fileID: 359262045}
   menu_Canvas: {fileID: 1453725382}
   menu_firstButton: {fileID: 123231121}

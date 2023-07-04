@@ -32,7 +32,7 @@ public class Buttons_Controller : MonoBehaviour
         menu_Canvas.active = true;
         options_Canvas.active = false;
         credits_Canvas.active = false;
-        cinemachine_Camera.Follow = mainMenu;
+        cinemachine_Camera.Follow = mainMenu; //Fix
         cinemachine_Camera.LookAt = mainMenu;
     }
 
@@ -44,7 +44,7 @@ public class Buttons_Controller : MonoBehaviour
         menu_Canvas.active = false;
         options_Canvas.active = true;
         credits_Canvas.active = false;
-        cinemachine_Camera.Follow = options;
+        cinemachine_Camera.Follow = options; // Fix
         cinemachine_Camera.LookAt = options;
         system.SetSelectedGameObject(options_firstButton);
     }
@@ -57,7 +57,7 @@ public class Buttons_Controller : MonoBehaviour
         menu_Canvas.active = true;
         options_Canvas.active = false;
         credits_Canvas.active = false;
-        cinemachine_Camera.Follow = mainMenu;
+        cinemachine_Camera.Follow = mainMenu; // Fix
         cinemachine_Camera.LookAt = mainMenu;
         system.SetSelectedGameObject(menu_firstButton);
     }
@@ -70,7 +70,7 @@ public class Buttons_Controller : MonoBehaviour
         menu_Canvas.active = false;
         options_Canvas.active = false;
         credits_Canvas.active = true;
-        cinemachine_Camera.Follow = credits;
+        cinemachine_Camera.Follow = credits; // Fix
         cinemachine_Camera.LookAt = credits;
         system.SetSelectedGameObject(credits_firstButton);
     }
