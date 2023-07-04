@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player_Component : Character_Component
 {
     public Player_Input_Manager input;
-    [SerializeField] private Player_Data_Source player_Source;
+    public Player_Data_Source player_Source;
 
     public Transform feet_Pivot;
     public Transform camera;
@@ -22,14 +23,32 @@ public class Player_Component : Character_Component
     public float coyoteTime;
     public float coyoteTimerCounter;
 
+   
     private void Awake()
     {
-        player_Source._player = this;
+        character_Health_Component._maxHealth = 100.0f;
+        character_Health_Component._health = character_Health_Component._maxHealth;
+
+        if (player_Source._player == null)
+        {
+            player_Source._player = this;
+        }
+        if (!player_Source._player)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(player_Source._player)} is null");
+            enabled = false;
+        }
+        feet_Pivot ??= GetComponent<Transform>();
+        if (!feet_Pivot)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(feet_Pivot)} is null");
+        }
     }
 
     private void OnEnable()
     {
-        character_Health_Component._maxHealth = 100f;
+        character_Health_Component._maxHealth = 100.0f;
+        character_Health_Component._health = character_Health_Component._maxHealth;
         initialSpeed = speed;
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();

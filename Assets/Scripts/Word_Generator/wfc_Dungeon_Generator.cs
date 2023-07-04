@@ -19,7 +19,7 @@ public class wfc_Dungeon_Generator : MonoBehaviour
     [SerializeField] private List<GameObject> boss_rooms_Prefab; // Empty = 0, Spawn = 1, Trap = 2, Norma = 3, Boss = 4
 
 
-    [SerializeField] private Player_Movement player_m;
+    [SerializeField] private Player_Data_Source player_data;
     [SerializeField] public Transform player;
     [SerializeField] public Transform playerContainer;
     private int currentRoomIndex = -1;
@@ -37,11 +37,9 @@ public class wfc_Dungeon_Generator : MonoBehaviour
 
         foreach (Transform item in rooms)
         {
-            //TODO - Fix - Hardcoded value
             if (item.CompareTag("Respawn"))
             {
-                player_m.SetSpawnPos(item.position);
-
+                player_data._player.rigidbody.position = item.position;
             }
             dungegonRooms.Add(item.GetComponent<Room_Behaviour>());
         }

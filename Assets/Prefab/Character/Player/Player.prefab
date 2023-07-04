@@ -1038,9 +1038,11 @@ MonoBehaviour:
   jumpBufferTime: 2
   jumpBufferTimeCounter: 2
   input: {fileID: 1901866628}
-  turn_Smooth_Velocity: 0
+  player_Source: {fileID: 11400000, guid: 88bdf9c4296836b46a7dbe877999d610, type: 2}
   feet_Pivot: {fileID: 656559977413399971}
   camera: {fileID: 0}
+  weaponHolder: {fileID: 1989077402}
+  turn_Smooth_Velocity: 0
   turnSmoothTime: 0.2
   lastAngle: 0
   maxDistance: 1

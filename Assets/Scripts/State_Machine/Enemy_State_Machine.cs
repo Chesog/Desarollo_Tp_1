@@ -13,6 +13,16 @@ public class Enemy_State_Machine : State_Machine
 
     protected override void OnEnable()
     {
+        if (enemy == null)
+        {
+            enemy = GetComponent<Enemy_Component>();
+        }
+        if (!enemy)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(enemy)} is null");
+            enabled = false;
+        }
+
         idle_State = new Enemy_Idle_State(this,enemy);
         move_State = new Enemy_Move_State(this,enemy);
         attack_State = new Enemy_Attack_State(this,enemy);

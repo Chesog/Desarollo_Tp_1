@@ -8,21 +8,10 @@ public class W_F_C : MonoBehaviour
 {
     [SerializeField] private Grid grid;
     private bool stopWFC;
-    //TODO - Fix - Wtf?
-    //1. var model.now Overlappingodeimovt.N:3, width:48 height:48, periodicinput:true, pertedic:false,
-    //    symmetry:8 ground:0 ):
-    //2. model.Rum(random.Next, limit:#):
-    //3.
-    //Input - the training Image
-    //N - HOW large of blocks(NoN) to sample from the Input as input patterns. (higher N leads to rising CPU
-    //    and memory cost)
-    //Width - The output width
-    //Height - The output height
-    //persedicingut-wther to sample the input across edges
-    //periedic - whether the output should be sampled across edges to create edge-wrapping output
-    //symetry - a value between 1..8. indicating how nany reflection and rotation symetries should be sampled
-    //from the input
 
+    /// <summary>
+    /// Start The Wave Functoin Collapse
+    /// </summary>
     public void StartWFC() 
     {
         grid.StartGrid();
@@ -34,6 +23,9 @@ public class W_F_C : MonoBehaviour
         } while (!stopWFC);
     }
 
+    /// <summary>
+    /// Select The First Node (At Random) From The Grid
+    /// </summary>
     private void FirsNodeSelection() 
     {
         int x = UnityEngine.Random.Range(0,grid.grid.GetLength(0));
@@ -44,6 +36,11 @@ public class W_F_C : MonoBehaviour
         CollapseSelection( ref grid.grid[x, y, z]);
 
     }
+
+    /// <summary>
+    /// Update The Entropy of The Neighbors of Current Node
+    /// </summary>
+    /// <param name="currentNode"></param>
     private void UpdateEntropy(Node2D currentNode) 
     {
 
@@ -93,6 +90,10 @@ public class W_F_C : MonoBehaviour
             grid.grid[x - 1, y, z].possible_Types = PossibilityOverlap(grid.grid[x - 1, y, z].possible_Types, currentNode.Possible_Neighbors[(int)currentNode.type]["Left"]);
         }
     }
+
+    /// <summary>
+    /// Search In the Grid For the Node Whit Least Entropy
+    /// </summary>
     private void SearchLeastEntropy() 
     {
         List<Node2D> sorted_Grid = SortGrid(grid.grid);
@@ -118,6 +119,10 @@ public class W_F_C : MonoBehaviour
         CollapseSelection(ref grid.grid[randpos.x, randpos.y, randpos.z]);
     }
 
+    /// <summary>
+    /// Give The "Collapse State" to The Current Node
+    /// </summary>
+    /// <param name="currentNode"></param>
     private void CollapseSelection( ref Node2D currentNode) 
     {
         List<RNode_Type> rNode_Types = new List<RNode_Type>();
@@ -136,6 +141,12 @@ public class W_F_C : MonoBehaviour
         UpdateEntropy(currentNode);
     }
 
+    /// <summary>
+    /// Check If There is A Possibility Overlap between the collapsed nodes
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="rs_Type"></param>
+    /// <returns></returns>
     private List<RNode_Type> PossibilityOverlap(List<RNode_Type> list, RNode_Type[] rs_Type) 
     {
         List<RNode_Type> rs = new List<RNode_Type>();
@@ -151,6 +162,11 @@ public class W_F_C : MonoBehaviour
         return rs;
     }
 
+    /// <summary>
+    /// Get The List of All The posibilities of The Selected Node
+    /// </summary>
+    /// <param name="node"></param>
+    /// <returns></returns>
     public List<RNode_Type> GetNodePossibilities(Node2D node) 
     {
         List<RNode_Type> possible_Types = new List<RNode_Type>();
@@ -194,6 +210,11 @@ public class W_F_C : MonoBehaviour
         return possible_Types;
     }
 
+    /// <summary>
+    /// Return All The Nodes Whit The "Uncolapsed State"
+    /// </summary>
+    /// <param name="grid_to_Sort"></param>
+    /// <returns></returns>
     private List<Node2D> SortGrid(Node2D[,,] grid_to_Sort) 
     {
         List<Node2D> output = new List<Node2D>();

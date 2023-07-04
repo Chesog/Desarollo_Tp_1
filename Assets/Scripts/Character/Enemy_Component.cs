@@ -24,7 +24,7 @@ public class Enemy_Component : Character_Component
     public event Action OnEnemyHit;
     public event Action OnEnemyDeath;
 
-    private void Start()
+    private void OnEnable()
     {
         character_Health_Component._maxHealth = 100f;
         initialSpeed = speed;

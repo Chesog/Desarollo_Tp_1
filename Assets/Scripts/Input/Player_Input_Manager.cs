@@ -134,6 +134,6 @@ public class Player_Input_Manager : MonoBehaviour
     /// </summary>
     public void OnPause()
     {
-        OnPlayerPause.Invoke();
+        OnPlayerPause?.Invoke();
     }
 }

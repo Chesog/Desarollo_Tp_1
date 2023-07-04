@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Health_Component : MonoBehaviour
 {
-    [SerializeField] public float _health { get; set; }
-    [SerializeField] public float _maxHealth { get; set; }
+    [field : SerializeField] public float _health { get; set; }
+    [field : SerializeField] public float _maxHealth { get; set; }
 
     public event Action OnDecrease_Health;
     public event Action OnInsufficient_Health;
@@ -42,6 +42,5 @@ public class Health_Component : MonoBehaviour
     private void OnDisable()
     {
         _health = 0;
-        _maxHealth = 0;
     }
 }

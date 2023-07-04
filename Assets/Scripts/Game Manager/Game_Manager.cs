@@ -9,19 +9,16 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] AudioClip GameMusic;
     [SerializeField] GameObject BossEnemy;
     [SerializeField] float BossEnemy_Health;
-    [SerializeField] float Player_Health;
     [SerializeField] GameObject game_Canvas;
     [SerializeField] GameObject Pause_Canvas;
     [SerializeField] GameObject Lose_Canvas;
     [SerializeField] GameObject Win_Canvas;
-    [SerializeField] Player_Component player;
+    [SerializeField] public Player_Data_Source player;
 
     //TODO - Documentation - Add summary
-    //TODO: TP2 - FSM
 
     private void OnEnable()
     {
-        //TODO - Fix - Repeated code
         game_Canvas.active = true;
         Pause_Canvas.active = false;
         Lose_Canvas.active = false;
@@ -33,7 +30,9 @@ public class Game_Manager : MonoBehaviour
         SoundManager.Instance.PlayMusic(GameMusic);
         BossEnemy = GameObject.FindGameObjectWithTag("Boss");
 
-        player.input.OnPlayerPause += Input_OnPlayerPause;
+        SetMaxHealth();
+
+        player._player.input.OnPlayerPause += Input_OnPlayerPause;
     }
 
     /// <summary>
@@ -43,7 +42,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (Pause_Canvas.active == true)
         {
-            if (player.character_Health_Component._health > 0)
+            if (player._player.character_Health_Component._health > 0)
             {
                 Pause_Canvas.active = false;
                 game_Canvas.active = true;
@@ -68,7 +67,7 @@ public class Game_Manager : MonoBehaviour
 
     public void Update()
     {
-        if (BossEnemy != null) 
+        if (BossEnemy != null)
         {
             BossEnemy_Health = BossEnemy.GetComponent<Enemy_Controller>().character_Health_Component._health;
             if (BossEnemy_Health <= 0)
@@ -80,10 +79,7 @@ public class Game_Manager : MonoBehaviour
             }
         }
 
-
-        Player_Health = Player_Controller.playerPos.GetComponent<Player_Controller>().GetHealth();
-
-        if (player.character_Health_Component._health <= 0)
+        if (player._player.character_Health_Component._health <= 0)
         {
             game_Canvas.active = false;
             Pause_Canvas.active = false;
@@ -96,12 +92,14 @@ public class Game_Manager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        UpdateHealth();
     }
 
     /// <summary>
     /// Function To Change The Current Scene To The Menu Scene
     /// </summary>
-    public void BackToMenu() 
+    public void BackToMenu()
     {
         //TODO - Fix - Hardcoded values
         Time.timeScale = 1;
@@ -112,7 +110,7 @@ public class Game_Manager : MonoBehaviour
     /// <summary>
     /// Function To Reload The Current Scene
     /// </summary>
-    public void ReloadScene() 
+    public void ReloadScene()
     {
         Time.timeScale = 1;
         SoundManager.Instance.StopMusic();
@@ -122,9 +120,9 @@ public class Game_Manager : MonoBehaviour
     /// <summary>
     /// Function To Set The Value For The On Screen Health Bar
     /// </summary>
-    public void SetHealth() 
+    public void UpdateHealth()
     {
-        healthBar.value = player.character_Health_Component._health;
+        healthBar.value = player._player.character_Health_Component._health;
     }
 
     /// <summary>
@@ -132,12 +130,12 @@ public class Game_Manager : MonoBehaviour
     /// </summary>
     public void SetMaxHealth()
     {
-        healthBar.maxValue = player.character_Health_Component._maxHealth;
-        healthBar.value = player.character_Health_Component._maxHealth;
+        healthBar.maxValue = player._player.character_Health_Component._maxHealth;
+        healthBar.value = player._player.character_Health_Component._maxHealth;
     }
 
     private void OnDisable()
     {
-        player.input.OnPlayerPause -= Input_OnPlayerPause;
+        player._player.input.OnPlayerPause -= Input_OnPlayerPause;
     }
 }

@@ -1541,25 +1541,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
-    - target: {fileID: 1391027550116362414, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: m_TagString
-      value: Boss
-      objectReference: {fileID: 0}
     - target: {fileID: 1391027550116362416, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391027550116362416, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.5456
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391027550116362416, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.5456
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391027550116362416, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3.5456
       objectReference: {fileID: 0}
     - target: {fileID: 1391027550116362416, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1600,26 +1584,6 @@ PrefabInstance:
     - target: {fileID: 1391027550116362416, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: health
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: lookRad
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 6330706891537420384, guid: f4c7e1d6f52575f4e9944cd5e58d16f4, type: 3}
-    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: stopDistance
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391027550116362417, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}
-      propertyPath: timeBetweenAttacks
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dda9a9b964900a4f845344946c2354d, type: 3}

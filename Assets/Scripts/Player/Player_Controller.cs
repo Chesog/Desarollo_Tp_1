@@ -70,8 +70,8 @@ using UnityEngine.InputSystem;
     {
         playerPos = this;
 
-        _Manager.SetMaxHealth();
-        health = setings.health;
+        //_Manager.SetMaxHealth();
+        //health = setings.health;
     }
 
     /// <summary>
@@ -230,7 +230,7 @@ using UnityEngine.InputSystem;
         {
             OnPlayerDead.Invoke();
         }
-        _Manager.SetHealth();
+        _Manager.UpdateHealth();
     }
 
     /// <summary>
