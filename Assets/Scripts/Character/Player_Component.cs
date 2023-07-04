@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
+/// <summary>
+/// Class That Contains The Player Variables
+/// </summary>
 public class Player_Component : Character_Component
 {
     public Player_Input_Manager input;

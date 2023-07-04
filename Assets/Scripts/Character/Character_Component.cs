@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Class That Contains The Variables of The Character
+/// </summary>
 public class Character_Component : MonoBehaviour
 {
     [Header("Character SetUps")]
@@ -49,6 +51,16 @@ public class Character_Component : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set The Character Base Variables
+    /// </summary>
+    /// <param name="_health"></param>
+    /// <param name="speed"></param>
+    /// <param name="initialSpeed"></param>
+    /// <param name="jumpForce"></param>
+    /// <param name="anim"></param>
+    /// <param name="rigidbody"></param>
+    /// <param name="jumpBufferTime"></param>
     public void SetCharacter_Component(Health_Component _health, float speed, float initialSpeed, float jumpForce, Animator anim, Rigidbody rigidbody, float jumpBufferTime)
     {
         character_Health_Component = _health;

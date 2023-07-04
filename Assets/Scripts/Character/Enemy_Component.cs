@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
+
+/// <summary>
+/// Class That Contains The Variables of The Enemy
+/// </summary>
 public class Enemy_Component : Character_Component
 {
     public float lookRad = 20f;
