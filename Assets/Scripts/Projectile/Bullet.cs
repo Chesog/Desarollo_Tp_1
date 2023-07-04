@@ -7,18 +7,17 @@ using UnityEngine;
 /// </summary>
 public class Bullet : MonoBehaviour
 {
-    //TODO: TP2 - Remove unused methods/variables
+    private const string player_Tag = "Player";
     [SerializeField] private bool isShoot;
     [SerializeField] private Transform target;
     [SerializeField] private Transform parent;
-    //TODO: TP2 - SOLID
     [SerializeField] private GameObject bullet;
     [SerializeField] private Rigidbody rb;
 
     private void Start()
     {
         //TODO - Fix - Hardcoded value
-        target ??= GameObject.FindGameObjectWithTag("Player").transform;
+        target ??= GameObject.FindGameObjectWithTag(player_Tag).transform;
         if (!target)
         {
             Debug.LogError(message: $"{name}: (logError){nameof(target)} is null");
