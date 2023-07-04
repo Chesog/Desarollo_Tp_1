@@ -27,8 +27,7 @@ public class Buttons_Controller : MonoBehaviour
     [Header("EventSystem Set Up")]
     [SerializeField] EventSystem system;
 
-
-    private void OnEnable()
+    private void Start()
     {
         menu_Canvas.active = true;
         options_Canvas.active = false;
@@ -36,8 +35,6 @@ public class Buttons_Controller : MonoBehaviour
         cinemachine_Camera.Follow = mainMenu;
         cinemachine_Camera.LookAt = mainMenu;
     }
-
-    //TODO: TP2 - SOLID
 
     /// <summary>
     /// Change The Camera Target To The Options Section

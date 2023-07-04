@@ -15,7 +15,11 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] GameObject Win_Canvas;
     [SerializeField] public Player_Data_Source player;
 
-    //TODO - Documentation - Add summary
+
+    private void Start()
+    {
+        player._player.input.OnPlayerPause += Input_OnPlayerPause;
+    }
 
     private void OnEnable()
     {
@@ -32,7 +36,7 @@ public class Game_Manager : MonoBehaviour
 
         SetMaxHealth();
 
-        player._player.input.OnPlayerPause += Input_OnPlayerPause;
+        //player._player.input.OnPlayerPause += Input_OnPlayerPause;
     }
 
     /// <summary>
@@ -136,6 +140,6 @@ public class Game_Manager : MonoBehaviour
 
     private void OnDisable()
     {
-        player._player.input.OnPlayerPause -= Input_OnPlayerPause;
+       player._player.input.OnPlayerPause -= Input_OnPlayerPause;
     }
 }
