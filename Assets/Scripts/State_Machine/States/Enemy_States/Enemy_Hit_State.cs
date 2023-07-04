@@ -1,10 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Enemy Hit State
+/// </summary>
 public class Enemy_Hit_State : Enemy_Base_State
 {
+    private const string hit_Animation_State = "Get_Hit";
     private float animTime = 1.5f;
     private float animTimer = 0.0f;
     public Enemy_Hit_State(Enemy_State_Machine enemySM, Enemy_Component enemy) : base(nameof(Enemy_Hit_State), enemySM, enemy) { }
@@ -37,9 +38,12 @@ public class Enemy_Hit_State : Enemy_Base_State
         base.UpdatePhysics();
     }
 
+    /// <summary>
+    /// Function to Play the Hit Animation For The Enemy
+    /// </summary>
     public void PlayHitAnimation() 
     {
-        enemy.anim.Play("Get_Hit");
+        enemy.anim.Play(hit_Animation_State);
     }
 
     public override void OnExit()

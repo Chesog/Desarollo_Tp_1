@@ -1,8 +1,9 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Enemy Attack State
+/// </summary>
 public class Enemy_Attack_State : Enemy_Base_State
 {
     private float bulletSpawnDelay;

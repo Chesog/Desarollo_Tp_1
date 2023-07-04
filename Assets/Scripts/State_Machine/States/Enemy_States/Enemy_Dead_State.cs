@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Enemy Dead State
+/// </summary>
 public class Enemy_Dead_State : Enemy_Base_State
 {
+    private const string dead_Animation_Name = "Standing React Death Backward";
     private float destroyTimer;
     private float destroyTime;
 
@@ -28,6 +29,9 @@ public class Enemy_Dead_State : Enemy_Base_State
         base.UpdatePhysics();
     }
 
+    /// <summary>
+    /// Destroy The ENemy GameObject
+    /// </summary>
     private void DestroyEnemy()
     {
 
@@ -38,9 +42,12 @@ public class Enemy_Dead_State : Enemy_Base_State
         }
     }
 
+    /// <summary>
+    /// Function to Play the Dead Animation For The Enemy
+    /// </summary>
     public void PlayDeathAnimation() 
     {
-         enemy.anim.Play("Standing React Death Backward");
+         enemy.anim.Play(dead_Animation_Name);
     }
 
     public override void OnExit()

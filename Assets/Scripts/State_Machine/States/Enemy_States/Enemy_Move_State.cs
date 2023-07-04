@@ -1,9 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Enemy Movement State
+/// </summary>
 public class Enemy_Move_State : Enemy_Base_State
 {
     public Enemy_Move_State(Enemy_State_Machine enemySM, Enemy_Component enemy) : base(nameof(Enemy_Move_State), enemySM, enemy) { }

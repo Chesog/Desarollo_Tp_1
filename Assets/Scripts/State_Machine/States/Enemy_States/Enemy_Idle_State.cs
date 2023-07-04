@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
+/// <summary>
+/// Class To Handle The Enemy Idle State
+/// </summary>
 public class Enemy_Idle_State : Enemy_Base_State
 {
     public Enemy_Idle_State(Enemy_State_Machine enemySM, Enemy_Component enemy) : base(nameof(Enemy_Idle_State), enemySM, enemy) { }

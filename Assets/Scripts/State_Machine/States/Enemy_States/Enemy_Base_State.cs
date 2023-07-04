@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/// <summary>
+/// Base State For The Enemy
+/// </summary>
 public class Enemy_Base_State : State
 {
     public Enemy_Component enemy;
