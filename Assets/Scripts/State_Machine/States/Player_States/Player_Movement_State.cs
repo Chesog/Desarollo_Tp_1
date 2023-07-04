@@ -1,9 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Player Movement State
+/// </summary>
 public class Player_Movement_State : Player_Base_State
 {
+    private const string movement_Animation_Name = "VelocityX/Z";
+
     public Player_Movement_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Movement_State), playerSM, player) { }
 
     public override void OnEnter()
@@ -74,9 +77,12 @@ public class Player_Movement_State : Player_Base_State
         player.rigidbody.velocity = moveDir.normalized * player.speed + Vector3.up * player.rigidbody.velocity.y;
     }
 
+    /// <summary>
+    /// Play The Movement Animation
+    /// </summary>
     public void PlayMovementAnimation() 
     {
-        player.anim.SetFloat("VelocityX/Z", player.movement.magnitude - player.movement.y);
+        player.anim.SetFloat(movement_Animation_Name, player.movement.magnitude - player.movement.y);
     }
 
     public override void OnExit()
@@ -94,6 +100,5 @@ public class Player_Movement_State : Player_Base_State
     public override void AddStateTransitions(string transitionName, State transitionState)
     {
         base.AddStateTransitions(transitionName, transitionState);
-        //transitions.Add(transitionName, transitionState);
     }
 }

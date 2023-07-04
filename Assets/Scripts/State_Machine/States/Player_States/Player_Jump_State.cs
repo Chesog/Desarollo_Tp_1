@@ -1,7 +1,12 @@
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Player Jump State
+/// </summary>
 public class Player_Jump_State : Player_Base_State
 {
+    private const string jump_Animation_Name = "VelocityY";
+
     public Player_Jump_State(State_Machine state_Machine, Player_Component player) : base(nameof(Player_Jump_State), state_Machine, player) { }
 
     public override void OnEnter()
@@ -56,9 +61,12 @@ public class Player_Jump_State : Player_Base_State
         base.UpdatePhysics();
     }
 
+    /// <summary>
+    /// Play The Jump Animation For The Player
+    /// </summary>
     public void PlayJumpAnimation()
     {
-        player.anim.SetFloat("VelocityY", player.rigidbody.velocity.y);
+        player.anim.SetFloat(jump_Animation_Name, player.rigidbody.velocity.y);
     }
 
     public bool isGrounded()
@@ -69,7 +77,6 @@ public class Player_Jump_State : Player_Base_State
     public override void AddStateTransitions(string transitionName, State transitionState)
     {
         base.AddStateTransitions(transitionName, transitionState);
-        //transitions.Add(transitionName, transitionState);
     }
 
 

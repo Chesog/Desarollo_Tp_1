@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Class To Handle The Player Attack State
+/// </summary>
 public class Player_Attack_State : Player_Base_State
 {
+    private const string attack_Animation_Name = "Sword And Shield Slash";
     private float attkCounter;
     private float attkTimer;
     public Player_Attack_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Attack_State), playerSM, player) { }
@@ -77,9 +78,12 @@ public class Player_Attack_State : Player_Base_State
 
     }
 
+    /// <summary>
+    /// Play The Attack Animation for the Player
+    /// </summary>
     public void PlayAttackAnimation()
     {
-        player.anim.Play("Sword And Shield Slash");
+        player.anim.Play(attack_Animation_Name);
     }
 
     public override void OnExit()

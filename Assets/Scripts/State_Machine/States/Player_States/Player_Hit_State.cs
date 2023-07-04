@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Player Hit State
+/// </summary>
 public class Player_Hit_State : Player_Base_State
 {
+    private const string hit_Animation_Name = "GetHit";
     private float animTime = 1.5f;
     private float animTimer = 0.0f;
     public Player_Hit_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Hit_State), playerSM, player) { }
@@ -31,10 +33,12 @@ public class Player_Hit_State : Player_Base_State
             animTimer += Time.deltaTime;
     }
 
-
+    /// <summary>
+    /// Play The Hit Animation For The Player
+    /// </summary>
     public void PlayHitAnimation()
     {
-        player.anim.Play("GetHit");
+        player.anim.Play(hit_Animation_Name);
     }
 
     public override void OnExit()

@@ -1,7 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Player Block State
+/// </summary>
 public class Player_Block_State : Player_Base_State
 {
+    private const string block_Animation_Name = "Blocking";
     private bool blocking;
     public Player_Block_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Block_State), playerSM, player) { }
 
@@ -56,9 +60,12 @@ public class Player_Block_State : Player_Base_State
 
     }
 
+    /// <summary>
+    /// Play The Block Animation for the Player
+    /// </summary>
     public void PlayBlockAnimation()
     {
-        player.anim.SetBool("Blocking",blocking);
+        player.anim.SetBool(block_Animation_Name, blocking);
     }
 
     public override void OnExit()

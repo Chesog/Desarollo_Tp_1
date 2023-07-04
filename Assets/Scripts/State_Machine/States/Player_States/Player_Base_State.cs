@@ -1,6 +1,6 @@
-using System;
-using System.Diagnostics;
-
+/// <summary>
+/// Base Class For The Player States
+/// </summary>
 public class Player_Base_State : State
 {
     public Player_Component player;

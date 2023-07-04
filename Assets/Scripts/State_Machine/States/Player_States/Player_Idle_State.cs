@@ -1,8 +1,13 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Class To Handle The Player Idle State
+/// </summary>
 public class Player_Idle_State : Player_Base_State
 {
+    private const string idle_Animation_Name = "Idle";
+
     public Player_Idle_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Idle_State), playerSM, player) { }
 
     public override void OnEnter()
@@ -69,9 +74,12 @@ public class Player_Idle_State : Player_Base_State
         base.UpdatePhysics();
     }
 
+    /// <summary>
+    /// Play The Idle Animation For The Player
+    /// </summary>
     public void PlayIdleAnimation() 
     {
-        player.anim.Play("Idle");
+        player.anim.Play(idle_Animation_Name);
     }
 
     public override void OnExit()
@@ -88,6 +96,5 @@ public class Player_Idle_State : Player_Base_State
     public override void AddStateTransitions(string transitionName, State transitionState)
     {
         base.AddStateTransitions(transitionName, transitionState);
-        //transitions.Add(transitionName, transitionState);
     }
 }
