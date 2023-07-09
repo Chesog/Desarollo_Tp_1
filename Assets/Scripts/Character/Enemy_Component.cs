@@ -77,9 +77,12 @@ public class Enemy_Component : Character_Component
     {
         if (character_Health_Component._health >= 0)
         {
-            if (other.CompareTag("Player_Weapon"))
+            if (other.GetComponent<Weapon_Stats>() != null) 
             {
-                TakeDamage(other.GetComponent<Weapon_Stats>().WeaponDamage);
+                if (other.CompareTag("Player_Weapon"))
+                {
+                    TakeDamage(other.GetComponent<Weapon_Stats>().WeaponDamage);
+                }
             }
         }
     }

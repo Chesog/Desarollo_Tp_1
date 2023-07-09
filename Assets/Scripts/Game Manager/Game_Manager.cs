@@ -114,7 +114,7 @@ public class Game_Manager : MonoBehaviour
     }
 
     /// <summary>
-    /// Fuction To Handle The Canbas On Pause State
+    /// Function To Handle The Canbas On Pause State
     /// </summary>
     private void Input_OnPlayerPause()
     {

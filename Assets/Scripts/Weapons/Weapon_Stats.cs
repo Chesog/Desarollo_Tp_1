@@ -5,5 +5,5 @@ using UnityEngine;
 /// </summary>
 public class Weapon_Stats : MonoBehaviour
 {
-    public float WeaponDamage { get; set;}
+    [field: SerializeField] public float WeaponDamage { get; set;}
 }

@@ -100,7 +100,7 @@ public class Weapon_Interaction_Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Update The Position of The Equiped Weapon
+    /// Update The Position of The Equipped Weapon
     /// </summary>
     private void UpdateEquipedPos() 
     {
@@ -114,6 +114,8 @@ public class Weapon_Interaction_Controller : MonoBehaviour
     {
         isEquiped = true;
         isSlotFull = true;
+
+        player_Source._player.SetCurrentWeapon(this.weapon);
 
         rb.isKinematic = true;
         coll.isTrigger = true;

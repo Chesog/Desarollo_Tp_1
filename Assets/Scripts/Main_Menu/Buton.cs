@@ -26,11 +26,10 @@ public class Buton : MonoBehaviour
     public void OnClickStart() 
     {
         SceneManager.LoadScene(game_Scene_Name);
-        SceneManager.UnloadScene(main_Menu_Scene_Name);
     }
 
     /// <summary>
-    /// Destroy The Prefab Of The Pannel
+    /// Destroy The Prefab Of The Panel
     /// </summary>
     public void OnWindowClose() 
     {

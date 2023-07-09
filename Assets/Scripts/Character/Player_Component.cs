@@ -8,6 +8,10 @@ public class Player_Component : Character_Component
     public Player_Input_Manager input;
     public Player_Data_Source player_Source;
 
+    public Weapon_Stats current_Weapon;
+    public float current_Weapon_Rad;
+    public float current_Weapon_MaxDistance;
+
     public Transform feet_Pivot;
     public Transform camera;
     public Transform weaponHolder;
@@ -21,32 +25,44 @@ public class Player_Component : Character_Component
     public float coyoteTime;
     public float coyoteTimerCounter;
 
+    public bool isPlayer_Attacking;
+
     private void Start()
     {
+        current_Weapon = null;
         character_Health_Component._maxHealth = 100.0f;
         character_Health_Component._health = character_Health_Component._maxHealth;
-        player_Source._player = this;
+
         feet_Pivot ??= GetComponent<Transform>();
     }
+
     private void Awake()
     {
         character_Health_Component._maxHealth = 100.0f;
         character_Health_Component._health = character_Health_Component._maxHealth;
+        player_Source._player = this;
 
-        if (player_Source._player == null)
+
+        if (current_Weapon == null)
         {
-            player_Source._player = this;
+            current_Weapon = weaponHolder.GetComponentInChildren<Weapon_Stats>();
         }
-        if (!player_Source._player)
+        if (!current_Weapon)
         {
-            Debug.LogError(message: $"{name}: (logError){nameof(player_Source._player)} is null");
+            Debug.LogError(message: $"{name}: (logError){nameof(current_Weapon)} is null");
             enabled = false;
         }
+
         feet_Pivot ??= GetComponent<Transform>();
         if (!feet_Pivot)
         {
             Debug.LogError(message: $"{name}: (logError){nameof(feet_Pivot)} is null");
         }
+    }
+
+    public void SetCurrentWeapon(Weapon_Stats weapon)
+    {
+        current_Weapon = weapon;
     }
 
     private void OnEnable()
@@ -56,5 +72,14 @@ public class Player_Component : Character_Component
         initialSpeed = speed;
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (isPlayer_Attacking)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position + transform.forward + new Vector3(0f, current_Weapon_MaxDistance, current_Weapon_MaxDistance), current_Weapon_Rad);
+        }
     }
 }

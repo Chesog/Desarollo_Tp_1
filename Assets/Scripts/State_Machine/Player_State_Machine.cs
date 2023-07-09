@@ -68,9 +68,9 @@ public class Player_State_Machine : State_Machine
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet") || currentState != blockState)
+        if (other.TryGetComponent<Bullet_Controller>(out var bullet) && currentState != blockState)
         {
-            player.character_Health_Component.DecreaseHealth(other.GetComponent<Bullet_Controller>().damage);
+            player.character_Health_Component.DecreaseHealth(bullet.damage);
             Destroy(other.gameObject);
         }
     }

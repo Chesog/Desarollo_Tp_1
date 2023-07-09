@@ -184,7 +184,6 @@ public class wfc_Dungeon_Generator : MonoBehaviour
                     wordPOs.y = gr.grid[x, y, z].pos.y * ofset.y;
                     wordPOs.z = gr.grid[x, y, z].pos.z * ofset.z;
 
-                    //TODO: TP2 - SOLID
                     switch (gr.grid[x, y, z].type)
                     {
                         case RNode_Type.Empty:
