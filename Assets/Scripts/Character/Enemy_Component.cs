@@ -9,7 +9,7 @@ public class Enemy_Component : Character_Component
 {
     public float lookRad = 20f;
     public float stopDistance = 5f;
-    public float timeBetweenAttacks = 3.0f;
+    public float timeBetweenAttacks = 6.0f;
     public float destroyTime;
     public float destroyTimer;
     public bool ready_To_Attack;
@@ -24,6 +24,14 @@ public class Enemy_Component : Character_Component
     public event Action OnEnemyAttack;
     public event Action OnEnemyHit;
     public event Action OnEnemyDeath;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        target = player_Source._player.transform;
+        rigidbody = GetComponent<Rigidbody>();
+        deathLoop = false;
+    }
 
     private void OnEnable()
     {

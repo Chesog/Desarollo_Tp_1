@@ -51,7 +51,7 @@ public class Player_Attack_State : Player_Base_State
     {
         if (attkTimer >= attkCounter) 
         {
-            player.movement = new Vector3(obj.x, 0f, obj.y).normalized;
+            player.movement = new Vector3(obj.x + 1.0f, 0f, obj.y + 1.0f).normalized;
             base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
         }
     }

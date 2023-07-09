@@ -65,6 +65,15 @@ public class Player_State_Machine : State_Machine
         base.OnEnable();
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet") || currentState != blockState)
+        {
+            player.character_Health_Component.DecreaseHealth(other.GetComponent<Bullet_Controller>().damage);
+            Destroy(other.gameObject);
+        }
+    }
     protected override State GetInitialState()
     {
         return idleState;

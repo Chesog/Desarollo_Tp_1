@@ -33,8 +33,11 @@ public class Player_Jump_State : Player_Base_State
 
     private void Input_OnPlayerMove(Vector2 obj)
     {
-        if (player.rigidbody.velocity.y == 0)
+        if (player.rigidbody.velocity.y == 0) 
+        {
+            player.movement = new Vector3(obj.x, 0f, obj.y).normalized;
             base.state_Machine.SetState(base.transitions[nameof(Player_Movement_State)]);
+        }
     }
 
     private void Input_OnPlayerJump(bool obj)

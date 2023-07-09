@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class Enemy_Idle_State : Enemy_Base_State
 {
+    private const string enemy_Idle_Animation_Name = "Squeleton_Idle";
+
     public Enemy_Idle_State(Enemy_State_Machine enemySM, Enemy_Component enemy) : base(nameof(Enemy_Idle_State), enemySM, enemy) { }
 
     public override void OnEnter()
@@ -52,7 +54,7 @@ public class Enemy_Idle_State : Enemy_Base_State
 
     public void PlayIdleAnim() 
     {
-        enemy.anim.Play("Squeleton_Idle");
+        enemy.anim.Play(enemy_Idle_Animation_Name);
     }
 
     public override void OnExit()

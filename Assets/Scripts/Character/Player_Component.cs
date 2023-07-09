@@ -21,7 +21,13 @@ public class Player_Component : Character_Component
     public float coyoteTime;
     public float coyoteTimerCounter;
 
-
+    private void Start()
+    {
+        character_Health_Component._maxHealth = 100.0f;
+        character_Health_Component._health = character_Health_Component._maxHealth;
+        player_Source._player = this;
+        feet_Pivot ??= GetComponent<Transform>();
+    }
     private void Awake()
     {
         character_Health_Component._maxHealth = 100.0f;
@@ -50,14 +56,5 @@ public class Player_Component : Character_Component
         initialSpeed = speed;
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Bullet"))
-        {
-            character_Health_Component.DecreaseHealth(other.GetComponent<Bullet_Controller>().damage);
-            Destroy(other.gameObject);
-        }
     }
 }

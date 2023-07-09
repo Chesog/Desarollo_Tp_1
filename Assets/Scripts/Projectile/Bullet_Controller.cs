@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Bullet_Controller : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 15f;
     public float lifetime = 5f;
     public float damage = 5f;
 

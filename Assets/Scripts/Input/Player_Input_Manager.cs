@@ -80,7 +80,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// <param name="input"></param>
     public void OnJump(InputValue input)
     {
-        OnPlayerJump.Invoke(input.isPressed);
+        //OnPlayerJump.Invoke(input.isPressed);
     }
 
     /// <summary>

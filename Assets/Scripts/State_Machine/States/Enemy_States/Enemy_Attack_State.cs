@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Enemy_Attack_State : Enemy_Base_State
 {
+    private const string enemy_Attack_Animation_Name = "Standing 1H Magic Attack 01";
     private float bulletSpawnDelay;
     public Enemy_Attack_State(Enemy_State_Machine enemySM, Enemy_Component enemy) : base(nameof(Enemy_Attack_State), enemySM, enemy) { }
 
@@ -13,7 +14,7 @@ public class Enemy_Attack_State : Enemy_Base_State
     {
         base.OnEnter();
 
-        bulletSpawnDelay = 1.0f;
+        bulletSpawnDelay = 2.0f;
         enemy.character_Health_Component.OnDecrease_Health += Character_Health_Component_OnDecrease_Health;
         enemy.character_Health_Component.OnInsufficient_Health += Character_Health_Component_OnInsufficient_Health;
     }
@@ -79,7 +80,7 @@ public class Enemy_Attack_State : Enemy_Base_State
 
     public void PlayAttackAnim()
     {
-        enemy.anim.Play("Standing 1H Magic Attack 01");
+        enemy.anim.Play(enemy_Attack_Animation_Name);
     }
 
     public override void OnExit()

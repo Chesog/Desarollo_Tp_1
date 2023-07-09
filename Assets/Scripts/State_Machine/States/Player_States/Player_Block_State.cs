@@ -44,7 +44,8 @@ public class Player_Block_State : Player_Base_State
 
     private void Input_OnPlayerAttack(bool obj)
     {
-        base.state_Machine.SetState(base.transitions[nameof(Player_Attack_State)]);
+        if (!blocking)
+            base.state_Machine.SetState(base.transitions[nameof(Player_Attack_State)]);
     }
 
     public override void UpdateLogic()
@@ -72,6 +73,7 @@ public class Player_Block_State : Player_Base_State
     {
         base.OnExit();
         blocking = false;
+        PlayBlockAnimation();
         player.input.OnPlayerAttack -= Input_OnPlayerAttack;
         player.input.OnPlayerMove -= Input_OnPlayerMove;
         player.input.OnPlayerJump -= Input_OnPlayerJump;
