@@ -88,7 +88,7 @@ public class Room_Behaviour : MonoBehaviour
     /// Set a Room Visibility
     /// </summary>
     /// <param name="value"></param>
-    public void SetRoomVisible(bool value) 
+    public void SetRoomVisible(bool value)
     {
         isRoomVisible = value;
     }
@@ -106,7 +106,7 @@ public class Room_Behaviour : MonoBehaviour
     /// Get if the Room is Visible
     /// </summary>
     /// <returns></returns>
-    public bool GetRoomVisible() 
+    public bool GetRoomVisible()
     {
         return isRoomVisible;
     }
@@ -115,7 +115,7 @@ public class Room_Behaviour : MonoBehaviour
     /// Get if the Room is Cheked
     /// </summary>
     /// <returns></returns>
-    public bool GetRoomCheked() 
+    public bool GetRoomCheked()
     {
         return isRoomCheked;
     }
@@ -124,7 +124,7 @@ public class Room_Behaviour : MonoBehaviour
     /// Update The Door && Wals Activation
     /// </summary>
     /// <param name="status"></param>
-    public void UpdateRoom(bool[] status) 
+    public void UpdateRoom(bool[] status)
     {
         for (int i = 0; i < status.Length; i++)
         {
@@ -136,7 +136,7 @@ public class Room_Behaviour : MonoBehaviour
     /// <summary>
     /// Set the Neighbors of the Current Room
     /// </summary>
-    public void SetAdjRooms() 
+    public void SetAdjRooms()
     {
         RaycastHit hit;
 
@@ -184,7 +184,7 @@ public class Room_Behaviour : MonoBehaviour
     /// <summary>
     /// Show the neighbors of his Room
     /// </summary>
-    public void ShowAdjRooms() 
+    public void ShowAdjRooms()
     {
         foreach (var item in adjRooms)
         {
@@ -206,26 +206,27 @@ public class Room_Behaviour : MonoBehaviour
             mesh[i].enabled = false;
         }
 
-        if (enemies != null) 
+        if (enemies != null)
         {
 
             if (enemies.Length > 0)
             {
                 for (int i = 0; i < enemies.Length; i++)
                 {
-                    enemies[i].active = false;
+                    if (enemies[i] != null)
+                        enemies[i].active = false;
                 }
             }
         }
 
-        if (props != null) 
+        if (props != null)
         {
             if (props.Length > 0)
             {
-
                 for (int i = 0; i < props.Length; i++)
                 {
-                    props[i].active = false;
+                    if (props[i] != null)
+                        props[i].active = false;
                 }
             }
         }
@@ -244,13 +245,14 @@ public class Room_Behaviour : MonoBehaviour
             mesh[i].enabled = true;
         }
 
-        if (enemies != null) 
+        if (enemies != null)
         {
-            if (enemies.Length > 0) 
+            if (enemies.Length > 0)
             {
                 for (int i = 0; i < enemies.Length; i++)
                 {
-                    enemies[i].active = true;
+                    if (enemies[i] != null)
+                        enemies[i].active = true;
                 }
             }
         }
@@ -262,7 +264,8 @@ public class Room_Behaviour : MonoBehaviour
 
                 for (int i = 0; i < props.Length; i++)
                 {
-                    props[i].active = true;
+                    if (props[i] != null)
+                        props[i].active = true;
                 }
             }
         }
@@ -270,9 +273,9 @@ public class Room_Behaviour : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(rayOrigin.position,Vector3.forward * rayDistance);
-        Gizmos.DrawRay(rayOrigin.position, - Vector3.forward * rayDistance);
-        Gizmos.DrawRay(rayOrigin.position,Vector3.left * rayDistance);
-        Gizmos.DrawRay(rayOrigin.position,Vector3.right * rayDistance);
+        Gizmos.DrawRay(rayOrigin.position, Vector3.forward * rayDistance);
+        Gizmos.DrawRay(rayOrigin.position, -Vector3.forward * rayDistance);
+        Gizmos.DrawRay(rayOrigin.position, Vector3.left * rayDistance);
+        Gizmos.DrawRay(rayOrigin.position, Vector3.right * rayDistance);
     }
 }
