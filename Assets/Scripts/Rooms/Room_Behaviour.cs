@@ -17,6 +17,8 @@ public class Room_Behaviour : MonoBehaviour
     [Header("Room SetUp")]
     [SerializeField] private GameObject[] walls;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
     [SerializeField] private GameObject[] doors;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
+    [SerializeField] private GameObject[] props;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
+    [SerializeField] private GameObject[] enemies;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
     [SerializeField] public Transform playerPos;
     [SerializeField] public Transform playerContainer;
     [SerializeField] private float updateTimer = 2.0f;
@@ -198,9 +200,34 @@ public class Room_Behaviour : MonoBehaviour
     {
         MeshRenderer[] mesh = GetComponentsInChildren<MeshRenderer>();
 
+
         for (int i = 0; i < mesh.Length; i++)
         {
             mesh[i].enabled = false;
+        }
+
+        if (enemies != null) 
+        {
+
+            if (enemies.Length > 0)
+            {
+                for (int i = 0; i < enemies.Length; i++)
+                {
+                    enemies[i].active = false;
+                }
+            }
+        }
+
+        if (props != null) 
+        {
+            if (props.Length > 0)
+            {
+
+                for (int i = 0; i < props.Length; i++)
+                {
+                    props[i].active = false;
+                }
+            }
         }
     }
 
@@ -211,9 +238,33 @@ public class Room_Behaviour : MonoBehaviour
     {
         MeshRenderer[] mesh = GetComponentsInChildren<MeshRenderer>();
 
+
         for (int i = 0; i < mesh.Length; i++)
         {
             mesh[i].enabled = true;
+        }
+
+        if (enemies != null) 
+        {
+            if (enemies.Length > 0) 
+            {
+                for (int i = 0; i < enemies.Length; i++)
+                {
+                    enemies[i].active = true;
+                }
+            }
+        }
+
+        if (props != null)
+        {
+            if (props.Length > 0)
+            {
+
+                for (int i = 0; i < props.Length; i++)
+                {
+                    props[i].active = true;
+                }
+            }
         }
     }
 
