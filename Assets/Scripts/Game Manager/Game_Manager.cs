@@ -21,7 +21,6 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] private GameObject Lose_Canvas;
     [SerializeField] private GameObject Win_Canvas;
 
-
     private void Start()
     {
         player._player.input.OnPlayerPause += Input_OnPlayerPause;
@@ -41,8 +40,6 @@ public class Game_Manager : MonoBehaviour
         BossEnemy = GameObject.FindGameObjectWithTag(boss_Tag);
 
         SetMaxHealth();
-
-        //player._player.input.OnPlayerPause += Input_OnPlayerPause;
     }
 
     public void Update()
