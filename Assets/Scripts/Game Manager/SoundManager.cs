@@ -10,9 +10,6 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource effectSource;
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider sfxSlider;
-
 
 
     private void OnEnable()
@@ -76,7 +73,7 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Togle The Music && SFX To Mute or UN Mute
+    /// Toggle The Music && SFX To Mute or UN Mute
     /// </summary>
     public void ToggleAudio()
     {
@@ -84,9 +81,13 @@ public class SoundManager : MonoBehaviour
         musicSource.mute = !musicSource.mute;
     }
 
-    private void Update()
+    public void ChangeMusic_Volume(float volume) 
     {
-        musicSource.volume = musicSlider.value;
-        effectSource.volume = sfxSlider.value;
+        musicSource.volume = volume;
+    }
+
+    public void ChangeSFX_Volume(float volume) 
+    {
+        effectSource.volume = volume;
     }
 }

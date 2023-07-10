@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +7,7 @@ public class Menu_Music_Manager : MonoBehaviour
 {
     [SerializeField] private AudioClip musicClip;
 
-    private void OnEnable()
+    private void Awake()
     {
         SoundManager.Instance.StopMusic();
         SoundManager.Instance.PlayMusic(musicClip);
