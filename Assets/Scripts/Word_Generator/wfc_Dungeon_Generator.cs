@@ -66,7 +66,7 @@ public class wfc_Dungeon_Generator : MonoBehaviour
 
         for (int i = 0; i < dungegonRooms.Count; i++)
         {
-            if (dungegonRooms[i].isPointInside(player.transform.position))
+            if (dungegonRooms[i].isPointInside(player_data._player.transform.position))
             {
                 currentRoom = dungegonRooms[i];
                 dungegonRooms[i].SetRoomVisible(true);

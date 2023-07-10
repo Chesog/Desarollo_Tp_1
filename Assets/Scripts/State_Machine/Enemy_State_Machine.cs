@@ -42,6 +42,7 @@ public class Enemy_State_Machine : State_Machine
         move_State.AddStateTransitions(nameof(Enemy_Dead_State), dead_State);
 
         attack_State.AddStateTransitions(nameof(Enemy_Idle_State), idle_State);
+        attack_State.AddStateTransitions(nameof(Enemy_Move_State), move_State);
         attack_State.AddStateTransitions(nameof(Enemy_Hit_State), hit_State);
         attack_State.AddStateTransitions(nameof(Enemy_Dead_State), dead_State);
 

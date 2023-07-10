@@ -47,11 +47,7 @@ public class Player_Component : Character_Component
         {
             current_Weapon = weaponHolder.GetComponentInChildren<Weapon_Stats>();
         }
-        if (!current_Weapon)
-        {
-            Debug.LogError(message: $"{name}: (logError){nameof(current_Weapon)} is null");
-            enabled = false;
-        }
+
 
         feet_Pivot ??= GetComponent<Transform>();
         if (!feet_Pivot)
