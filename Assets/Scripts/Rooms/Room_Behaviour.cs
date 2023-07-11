@@ -123,7 +123,7 @@ public class Room_Behaviour : MonoBehaviour
     }
 
     /// <summary>
-    /// Update The Door && Wals Activation
+    /// Update The Door && Walls Activation
     /// </summary>
     /// <param name="status"></param>
     public void UpdateRoom(bool[] status)
@@ -135,6 +135,9 @@ public class Room_Behaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if There are Enemies in the Current Room
+    /// </summary>
     public void Check_Enemies_In_Room() 
     {
         for (int i = 0; i < enemies.Count; i++)
@@ -155,6 +158,9 @@ public class Room_Behaviour : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Open the Connected Doors of the Adjacent Rooms
+    /// </summary>
     public void Open_Adj_Doors() 
     {
         if (doors[(int)Directionss.UP].activeInHierarchy)
