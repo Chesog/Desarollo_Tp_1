@@ -16,9 +16,10 @@ public class Room_Behaviour : MonoBehaviour
 {
     [Header("Room SetUp")]
     [SerializeField] private GameObject[] walls;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
-    [SerializeField] private GameObject[] doors;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
-    [SerializeField] private GameObject[] props;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
-    [SerializeField] private GameObject[] enemies;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left
+    [SerializeField] private GameObject[] entrance;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left    
+    [SerializeField] private GameObject[] doors;      // 0 = Up - 1 = Down - 2 = Right - 3 = Left    
+    [SerializeField] private List<GameObject> props;
+    [SerializeField] private List<GameObject> enemies;
     [SerializeField] public Transform playerPos;
     [SerializeField] public Transform playerContainer;
     [SerializeField] private float updateTimer = 2.0f;
@@ -54,6 +55,7 @@ public class Room_Behaviour : MonoBehaviour
         if (isRoomVisible)
         {
             Show();
+            Check_Enemies_In_Room();
         }
         else
         {
@@ -128,8 +130,51 @@ public class Room_Behaviour : MonoBehaviour
     {
         for (int i = 0; i < status.Length; i++)
         {
-            doors[i].SetActive(status[i]);
+            entrance[i].SetActive(status[i]);
             walls[i].SetActive(!status[i]);
+        }
+    }
+
+    public void Check_Enemies_In_Room() 
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i] == null)
+                enemies.Remove(enemies[i]);
+        }
+
+        if (enemies.Count <= 0) 
+        {
+            for (int i = 0; i < entrance.Length; i++)
+            {
+                if (doors[i].activeInHierarchy)
+                    doors[i].transform.position += Vector3.up;
+            }
+            Open_Adj_Doors();
+        }
+
+    }
+
+    public void Open_Adj_Doors() 
+    {
+        if (doors[(int)Directionss.UP].activeInHierarchy)
+        {
+            adjRooms[(int)Directions.Up].doors[(int)Directionss.DOWN].transform.position += Vector3.up;
+        }
+
+        if (doors[(int)Directionss.DOWN].activeInHierarchy)
+        {
+            adjRooms[(int)Directionss.DOWN].doors[(int)Directionss.UP].transform.position += Vector3.up;
+        }
+
+        if (doors[(int)Directionss.RIGHT].activeInHierarchy)
+        {
+            adjRooms[(int)Directionss.RIGHT].doors[(int)Directionss.LEFT].transform.position += Vector3.up;
+        }
+
+        if (doors[(int)Directionss.LEFT].activeInHierarchy)
+        {
+            adjRooms[(int)Directionss.LEFT].doors[(int)Directionss.RIGHT].transform.position += Vector3.up;
         }
     }
 
@@ -140,41 +185,41 @@ public class Room_Behaviour : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (doors[(int)Directionss.UP].activeInHierarchy)
+        if (entrance[(int)Directionss.UP].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.forward, out hit, rayDistance))
             {
-                hit.collider.GetComponentInParent<Room_Behaviour>().doors[(int)Directionss.DOWN].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().entrance[(int)Directionss.DOWN].SetActive(true);
                 hit.collider.GetComponentInParent<Room_Behaviour>().walls[(int)Directionss.DOWN].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
 
-        if (doors[(int)Directionss.DOWN].activeInHierarchy)
+        if (entrance[(int)Directionss.DOWN].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, -Vector3.forward, out hit, rayDistance))
             {
-                hit.collider.GetComponentInParent<Room_Behaviour>().doors[(int)Directionss.UP].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().entrance[(int)Directionss.UP].SetActive(true);
                 hit.collider.GetComponentInParent<Room_Behaviour>().walls[(int)Directionss.UP].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
 
-        if (doors[(int)Directionss.RIGHT].activeInHierarchy)
+        if (entrance[(int)Directionss.RIGHT].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.right, out hit, rayDistance))
             {
-                hit.collider.GetComponentInParent<Room_Behaviour>().doors[(int)Directionss.LEFT].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().entrance[(int)Directionss.LEFT].SetActive(true);
                 hit.collider.GetComponentInParent<Room_Behaviour>().walls[(int)Directionss.LEFT].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
         }
 
-        if (doors[(int)Directionss.LEFT].activeInHierarchy)
+        if (entrance[(int)Directionss.LEFT].activeInHierarchy)
         {
             if (Physics.Raycast(rayOrigin.position, Vector3.left, out hit, rayDistance))
             {
-                hit.collider.GetComponentInParent<Room_Behaviour>().doors[(int)Directionss.RIGHT].SetActive(true);
+                hit.collider.GetComponentInParent<Room_Behaviour>().entrance[(int)Directionss.RIGHT].SetActive(true);
                 hit.collider.GetComponentInParent<Room_Behaviour>().walls[(int)Directionss.RIGHT].SetActive(false);
                 adjRooms.Add(hit.collider.GetComponentInParent<Room_Behaviour>());
             }
@@ -209,9 +254,9 @@ public class Room_Behaviour : MonoBehaviour
         if (enemies != null)
         {
 
-            if (enemies.Length > 0)
+            if (enemies.Count > 0)
             {
-                for (int i = 0; i < enemies.Length; i++)
+                for (int i = 0; i < enemies.Count; i++)
                 {
                     if (enemies[i] != null)
                         enemies[i].active = false;
@@ -221,9 +266,9 @@ public class Room_Behaviour : MonoBehaviour
 
         if (props != null)
         {
-            if (props.Length > 0)
+            if (props.Count > 0)
             {
-                for (int i = 0; i < props.Length; i++)
+                for (int i = 0; i < props.Count; i++)
                 {
                     if (props[i] != null)
                         props[i].active = false;
@@ -247,9 +292,9 @@ public class Room_Behaviour : MonoBehaviour
 
         if (enemies != null)
         {
-            if (enemies.Length > 0)
+            if (enemies.Count > 0)
             {
-                for (int i = 0; i < enemies.Length; i++)
+                for (int i = 0; i < enemies.Count; i++)
                 {
                     if (enemies[i] != null)
                         enemies[i].active = true;
@@ -259,10 +304,10 @@ public class Room_Behaviour : MonoBehaviour
 
         if (props != null)
         {
-            if (props.Length > 0)
+            if (props.Count > 0)
             {
 
-                for (int i = 0; i < props.Length; i++)
+                for (int i = 0; i < props.Count; i++)
                 {
                     if (props[i] != null)
                         props[i].active = true;

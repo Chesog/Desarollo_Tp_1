@@ -89,7 +89,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// <param name="input"></param>
     public void OnSprint(InputValue input)
     {
-        OnPlayerSprint.Invoke(input.isPressed);
+       // OnPlayerSprint.Invoke(input.isPressed);
     }
 
     /// <summary>
