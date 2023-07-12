@@ -25,6 +25,7 @@ public class Weapon_Interaction_Controller : MonoBehaviour
     private void Start()
     {
         isEquiped = false;
+        isSlotFull = false;
 
         if (player == null)
         {
