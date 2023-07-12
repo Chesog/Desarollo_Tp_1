@@ -70,7 +70,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// <param name="input"></param>
     public void OnMove(InputValue input)
     {
-        OnPlayerMove.Invoke(input.Get<Vector2>());
+        OnPlayerMove?.Invoke(input.Get<Vector2>());
     }
 
 
@@ -80,7 +80,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// <param name="input"></param>
     public void OnJump(InputValue input)
     {
-        //OnPlayerJump.Invoke(input.isPressed);
+        
     }
 
     /// <summary>
@@ -89,7 +89,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// <param name="input"></param>
     public void OnSprint(InputValue input)
     {
-       // OnPlayerSprint.Invoke(input.isPressed);
+
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// <param name="input"></param>
     public void OnR_Click(InputValue input)
     {
-        OnPlayerBlock.Invoke(input.isPressed);
+        OnPlayerBlock?.Invoke(input.isPressed);
     }
 
     /// <summary>
@@ -107,7 +107,7 @@ public class Player_Input_Manager : MonoBehaviour
     /// <param name="input"></param>
     public void OnL_Click(InputValue input)
     {
-        OnPlayerAttack.Invoke(input.isPressed);
+        OnPlayerAttack?.Invoke(input.isPressed);
     }
 
     /// <summary>

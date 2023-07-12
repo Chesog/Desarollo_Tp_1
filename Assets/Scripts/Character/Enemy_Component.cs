@@ -18,7 +18,9 @@ public class Enemy_Component : Character_Component
     public Transform bulletSpawn;
 
     public Player_Data_Source player_Source;
+
     public GameObject bulletPrefab;
+    public GameObject hit_Particles;
 
     public event Action<Vector2> OnEnemyMove;
     public event Action OnEnemyAttack;
@@ -47,6 +49,16 @@ public class Enemy_Component : Character_Component
         if (!anim)
         {
             Debug.LogError(message: $"{name}: (logError){nameof(anim)} is null");
+            enabled = false;
+        }
+
+        if (hit_Particles == null)
+        {
+            hit_Particles = GetComponent<GameObject>();
+        }
+        if (!hit_Particles)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(hit_Particles)} is null");
             enabled = false;
         }
 

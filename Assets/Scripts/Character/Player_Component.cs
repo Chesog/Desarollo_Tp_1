@@ -16,6 +16,8 @@ public class Player_Component : Character_Component
     public Transform camera;
     public Transform weaponHolder;
 
+    public GameObject hit_Particles;
+
     public float turn_Smooth_Velocity;
     public float turnSmoothTime;
     public float lastAngle;
@@ -34,6 +36,7 @@ public class Player_Component : Character_Component
         character_Health_Component._health = character_Health_Component._maxHealth;
 
         feet_Pivot ??= GetComponent<Transform>();
+        hit_Particles ??= GetComponent<GameObject>();
     }
 
     private void Awake()
@@ -47,12 +50,21 @@ public class Player_Component : Character_Component
         {
             current_Weapon = weaponHolder.GetComponentInChildren<Weapon_Stats>();
         }
-
-
-        feet_Pivot ??= GetComponent<Transform>();
-        if (!feet_Pivot)
+        else
         {
-            Debug.LogError(message: $"{name}: (logError){nameof(feet_Pivot)} is null");
+            Debug.Log($"{name}: (log)){nameof(current_Weapon)} There is no Weapon");
+        }
+
+        if (current_Weapon == null)
+        {
+            current_Weapon = weaponHolder.GetComponentInChildren<Weapon_Stats>();
+        }
+
+
+        hit_Particles ??= GetComponent<GameObject>();
+        if (!hit_Particles)
+        {
+            Debug.LogError(message: $"{name}: (logError){nameof(hit_Particles)} is null");
         }
     }
 

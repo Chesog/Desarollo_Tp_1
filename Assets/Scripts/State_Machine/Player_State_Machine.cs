@@ -58,6 +58,7 @@ public class Player_State_Machine : State_Machine
         blockState.AddStateTransitions(nameof(Player_Dead_State), deadState);
 
         hitState.AddStateTransitions(nameof(Player_Idle_State), idleState);
+        hitState.AddStateTransitions(nameof(Player_Movement_State), moveState);
         hitState.AddStateTransitions(nameof(Player_Dead_State), deadState);
 
         deadState.AddStateTransitions(nameof(Player_Idle_State), idleState);

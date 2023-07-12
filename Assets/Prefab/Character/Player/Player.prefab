@@ -1045,6 +1045,7 @@ MonoBehaviour:
   feet_Pivot: {fileID: 656559977413399971}
   camera: {fileID: 0}
   weaponHolder: {fileID: 1989077402}
+  hit_Particles: {fileID: 4697547654548650735, guid: 2af1157ae953af34d8d57d21b8762c8d, type: 3}
   turn_Smooth_Velocity: 0
   turnSmoothTime: 0.2
   lastAngle: 0

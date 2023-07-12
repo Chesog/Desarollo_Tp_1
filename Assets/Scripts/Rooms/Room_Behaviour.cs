@@ -138,7 +138,7 @@ public class Room_Behaviour : MonoBehaviour
     /// <summary>
     /// Check if There are Enemies in the Current Room
     /// </summary>
-    public void Check_Enemies_In_Room() 
+    public void Check_Enemies_In_Room()
     {
         for (int i = 0; i < enemies.Count; i++)
         {
@@ -146,7 +146,7 @@ public class Room_Behaviour : MonoBehaviour
                 enemies.Remove(enemies[i]);
         }
 
-        if (enemies.Count <= 0) 
+        if (enemies.Count <= 0)
         {
             for (int i = 0; i < entrance.Length; i++)
             {
@@ -161,26 +161,54 @@ public class Room_Behaviour : MonoBehaviour
     /// <summary>
     /// Open the Connected Doors of the Adjacent Rooms
     /// </summary>
-    public void Open_Adj_Doors() 
+    public void Open_Adj_Doors()
     {
-        if (doors[(int)Directionss.UP].activeInHierarchy)
+        if (adjRooms.Count >= (int)Directionss.UP)
         {
-            adjRooms[(int)Directions.Up].doors[(int)Directionss.DOWN].transform.position += Vector3.up;
+            if (doors[(int)Directionss.UP].activeInHierarchy)
+            {
+                if (doors.Length >= (int)Directionss.UP)
+                {
+                    if (adjRooms[(int)Directionss.UP].doors[(int)Directionss.DOWN] != null && adjRooms[(int)Directionss.UP].doors[(int)Directionss.DOWN].activeInHierarchy)
+                        adjRooms[(int)Directionss.UP].doors[(int)Directionss.DOWN].transform.position += Vector3.up;
+                }
+            }
         }
 
-        if (doors[(int)Directionss.DOWN].activeInHierarchy)
+        if (adjRooms.Count > (int)Directionss.DOWN)
         {
-            adjRooms[(int)Directionss.DOWN].doors[(int)Directionss.UP].transform.position += Vector3.up;
+            if (doors[(int)Directionss.DOWN].activeInHierarchy)
+            {
+                if (doors.Length > (int)Directionss.DOWN)
+                {
+                    if (adjRooms[(int)Directionss.DOWN].doors[(int)Directionss.UP] != null && adjRooms[(int)Directionss.DOWN].doors[(int)Directionss.UP].activeInHierarchy)
+                        adjRooms[(int)Directionss.DOWN].doors[(int)Directionss.UP].transform.position += Vector3.up;
+                }
+            }
         }
 
-        if (doors[(int)Directionss.RIGHT].activeInHierarchy)
+        if (adjRooms.Count > (int)Directionss.RIGHT)
         {
-            adjRooms[(int)Directionss.RIGHT].doors[(int)Directionss.LEFT].transform.position += Vector3.up;
+            if (doors[(int)Directionss.RIGHT].activeInHierarchy)
+            {
+                if (doors.Length >= (int)Directionss.RIGHT)
+                {
+                    if (adjRooms[(int)Directionss.RIGHT].doors[(int)Directionss.LEFT] != null && adjRooms[(int)Directionss.RIGHT].doors[(int)Directionss.LEFT].activeInHierarchy)
+                        adjRooms[(int)Directionss.RIGHT].doors[(int)Directionss.LEFT].transform.position += Vector3.up;
+                }
+            }
         }
 
-        if (doors[(int)Directionss.LEFT].activeInHierarchy)
+        if (adjRooms.Count > (int)Directionss.LEFT + 1 )
         {
-            adjRooms[(int)Directionss.LEFT].doors[(int)Directionss.RIGHT].transform.position += Vector3.up;
+            if (doors[(int)Directionss.LEFT].activeInHierarchy)
+            {
+                if (doors.Length >= (int)Directionss.LEFT)
+                {
+                    if (adjRooms[(int)Directionss.LEFT].doors[(int)Directionss.RIGHT] != null && adjRooms[(int)Directionss.LEFT].doors[(int)Directionss.RIGHT].activeInHierarchy)
+                        adjRooms[(int)Directionss.LEFT].doors[(int)Directionss.RIGHT].transform.position += Vector3.up;
+                }
+            }
         }
     }
 
