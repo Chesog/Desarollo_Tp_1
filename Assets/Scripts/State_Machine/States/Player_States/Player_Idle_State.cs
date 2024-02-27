@@ -58,13 +58,13 @@ public class Player_Idle_State : Player_Base_State
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        float targetAngle = Mathf.Atan2(player.movement.x, player.movement.z) * Mathf.Rad2Deg + player.camera.eulerAngles.y;
-
-        player.lastAngle = targetAngle;
-
-        float angle = Mathf.SmoothDampAngle(player.GetComponent<Transform>().eulerAngles.y, targetAngle, ref player.turn_Smooth_Velocity, player.turnSmoothTime);
-
-        player.GetComponent<Transform>().rotation = Quaternion.Euler(0f, angle, 0f);
+        //float targetAngle = Mathf.Atan2(player.movement.x, player.movement.z) * Mathf.Rad2Deg + player.camera.eulerAngles.y;
+        //
+        //player.lastAngle = targetAngle;
+        //
+        //float angle = Mathf.SmoothDampAngle(player.GetComponent<Transform>().eulerAngles.y, targetAngle, ref player.turn_Smooth_Velocity, player.turnSmoothTime);
+        //
+        //player.GetComponent<Transform>().rotation = Quaternion.Euler(0f, angle, 0f);
 
         PlayIdleAnimation();
     }

@@ -9,7 +9,10 @@ public class Player_Movement_State : Player_Base_State
 {
     private const string movement_Animation_Name = "VelocityX/Z";
 
-    public Player_Movement_State(Player_State_Machine playerSM, Player_Component player) : base(nameof(Player_Movement_State), playerSM, player) { }
+    public Player_Movement_State(Player_State_Machine playerSM, Player_Component player) : base(
+        nameof(Player_Movement_State), playerSM, player)
+    {
+    }
 
     public override void OnEnter()
     {
@@ -50,7 +53,7 @@ public class Player_Movement_State : Player_Base_State
 
     private void Player_Input_OnPlayerMove(Vector2 newMovement)
     {
-        player.movement = new Vector3(newMovement.x,0f,newMovement.y).normalized;
+        player.movement = new Vector3(newMovement.x, 0f, newMovement.y).normalized;
     }
 
     public override void UpdateLogic()
@@ -65,11 +68,15 @@ public class Player_Movement_State : Player_Base_State
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-        float targetAngle = Mathf.Atan2(player.movement.x, player.movement.z) * Mathf.Rad2Deg + player.camera .eulerAngles.y;
+
+
+        float targetAngle = Mathf.Atan2(player.movement.x, player.movement.z) * Mathf.Rad2Deg;
 
         player.lastAngle = targetAngle;
+        
 
-        float angle = Mathf.SmoothDampAngle(player.GetComponent<Transform>().eulerAngles.y, targetAngle, ref player.turn_Smooth_Velocity, player.turnSmoothTime);
+        float angle = Mathf.SmoothDampAngle(player.GetComponent<Transform>().eulerAngles.y, targetAngle,
+            ref player.turn_Smooth_Velocity, player.turnSmoothTime);
 
         player.GetComponent<Transform>().rotation = Quaternion.Euler(0f, angle, 0f);
 
@@ -81,7 +88,7 @@ public class Player_Movement_State : Player_Base_State
     /// <summary>
     /// Play The Movement Animation
     /// </summary>
-    public void PlayMovementAnimation() 
+    public void PlayMovementAnimation()
     {
         player.anim.SetFloat(movement_Animation_Name, player.movement.magnitude - player.movement.y);
     }
