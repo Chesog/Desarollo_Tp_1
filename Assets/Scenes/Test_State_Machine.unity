@@ -6174,6 +6174,10 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 7279614904620200701}
+    - target: {fileID: 465380499187772017, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
+      propertyPath: comboCooldown
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1270577669987283354, guid: b6d5d21b7d620a54dbc720bf5bc86ec0, type: 3}
       propertyPath: m_Name
       value: Player

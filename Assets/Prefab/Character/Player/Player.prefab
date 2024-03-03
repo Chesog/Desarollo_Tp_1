@@ -848,6 +848,7 @@ GameObject:
   - component: {fileID: 656559978401318382}
   - component: {fileID: 656559978401318368}
   - component: {fileID: 656559978401318380}
+  - component: {fileID: 465380499187772017}
   - component: {fileID: 1901866628}
   - component: {fileID: 1901866632}
   - component: {fileID: 1901866633}
@@ -1003,6 +1004,28 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &465380499187772017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270577669987283354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cbd70106fd11e845bf032f664235c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAttacks:
+  - {fileID: 11400000, guid: 4a30e71cf914ad045857cda7703a2fa2, type: 2}
+  - {fileID: 11400000, guid: 224094bbcd0d3a04bab9cfc74b968a75, type: 2}
+  - {fileID: 11400000, guid: 09b879fab742029429d15ea0870670da, type: 2}
+  - {fileID: 11400000, guid: adf6a7976bb3fbf46bec7fac61162ebb, type: 2}
+  player: {fileID: 1901866632}
+  anim: {fileID: 3899752145710056005}
+  playerWeapon: {fileID: 0}
+  comboCooldown: 1
+  timeBetweenAttacks: 0.5
 --- !u!114 &1901866628
 MonoBehaviour:
   m_ObjectHideFlags: 0
