@@ -187,6 +187,7 @@ public class PlayerController : ValidatedMonoBehaviour
     public void Attack()
     {
         Vector3 attackPos = transform.position + transform.forward;
+        
         Collider[] hitEnemies = Physics.OverlapSphere(attackPos, attackDistance);
 
         foreach (var enemy in hitEnemies)

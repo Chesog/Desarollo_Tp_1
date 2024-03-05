@@ -5482,9 +5482,10 @@ MonoBehaviour:
   dashForce: 5
   dashDuration: 0.5
   dashCooldown: 2
-  attackCooldown: 0.5
+  attackCooldown: 0.7
   attackDistance: 1
   attackDamage: 10
+  ball: {fileID: 0}
 --- !u!136 &1692628701
 CapsuleCollider:
   m_ObjectHideFlags: 0
