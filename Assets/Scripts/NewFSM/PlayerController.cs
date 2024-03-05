@@ -9,6 +9,7 @@ public class PlayerController : ValidatedMonoBehaviour
     [Header("References")] 
     [SerializeField, Self] private Animator _animator;
     [SerializeField, Self] private Rigidbody _rigidbody;
+    [SerializeField, Anywhere] private GroundChecker groundChecker;
     [SerializeField, Anywhere] private CinemachineVirtualCamera _camera;
     [SerializeField, Anywhere] private InputReader _input;
 

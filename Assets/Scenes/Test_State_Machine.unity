@@ -5454,6 +5454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1692628696}
   _rigidbody: {fileID: 1692628702}
+  groundChecker: {fileID: 384591448}
   _camera: {fileID: 8134102630179209894}
   _input: {fileID: 11400000, guid: acf37d8a64a58b04ea6efb6afae332af, type: 2}
   moveSpeed: 300
