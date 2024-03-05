@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Cinemachine;
 using KBCore.Refs;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class PlayerController : ValidatedMonoBehaviour
@@ -13,18 +15,29 @@ public class PlayerController : ValidatedMonoBehaviour
     [SerializeField, Anywhere] private CinemachineVirtualCamera _camera;
     [SerializeField, Anywhere] private InputReader _input;
 
-    [Header("Settings")]
+    [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 6.0f;
     [SerializeField] private float rotationSpeed = 15f;
     [SerializeField] private float smoothTime = 0.2f;
     
+    [Header("Jump Settings")]
+    [SerializeField] private float jumpForce = 10.0f;
+    [SerializeField] private float jumpDuration = 0.5f;
+    [SerializeField] private float jumpCooldown = 0.0f;
+    [SerializeField] private float jumpMaxHeight = 2.0f;
+    [SerializeField] private float gravityMultiplier = 3.0f;
         
     Transform mainCam;
         
     private const float ZeroF = 0f;
     private float currentSpeed;
     private float velocity;
+    private float jumpVelocity;
     private float dashVelocity = 1f;
+
+    private List<Timer> _timers;
+    private CountdownTimer jumpTimer;
+    private CountdownTimer jumpCooldownTimer;
     
     //Animator parameters
     private static readonly int Speed = Animator.StringToHash("Speed");
@@ -32,22 +45,74 @@ public class PlayerController : ValidatedMonoBehaviour
     private void Awake()
     {
         mainCam = Camera.main.transform;
+        jumpTimer = new CountdownTimer(jumpDuration);
+        jumpCooldownTimer = new CountdownTimer(jumpCooldown);
+
+        _timers = new List<Timer>(2) {jumpTimer, jumpCooldownTimer};
+
+        jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
+    }
+
+    private void OnEnable()
+    {
+        _input.Jump += OnJump;
+    }
+    private void OnDisable()
+    {
+        _input.Jump -= OnJump;
     }
 
     private void Update()
     {
-        HandleMovement();
+        HandleTimers();
         UpdateAnimator();
     }
 
     private void FixedUpdate()
     {
+        HandleJump();   
         HandleMovement();   
     }
-    
     private void UpdateAnimator()
     {
         _animator.SetFloat(Speed, currentSpeed);
+    }
+    
+    private void OnJump(bool performed)
+    {
+        if (performed && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning && groundChecker.IsGrounded)
+        {
+            jumpTimer.Start();
+            jumpVelocity = jumpForce;
+        }
+        else if (!performed && jumpTimer.IsRunning)
+        {
+            jumpTimer.Stop();
+        }
+    }
+    
+    private void HandleTimers()
+    {
+        foreach (var timer in _timers)
+            timer.Tick(Time.deltaTime);
+    }
+    
+    
+    private void HandleJump()
+    {
+        // If not jumping and grounded, keep jump velocity at 0
+        if (!jumpTimer.IsRunning && groundChecker.IsGrounded) 
+        {
+            jumpVelocity = ZeroF;
+            return;
+        }
+        
+        // Gravity takes over
+        if (!jumpTimer.IsRunning) 
+            jumpVelocity += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+        
+        // Apply velocity
+        _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, jumpVelocity, _rigidbody.velocity.z);
     }
 
     public void HandleMovement()

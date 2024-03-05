@@ -8,6 +8,7 @@ using static Character_Controls;
 public class InputReader : ScriptableObject, IPlayerActions
 {
     public event UnityAction<Vector2> Move = delegate {  };
+    public event UnityAction<bool> Jump = delegate {  };
 
     private Character_Controls InputActions;
 
@@ -35,7 +36,15 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-       
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                Jump?.Invoke(true);
+                break;
+            case InputActionPhase.Canceled:
+                Jump?.Invoke(false);
+                break;
+        }
     }
 
     public void OnSprint(InputAction.CallbackContext context)

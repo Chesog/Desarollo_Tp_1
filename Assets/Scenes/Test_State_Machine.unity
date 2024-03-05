@@ -5460,6 +5460,11 @@ MonoBehaviour:
   moveSpeed: 300
   rotationSpeed: 300
   smoothTime: 0.2
+  jumpForce: 10
+  jumpDuration: 0.5
+  jumpCooldown: 0
+  jumpMaxHeight: 2
+  gravityMultiplier: 3
 --- !u!136 &1692628701
 CapsuleCollider:
   m_ObjectHideFlags: 0
