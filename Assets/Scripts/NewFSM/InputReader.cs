@@ -1,0 +1,70 @@
+using System;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using static Character_Controls;
+
+[CreateAssetMenu(fileName = "InputReader",menuName = "Input/Input Reader")]
+public class InputReader : ScriptableObject, IPlayerActions
+{
+    public event UnityAction<Vector2> Move = delegate {  };
+
+    private Character_Controls InputActions;
+
+    public Vector3 Direction => InputActions.Player.Move.ReadValue<Vector2>();
+
+    private void OnEnable()
+    {
+        if (InputActions == null)
+        {
+            InputActions = new Character_Controls();
+            InputActions.Player.SetCallbacks(this);
+        }
+        InputActions.Enable();
+    }
+
+    public void OnMouse_Look(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Move?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+       
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnL_Click(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnR_Click(InputAction.CallbackContext context)
+    {
+      
+    }
+
+    public void OnPickUp(InputAction.CallbackContext context)
+    {
+       
+    }
+
+    public void OnDrop(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        
+    }
+}
