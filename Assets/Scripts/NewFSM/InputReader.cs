@@ -10,6 +10,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event UnityAction<Vector2> Move = delegate {  };
     public event UnityAction<bool> Jump = delegate {  };
     public event UnityAction<bool> Dash = delegate {  };
+    public event UnityAction Attack = delegate { };
 
     private Character_Controls InputActions;
 
@@ -63,7 +64,10 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     public void OnL_Click(InputAction.CallbackContext context)
     {
-        
+        if (context.phase == InputActionPhase.Started)
+        {
+            Attack?.Invoke();
+        }
     }
 
     public void OnR_Click(InputAction.CallbackContext context)

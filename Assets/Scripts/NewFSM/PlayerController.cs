@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cinemachine;
 using KBCore.Refs;
@@ -30,6 +29,11 @@ public class PlayerController : ValidatedMonoBehaviour
     [SerializeField] private float dashForce = 10.0f;
     [SerializeField] private float dashDuration = 1.0f;
     [SerializeField] private float dashCooldown = 2.0f;
+    
+    [Header("Attack Settings")]
+    [SerializeField] float attackCooldown = 0.5f;
+    [SerializeField] float attackDistance = 1f;
+    [SerializeField] int attackDamage = 10;
         
     Transform mainCam;
         
@@ -44,6 +48,7 @@ public class PlayerController : ValidatedMonoBehaviour
     private CountdownTimer jumpCooldownTimer;
     private CountdownTimer dashTimer;
     private CountdownTimer dashCooldownTimer;
+    private CountdownTimer attackTimer;
 
     private StateMachine _stateMachine;
     
@@ -53,38 +58,58 @@ public class PlayerController : ValidatedMonoBehaviour
     private void Awake()
     {
         mainCam = Camera.main.transform;
-        
-        // Set up Timers
+        SetupStateMachine();
+        SetupTimers();
+    }
+    
+    void SetupStateMachine()
+    {
+        // State Machine
+        _stateMachine = new StateMachine();
+
+        // Declare states
+        var locomotionState = new LocomotionState(this, _animator);
+        var jumpState = new JumpState(this, _animator);
+        var dashState = new DashState(this, _animator);
+        var attackState = new AttackState(this, _animator);
+
+        // Define transitions
+        At(locomotionState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
+        At(locomotionState, dashState, new FuncPredicate(() => dashTimer.IsRunning));
+        At(locomotionState, attackState, new FuncPredicate(() => attackTimer.IsRunning));
+        At(attackState, locomotionState, new FuncPredicate(() => !attackTimer.IsRunning));
+        Any(locomotionState, new FuncPredicate(ReturnToLocomotionState));
+
+        // Set initial state
+        _stateMachine.SetState(locomotionState);
+    }
+
+    bool ReturnToLocomotionState()
+    {
+        return groundChecker.IsGrounded 
+               && !attackTimer.IsRunning 
+               && !jumpTimer.IsRunning 
+               && !dashTimer.IsRunning;
+    }
+    
+    void SetupTimers() 
+    {
+        // Setup timers
         jumpTimer = new CountdownTimer(jumpDuration);
         jumpCooldownTimer = new CountdownTimer(jumpCooldown);
 
         jumpTimer.OnTimerStart += () => jumpVelocity = jumpForce;
         jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
-        
-        
+
         dashTimer = new CountdownTimer(dashDuration);
         dashCooldownTimer = new CountdownTimer(dashCooldown);
-        
+
         dashTimer.OnTimerStart += () => dashVelocity = dashForce;
-        dashTimer.OnTimerStop += () => { dashVelocity = 1.0f; dashCooldownTimer.Start(); };
-        
-        _timers = new List<Timer>(4) {jumpTimer, jumpCooldownTimer,dashTimer,dashCooldownTimer};
-        
-        //State Machine
-        _stateMachine = new StateMachine();
-        
-        // Declare States
-        var locomotionState = new LocomotionState(this,_animator);
-        var jumpState = new JumpState(this,_animator);
-        var dashState = new DashState(this,_animator);
-        
-        // Define transitions
-        At(locomotionState,jumpState,new FuncPredicate(() => jumpTimer.IsRunning));
-        At(locomotionState,dashState,new FuncPredicate(() => dashTimer.IsRunning));
-        Any(locomotionState,new FuncPredicate(() => groundChecker.IsGrounded && !jumpTimer.IsRunning && !dashTimer.IsRunning));
-        
-        // Set initial State
-        _stateMachine.SetState(locomotionState);
+        dashTimer.OnTimerStop += () => { dashVelocity = 1f; dashCooldownTimer.Start(); };
+
+        attackTimer = new CountdownTimer(attackCooldown);
+
+        _timers = new(5) {jumpTimer, jumpCooldownTimer, dashTimer, dashCooldownTimer, attackTimer};
     }
 
     private void At(Istate from,Istate to , Ipredicate condition) => _stateMachine.AddTransition(from,to,condition);
@@ -94,11 +119,13 @@ public class PlayerController : ValidatedMonoBehaviour
     {
         _input.Jump += OnJump;
         _input.Dash += OnDash;
+        _input.Attack += OnAttack;
     }
     private void OnDisable()
     {
         _input.Jump -= OnJump;
         _input.Dash -= OnDash;
+        _input.Attack -= OnAttack;
     }
 
     private void Update()
@@ -143,13 +170,35 @@ public class PlayerController : ValidatedMonoBehaviour
         }
     }
     
+    void OnAttack() 
+    {
+        if (!attackTimer.IsRunning) {
+            attackTimer.Start();
+        }
+    }
+
+    
     private void HandleTimers()
     {
         foreach (var timer in _timers)
             timer.Tick(Time.deltaTime);
     }
-    
-    
+
+    public void Attack()
+    {
+        Vector3 attackPos = transform.position + transform.forward;
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPos, attackDistance);
+
+        foreach (var enemy in hitEnemies)
+        {
+            Debug.Log(enemy.name);
+            if (enemy.CompareTag("Enemy"))
+            {
+                enemy.GetComponent<Health_Component>().DecreaseHealth(attackDamage);
+            }
+        }
+    }
+
     public void HandleJump()
     {
         // If not jumping and grounded, keep jump velocity at 0
