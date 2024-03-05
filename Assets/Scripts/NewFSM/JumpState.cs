@@ -2,15 +2,17 @@
 
 public class JumpState : BaseState
 {
-    protected JumpState(PlayerController player, Animator animator) : base(player, animator) { }
+    public JumpState(PlayerController player, Animator animator) : base(player, animator) { }
 
     public override void OnEnter()
     {
         _animator.CrossFade(JumpHash,crossFadeDuration);
+        Debug.Log("JumpState.OnEnter");
     }
 
     public override void FixedUpdate()
     {
-       //call for player jump logic and move logic
+       _player.HandleJump();
+       _player.HandleMovement();
     }
 }

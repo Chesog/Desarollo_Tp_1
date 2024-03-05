@@ -24,8 +24,12 @@ public class PlayerController : ValidatedMonoBehaviour
     [SerializeField] private float jumpForce = 10.0f;
     [SerializeField] private float jumpDuration = 0.5f;
     [SerializeField] private float jumpCooldown = 0.0f;
-    [SerializeField] private float jumpMaxHeight = 2.0f;
     [SerializeField] private float gravityMultiplier = 3.0f;
+    
+    [Header("Dash Settings")]
+    [SerializeField] private float dashForce = 10.0f;
+    [SerializeField] private float dashDuration = 1.0f;
+    [SerializeField] private float dashCooldown = 2.0f;
         
     Transform mainCam;
         
@@ -33,11 +37,15 @@ public class PlayerController : ValidatedMonoBehaviour
     private float currentSpeed;
     private float velocity;
     private float jumpVelocity;
-    private float dashVelocity = 1f;
+    private float dashVelocity = 1.0f;
 
     private List<Timer> _timers;
     private CountdownTimer jumpTimer;
     private CountdownTimer jumpCooldownTimer;
+    private CountdownTimer dashTimer;
+    private CountdownTimer dashCooldownTimer;
+
+    private StateMachine _stateMachine;
     
     //Animator parameters
     private static readonly int Speed = Animator.StringToHash("Speed");
@@ -45,33 +53,65 @@ public class PlayerController : ValidatedMonoBehaviour
     private void Awake()
     {
         mainCam = Camera.main.transform;
+        
+        // Set up Timers
         jumpTimer = new CountdownTimer(jumpDuration);
         jumpCooldownTimer = new CountdownTimer(jumpCooldown);
 
-        _timers = new List<Timer>(2) {jumpTimer, jumpCooldownTimer};
-
+        jumpTimer.OnTimerStart += () => jumpVelocity = jumpForce;
         jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
+        
+        
+        dashTimer = new CountdownTimer(dashDuration);
+        dashCooldownTimer = new CountdownTimer(dashCooldown);
+        
+        dashTimer.OnTimerStart += () => dashVelocity = dashForce;
+        dashTimer.OnTimerStop += () => { dashVelocity = 1.0f; dashCooldownTimer.Start(); };
+        
+        _timers = new List<Timer>(4) {jumpTimer, jumpCooldownTimer,dashTimer,dashCooldownTimer};
+        
+        //State Machine
+        _stateMachine = new StateMachine();
+        
+        // Declare States
+        var locomotionState = new LocomotionState(this,_animator);
+        var jumpState = new JumpState(this,_animator);
+        var dashState = new DashState(this,_animator);
+        
+        // Define transitions
+        At(locomotionState,jumpState,new FuncPredicate(() => jumpTimer.IsRunning));
+        At(locomotionState,dashState,new FuncPredicate(() => dashTimer.IsRunning));
+        Any(locomotionState,new FuncPredicate(() => groundChecker.IsGrounded && !jumpTimer.IsRunning && !dashTimer.IsRunning));
+        
+        // Set initial State
+        _stateMachine.SetState(locomotionState);
     }
+
+    private void At(Istate from,Istate to , Ipredicate condition) => _stateMachine.AddTransition(from,to,condition);
+    private void Any(Istate to , Ipredicate condition) => _stateMachine.AddAnyTransition(to,condition);
 
     private void OnEnable()
     {
         _input.Jump += OnJump;
+        _input.Dash += OnDash;
     }
     private void OnDisable()
     {
         _input.Jump -= OnJump;
+        _input.Dash -= OnDash;
     }
 
     private void Update()
     {
+        _stateMachine.Update();
+        
         HandleTimers();
         UpdateAnimator();
     }
 
     private void FixedUpdate()
     {
-        HandleJump();   
-        HandleMovement();   
+        _stateMachine.FixedUpdate();
     }
     private void UpdateAnimator()
     {
@@ -91,6 +131,18 @@ public class PlayerController : ValidatedMonoBehaviour
         }
     }
     
+    private void OnDash(bool performed)
+    {
+        if (performed && !dashTimer.IsRunning && !dashCooldownTimer.IsRunning)
+        {
+            dashTimer.Start();
+        }
+        else if (!performed && dashTimer.IsRunning)
+        {
+            dashTimer.Stop();
+        }
+    }
+    
     private void HandleTimers()
     {
         foreach (var timer in _timers)
@@ -98,7 +150,7 @@ public class PlayerController : ValidatedMonoBehaviour
     }
     
     
-    private void HandleJump()
+    public void HandleJump()
     {
         // If not jumping and grounded, keep jump velocity at 0
         if (!jumpTimer.IsRunning && groundChecker.IsGrounded) 

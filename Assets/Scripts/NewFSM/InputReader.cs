@@ -9,6 +9,7 @@ public class InputReader : ScriptableObject, IPlayerActions
 {
     public event UnityAction<Vector2> Move = delegate {  };
     public event UnityAction<bool> Jump = delegate {  };
+    public event UnityAction<bool> Dash = delegate {  };
 
     private Character_Controls InputActions;
 
@@ -49,7 +50,15 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                Dash?.Invoke(true);
+                break;
+            case InputActionPhase.Canceled:
+                Dash?.Invoke(false);
+                break;
+        }
     }
 
     public void OnL_Click(InputAction.CallbackContext context)

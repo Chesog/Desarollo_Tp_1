@@ -19,7 +19,6 @@ public class GroundChecker : MonoBehaviour
         IsGrounded = Physics.SphereCast(transform.position, radius, Vector3.down * groundDistance, out hit,
             groundDistance,
             groundLayer);
-        Debug.Log(IsGrounded);
     }
 
     private void OnDrawGizmos()
