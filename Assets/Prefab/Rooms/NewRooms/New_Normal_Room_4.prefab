@@ -933,7 +933,7 @@ MonoBehaviour:
   isRoomVisible: 0
   isRoomCheked: 0
   rayOrigin: {fileID: 401105501872860940}
-  rayDistance: 130
+  rayDistance: 65
   adjRooms: []
 --- !u!1 &5991330738621684659
 GameObject:

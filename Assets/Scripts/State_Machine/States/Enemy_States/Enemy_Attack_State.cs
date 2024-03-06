@@ -8,7 +8,11 @@ public class Enemy_Attack_State : Enemy_Base_State
 {
     private const string enemy_Attack_Animation_Name = "Standing 1H Magic Attack 01";
     private float bulletSpawnDelay;
-    public Enemy_Attack_State(Enemy_State_Machine enemySM, Enemy_Component enemy) : base(nameof(Enemy_Attack_State), enemySM, enemy) { }
+
+    public Enemy_Attack_State(Enemy_State_Machine enemySM, Enemy_Component enemy) : base(nameof(Enemy_Attack_State),
+        enemySM, enemy)
+    {
+    }
 
     public override void OnEnter()
     {
@@ -56,10 +60,10 @@ public class Enemy_Attack_State : Enemy_Base_State
 
                 enemy.rigidbody.velocity = new Vector3(0f, 0f, 0f);
             }
-            else
+            else if (enemy.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
                 base.state_Machine.SetState(base.transitions[nameof(Enemy_Move_State)]);
         }
-        else
+        else if (enemy.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
             base.state_Machine.SetState(base.transitions[nameof(Enemy_Idle_State)]);
     }
 
@@ -92,9 +96,13 @@ public class Enemy_Attack_State : Enemy_Base_State
 
     public void Spawn_Bullet()
     {
-        GameObject bullet = GameObject.Instantiate(enemy.bulletPrefab, enemy.bulletSpawn.position, enemy.transform.rotation);
-        Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
-        bulletScript.Fire();
+        if (enemy.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
+        {
+            GameObject bullet =
+                GameObject.Instantiate(enemy.bulletPrefab, enemy.bulletSpawn.position, enemy.transform.rotation);
+            Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
+            bulletScript.Fire();
+        }
     }
 
     public override void AddStateTransitions(string transitionName, State transitionState)
