@@ -16,7 +16,7 @@ public class PlayerController : ValidatedMonoBehaviour
     [SerializeField, Anywhere] private Player_Data_Source _playerDataSource;
 
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 6.0f;
+    [SerializeField] public float moveSpeed = 6.0f;
     [SerializeField] private float rotationSpeed = 15f;
     [SerializeField] private float smoothTime = 0.2f;
     
@@ -212,7 +212,6 @@ public class PlayerController : ValidatedMonoBehaviour
 
         foreach (var enemy in hitEnemies)
         {
-            Debug.Log(enemy.name);
             if (enemy.CompareTag("Enemy"))
             {
                 enemy.GetComponent<Health_Component>().DecreaseHealth(attackDamage);

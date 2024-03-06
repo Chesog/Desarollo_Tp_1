@@ -107,6 +107,42 @@ public partial class @Character_Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InfiniteHealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""3dc4e7c2-d30d-4dd8-be66-8d67d007f77e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Nuke"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc7700ad-b1ea-47d6-9f24-f7bd93cf0a5c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flash"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ae19530-7936-4ae3-88db-9b1fac681473"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Teleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d17da09-3076-4b63-91e2-1bf2e74fcfa6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -349,6 +385,50 @@ public partial class @Character_Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f32af1d-d5c4-462d-b7cf-26885e407190"",
+                    ""path"": ""<Keyboard>/f9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InfiniteHealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4310eef-b4a3-43c1-8959-4cf8339a05db"",
+                    ""path"": ""<Keyboard>/f10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Nuke"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""849acf53-849a-4959-b4f8-fc646110428e"",
+                    ""path"": ""<Keyboard>/f11"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09285267-2552-49b5-a76e-372cd758be28"",
+                    ""path"": ""<Keyboard>/f12"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Teleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -884,6 +964,10 @@ public partial class @Character_Controls: IInputActionCollection2, IDisposable
         m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_InfiniteHealth = m_Player.FindAction("InfiniteHealth", throwIfNotFound: true);
+        m_Player_Nuke = m_Player.FindAction("Nuke", throwIfNotFound: true);
+        m_Player_Flash = m_Player.FindAction("Flash", throwIfNotFound: true);
+        m_Player_Teleport = m_Player.FindAction("Teleport", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -966,6 +1050,10 @@ public partial class @Character_Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PickUp;
     private readonly InputAction m_Player_Drop;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_InfiniteHealth;
+    private readonly InputAction m_Player_Nuke;
+    private readonly InputAction m_Player_Flash;
+    private readonly InputAction m_Player_Teleport;
     public struct PlayerActions
     {
         private @Character_Controls m_Wrapper;
@@ -979,6 +1067,10 @@ public partial class @Character_Controls: IInputActionCollection2, IDisposable
         public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @InfiniteHealth => m_Wrapper.m_Player_InfiniteHealth;
+        public InputAction @Nuke => m_Wrapper.m_Player_Nuke;
+        public InputAction @Flash => m_Wrapper.m_Player_Flash;
+        public InputAction @Teleport => m_Wrapper.m_Player_Teleport;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1015,6 +1107,18 @@ public partial class @Character_Controls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @InfiniteHealth.started += instance.OnInfiniteHealth;
+            @InfiniteHealth.performed += instance.OnInfiniteHealth;
+            @InfiniteHealth.canceled += instance.OnInfiniteHealth;
+            @Nuke.started += instance.OnNuke;
+            @Nuke.performed += instance.OnNuke;
+            @Nuke.canceled += instance.OnNuke;
+            @Flash.started += instance.OnFlash;
+            @Flash.performed += instance.OnFlash;
+            @Flash.canceled += instance.OnFlash;
+            @Teleport.started += instance.OnTeleport;
+            @Teleport.performed += instance.OnTeleport;
+            @Teleport.canceled += instance.OnTeleport;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1046,6 +1150,18 @@ public partial class @Character_Controls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @InfiniteHealth.started -= instance.OnInfiniteHealth;
+            @InfiniteHealth.performed -= instance.OnInfiniteHealth;
+            @InfiniteHealth.canceled -= instance.OnInfiniteHealth;
+            @Nuke.started -= instance.OnNuke;
+            @Nuke.performed -= instance.OnNuke;
+            @Nuke.canceled -= instance.OnNuke;
+            @Flash.started -= instance.OnFlash;
+            @Flash.performed -= instance.OnFlash;
+            @Flash.canceled -= instance.OnFlash;
+            @Teleport.started -= instance.OnTeleport;
+            @Teleport.performed -= instance.OnTeleport;
+            @Teleport.canceled -= instance.OnTeleport;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1192,6 +1308,10 @@ public partial class @Character_Controls: IInputActionCollection2, IDisposable
         void OnPickUp(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnInfiniteHealth(InputAction.CallbackContext context);
+        void OnNuke(InputAction.CallbackContext context);
+        void OnFlash(InputAction.CallbackContext context);
+        void OnTeleport(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

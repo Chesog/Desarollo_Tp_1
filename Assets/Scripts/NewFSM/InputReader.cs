@@ -13,6 +13,10 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event UnityAction Pause = delegate { };
     public event UnityAction PickUp = delegate { };
     public event UnityAction Drop = delegate { };
+    public event UnityAction InfiniteHealth = delegate { };
+    public event UnityAction Nuke = delegate { };
+    public event UnityAction Teleport = delegate { };
+    public event UnityAction Flash = delegate { };
 
     private Character_Controls InputActions;
 
@@ -90,5 +94,29 @@ public class InputReader : ScriptableObject, IPlayerActions
     {
         if (context.phase == InputActionPhase.Started)
             Pause?.Invoke();
+    }
+
+    public void OnInfiniteHealth(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            InfiniteHealth?.Invoke();
+    }
+
+    public void OnNuke(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            Nuke?.Invoke();
+    }
+
+    public void OnFlash(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            Flash?.Invoke();
+    }
+
+    public void OnTeleport(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            Teleport?.Invoke();
     }
 }

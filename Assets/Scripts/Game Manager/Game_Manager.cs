@@ -21,9 +21,19 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] private GameObject Lose_Canvas;
     [SerializeField] private GameObject Win_Canvas;
 
+    private bool godMode = false;
+    private float lastHealthValue;
+    
+    private bool flash = false;
+    private float lastSpeedValue;
+
     private void Start()
     {
         player._player.GetPlayerInputReader().Pause += Input_OnPlayerPause;
+        player._player.GetPlayerInputReader().InfiniteHealth += Input_OnPlayerInfiniteHealth;
+        player._player.GetPlayerInputReader().Nuke += Input_OnPlayerNuke;
+        player._player.GetPlayerInputReader().Flash += Input_OnPlayerFlash;
+        player._player.GetPlayerInputReader().Teleport += Input_OnPlayerTeleport;
     }
 
     private void OnEnable()
@@ -144,7 +154,49 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-  
+    private void Input_OnPlayerTeleport()
+    {
+        player._player.transform.position = BossEnemy.transform.position;
+    }
+    
+    private void Input_OnPlayerFlash()
+    {
+        if (flash)
+        {
+            player._player.moveSpeed = lastSpeedValue;
+            flash = false;
+        }
+        else
+        {
+            lastSpeedValue = player._player.moveSpeed;
+            player._player.moveSpeed *= 5.0f;
+            flash = true;
+        }
+    }
+    
+    private void Input_OnPlayerNuke()
+    {
+        BossEnemy.SetActive(true);
+        BossEnemy.GetComponent<Enemy_Component>().character_Health_Component._health = -10.0f;
+    }
+
+    private void Input_OnPlayerInfiniteHealth()
+    {
+        if (godMode)
+        {
+            player._player.GetPlayerHealthComponent()._health = lastHealthValue;
+            godMode = false;
+        }
+        else
+        {
+            lastHealthValue = player._player.GetPlayerHealthComponent()._health;
+            player._player.GetPlayerHealthComponent()._health = 9999999999999999999;
+            godMode = true;
+        }
+    }
+
+    
+
 
     private void OnDisable()
     {
