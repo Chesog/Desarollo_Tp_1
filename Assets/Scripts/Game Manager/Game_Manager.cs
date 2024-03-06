@@ -23,7 +23,7 @@ public class Game_Manager : MonoBehaviour
 
     private void Start()
     {
-        player._player.input.OnPlayerPause += Input_OnPlayerPause;
+        player._player.GetPlayerInputReader().Pause += Input_OnPlayerPause;
     }
 
     private void OnEnable()
@@ -61,7 +61,7 @@ public class Game_Manager : MonoBehaviour
             }
         }
 
-        if (player._player.character_Health_Component._health <= 0)
+        if (player._player.GetPlayerHealthComponent()._health <= 0)
         {
             game_Canvas.active = false;
             Pause_Canvas.active = false;
@@ -103,7 +103,7 @@ public class Game_Manager : MonoBehaviour
     /// </summary>
     public void UpdateHealth()
     {
-        healthBar.value = player._player.character_Health_Component._health;
+        healthBar.value = player._player.GetPlayerHealthComponent()._health;
     }
 
     /// <summary>
@@ -111,8 +111,8 @@ public class Game_Manager : MonoBehaviour
     /// </summary>
     public void SetMaxHealth()
     {
-        healthBar.maxValue = player._player.character_Health_Component._maxHealth;
-        healthBar.value = player._player.character_Health_Component._maxHealth;
+        healthBar.maxValue = player._player.GetPlayerHealthComponent()._maxHealth;
+        healthBar.value = player._player.GetPlayerHealthComponent()._maxHealth;
     }
 
     /// <summary>
@@ -122,7 +122,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (Pause_Canvas.active == true)
         {
-            if (player._player.character_Health_Component._health > 0)
+            if (player._player.GetPlayerHealthComponent()._health > 0)
             {
                 Pause_Canvas.active = false;
                 game_Canvas.active = true;
@@ -149,6 +149,6 @@ public class Game_Manager : MonoBehaviour
 
     private void OnDisable()
     {
-       player._player.input.OnPlayerPause -= Input_OnPlayerPause;
+       player._player.GetPlayerInputReader().Pause -= Input_OnPlayerPause;
     }
 }

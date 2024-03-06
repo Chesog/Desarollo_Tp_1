@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -41,7 +42,7 @@ public class wfc_Dungeon_Generator : MonoBehaviour
         {
             if (item.CompareTag("Respawn"))
             {
-                player_data._player.rigidbody.position = item.position;
+                player_data._player.GetPlayerRigidbody().transform.position = item.position;
             }
             dungegonRooms.Add(item.GetComponent<Room_Behaviour>());
         }
@@ -49,6 +50,11 @@ public class wfc_Dungeon_Generator : MonoBehaviour
         {
             item.SetAdjRooms();
         }
+    }
+
+    private void OnEnable()
+    {
+        throw new NotImplementedException();
     }
 
     void Update()

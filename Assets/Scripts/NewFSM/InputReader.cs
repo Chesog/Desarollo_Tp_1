@@ -4,13 +4,16 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using static Character_Controls;
 
-[CreateAssetMenu(fileName = "InputReader",menuName = "Input/Input Reader")]
+[CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader")]
 public class InputReader : ScriptableObject, IPlayerActions
 {
-    public event UnityAction<Vector2> Move = delegate {  };
-    public event UnityAction<bool> Jump = delegate {  };
-    public event UnityAction<bool> Dash = delegate {  };
+    public event UnityAction<Vector2> Move = delegate { };
+    public event UnityAction<bool> Jump = delegate { };
+    public event UnityAction<bool> Dash = delegate { };
     public event UnityAction Attack = delegate { };
+    public event UnityAction Pause = delegate { };
+    public event UnityAction PickUp = delegate { };
+    public event UnityAction Drop = delegate { };
 
     private Character_Controls InputActions;
 
@@ -23,12 +26,12 @@ public class InputReader : ScriptableObject, IPlayerActions
             InputActions = new Character_Controls();
             InputActions.Player.SetCallbacks(this);
         }
+
         InputActions.Enable();
     }
 
     public void OnMouse_Look(InputAction.CallbackContext context)
     {
-        
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -65,28 +68,28 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnL_Click(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
-        {
             Attack?.Invoke();
-        }
     }
 
     public void OnR_Click(InputAction.CallbackContext context)
     {
-      
     }
 
     public void OnPickUp(InputAction.CallbackContext context)
     {
-       
+        if (context.phase == InputActionPhase.Started)
+            PickUp?.Invoke();
     }
 
     public void OnDrop(InputAction.CallbackContext context)
     {
-        
+        if (context.phase == InputActionPhase.Started)
+            Drop?.Invoke();
     }
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        
+        if (context.phase == InputActionPhase.Started)
+            Pause?.Invoke();
     }
 }

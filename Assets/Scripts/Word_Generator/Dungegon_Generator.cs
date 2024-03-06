@@ -8,7 +8,7 @@ public enum Directions {Up,Down,Right,Left}
 /// <summary>
 /// Class To create A Dungegon Tipe Map whit a dungegon snake Generation Algorithm
 /// </summary>
-[Obsolete]public class Dungegon_Generator : MonoBehaviour
+public class Dungegon_Generator : MonoBehaviour
 {
     public class Cell
     {

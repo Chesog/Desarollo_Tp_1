@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using Cinemachine;
 using KBCore.Refs;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class PlayerController : ValidatedMonoBehaviour
 {
     [Header("References")] 
     [SerializeField, Self] private Animator _animator;
     [SerializeField, Self] private Rigidbody _rigidbody;
+    [SerializeField, Self] private Health_Component _healthComponent;
     [SerializeField, Anywhere] private GroundChecker groundChecker;
     [SerializeField, Anywhere] private CinemachineVirtualCamera _camera;
     [SerializeField, Anywhere] private InputReader _input;
+    [SerializeField, Anywhere] private Player_Data_Source _playerDataSource;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 6.0f;
@@ -52,17 +52,36 @@ public class PlayerController : ValidatedMonoBehaviour
 
     private StateMachine _stateMachine;
     
+    public Weapon_Stats current_Weapon;
+    public Transform weaponHolder;
+    
     //Animator parameters
     private static readonly int Speed = Animator.StringToHash("Speed");
 
     private void Awake()
     {
         mainCam = Camera.main.transform;
+        SetUpPlayer();
         SetupStateMachine();
         SetupTimers();
     }
-    
-    void SetupStateMachine()
+
+    private void SetUpPlayer()
+    {
+        _playerDataSource._player = this;
+        _healthComponent._maxHealth = 100.0f;
+        _healthComponent._health = _healthComponent._maxHealth;
+        
+        if (current_Weapon == null)
+            current_Weapon = weaponHolder.GetComponentInChildren<Weapon_Stats>();
+        else
+            Debug.Log($"{name}: (log)){nameof(current_Weapon)} There is no Weapon");
+        
+        if (current_Weapon == null)
+            current_Weapon = weaponHolder.GetComponentInChildren<Weapon_Stats>();
+    }
+
+    private void SetupStateMachine()
     {
         // State Machine
         _stateMachine = new StateMachine();
@@ -84,7 +103,7 @@ public class PlayerController : ValidatedMonoBehaviour
         _stateMachine.SetState(locomotionState);
     }
 
-    bool ReturnToLocomotionState()
+    private bool ReturnToLocomotionState()
     {
         return groundChecker.IsGrounded 
                && !attackTimer.IsRunning 
@@ -92,7 +111,7 @@ public class PlayerController : ValidatedMonoBehaviour
                && !dashTimer.IsRunning;
     }
     
-    void SetupTimers() 
+    private void SetupTimers() 
     {
         // Setup timers
         jumpTimer = new CountdownTimer(jumpDuration);
@@ -248,6 +267,11 @@ public class PlayerController : ValidatedMonoBehaviour
         var targetRotation = Quaternion.LookRotation(adjustedDirection);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
+
+    public Rigidbody GetPlayerRigidbody() => _rigidbody;
+    public InputReader GetPlayerInputReader() => _input;
+    public Health_Component GetPlayerHealthComponent() => _healthComponent;
+    public void SetCurrentWeapon(Weapon_Stats weapon) => current_Weapon = weapon;
 
     void SmoothSpeed(float value)
     {

@@ -27,26 +27,26 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         isEquiped = false;
         isSlotFull = false;
 
-        if (player == null)
-        {
-            player = player_Source._player.transform;
-        }
-        if (!player)
-        {
-            Debug.LogError(message: $"{name}: (logError){nameof(player)} is null");
-            enabled = false;
-        }
+        //if (player == null)
+        //{
+        //    player = player_Source._player.transform;
+        //}
+        //if (!player)
+        //{
+        //    Debug.LogError(message: $"{name}: (logError){nameof(player)} is null");
+        //    enabled = false;
+        //}
 
-        if (weapon_Container == null)
-        {
-            weapon_Container = player_Source._player.weaponHolder;
-
-        }
-        if (!weapon_Container)
-        {
-            Debug.LogError(message: $"{name}: (logError){nameof(weapon_Container)} is null");
-            enabled = false;
-        }
+        //if (weapon_Container == null)
+        //{
+        //    weapon_Container = player_Source._player.weaponHolder;
+        //
+        //}
+        //if (!weapon_Container)
+        //{
+        //    Debug.LogError(message: $"{name}: (logError){nameof(weapon_Container)} is null");
+        //    enabled = false;
+        //}
 
         if (!isEquiped)
         {
@@ -65,8 +65,8 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         if (player_Source._player == null)
             return;
 
-        player_Source._player.input.OnPlayerPickUp += Input_OnPlayerPickUp;
-        player_Source._player.input.OnPlayerDrop += Input_OnPlayerDrop;
+        player_Source._player.GetPlayerInputReader().PickUp += Input_OnPlayerPickUp;
+        player_Source._player.GetPlayerInputReader().Drop += Input_OnPlayerDrop;
     }
 
     /// <summary>
@@ -155,8 +155,8 @@ public class Weapon_Interaction_Controller : MonoBehaviour
         if (player_Source._player == null)
             return;
 
-        player_Source._player.input.OnPlayerPickUp -= Input_OnPlayerPickUp;
-        player_Source._player.input.OnPlayerDrop -= Input_OnPlayerDrop;
+        player_Source._player.GetPlayerInputReader().PickUp -= Input_OnPlayerPickUp;
+        player_Source._player.GetPlayerInputReader().Drop -= Input_OnPlayerDrop;
     }
 
     private void OnDrawGizmos()

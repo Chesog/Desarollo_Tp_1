@@ -43,7 +43,7 @@ public class Player_Component : Character_Component
     {
         character_Health_Component._maxHealth = 100.0f;
         character_Health_Component._health = character_Health_Component._maxHealth;
-        player_Source._player = this;
+        //player_Source._player = this;
 
 
         if (current_Weapon == null)

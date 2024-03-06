@@ -4602,11 +4602,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3019691987238572668, guid: 52e938f8baab600468d82a04a5f45691, type: 3}
       propertyPath: sizeX
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3019691987238572668, guid: 52e938f8baab600468d82a04a5f45691, type: 3}
       propertyPath: sizeZ
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3019691987238572669, guid: 52e938f8baab600468d82a04a5f45691, type: 3}
       propertyPath: m_Name

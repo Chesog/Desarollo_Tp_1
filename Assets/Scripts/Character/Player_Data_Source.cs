@@ -8,5 +8,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "DataSources/Player")]
 public class Player_Data_Source : ScriptableObject
 {
-    public Player_Component _player { get; set; }
+    public PlayerController _player { get; set; }
 }
