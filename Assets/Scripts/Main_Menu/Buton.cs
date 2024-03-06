@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class Buton : MonoBehaviour
 {
-    private const string game_Scene_Name = "wfc_Test";
+    private const string game_Scene_Name = "NewLevel_1";
     private const string main_Menu_Scene_Name = "Main_Menu";
     [SerializeField] private GameObject windowPrefab;
     [SerializeField] private GameObject panelParent;

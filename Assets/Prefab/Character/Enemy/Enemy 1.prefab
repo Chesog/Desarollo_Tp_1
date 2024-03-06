@@ -168,6 +168,7 @@ MonoBehaviour:
   player_Source: {fileID: 11400000, guid: 88bdf9c4296836b46a7dbe877999d610, type: 2}
   bulletPrefab: {fileID: 6330706891537420384, guid: f4c7e1d6f52575f4e9944cd5e58d16f4, type: 3}
   hit_Particles: {fileID: 4697547654548650735, guid: 2af1157ae953af34d8d57d21b8762c8d, type: 3}
+  hit_Particles_spawn: {fileID: 0}
 --- !u!114 &25289003
 MonoBehaviour:
   m_ObjectHideFlags: 0

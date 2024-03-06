@@ -11,7 +11,7 @@ public class Game_Manager : MonoBehaviour
 
     private const string main_Menu_Name = "Main_Menu";
     private const string boss_Tag = "Boss";
-    private const string game_Scene_Name = "wfc_Test";
+    private const string game_Scene_Name = "NewLevel_1";
     [SerializeField] private Slider healthBar;
     [SerializeField] private AudioClip GameMusic;
     [SerializeField] private GameObject BossEnemy;
@@ -120,7 +120,9 @@ public class Game_Manager : MonoBehaviour
     /// </summary>
     private void Input_OnPlayerPause()
     {
-        if (Pause_Canvas.active == true)
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        if (Pause_Canvas.active)
         {
             if (player._player.GetPlayerHealthComponent()._health > 0)
             {
@@ -129,14 +131,11 @@ public class Game_Manager : MonoBehaviour
                 Lose_Canvas.active = false;
                 Win_Canvas.active = false;
                 Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
             }
         }
         else
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+
             Time.timeScale = 0;
             Pause_Canvas.active = true;
             game_Canvas.active = false;
