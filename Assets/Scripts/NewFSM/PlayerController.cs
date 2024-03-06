@@ -277,4 +277,13 @@ public class PlayerController : ValidatedMonoBehaviour
     {
         currentSpeed = Mathf.SmoothDamp(currentSpeed, value, ref velocity, smoothTime);
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Bullet_Controller>(out var bullet))
+        {
+            _healthComponent.DecreaseHealth(bullet.damage);
+            Destroy(other.gameObject);
+        }
+    }
 }
