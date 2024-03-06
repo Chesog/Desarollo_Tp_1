@@ -14,6 +14,7 @@ public class Character_Component : MonoBehaviour
     public Vector3 movement;
     public Animator anim;
     public Rigidbody rigidbody;
+    public float damage;
     [Header("Character Jump Timers")]
     public float jumpBufferTime;
     public float jumpBufferTimeCounter;

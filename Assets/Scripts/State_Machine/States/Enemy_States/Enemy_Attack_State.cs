@@ -6,8 +6,10 @@ using UnityEngine;
 /// </summary>
 public class Enemy_Attack_State : Enemy_Base_State
 {
-    private const string enemy_Attack_Animation_Name = "Standing 1H Magic Attack 01";
+    private const string rangedEnemy_Attack_Animation_Name = "Standing 1H Magic Attack 01";
+    private const string meleEnemy_Attack_Animation_Name = "Sword And Shield Slash";
     private float bulletSpawnDelay;
+    private float attackDistance = 1f;
 
     public Enemy_Attack_State(Enemy_State_Machine enemySM, Enemy_Component enemy) : base(nameof(Enemy_Attack_State),
         enemySM, enemy)
@@ -18,7 +20,7 @@ public class Enemy_Attack_State : Enemy_Base_State
     {
         base.OnEnter();
 
-        bulletSpawnDelay = 2.0f;
+        bulletSpawnDelay = 1.0f;
         enemy.character_Health_Component.OnDecrease_Health += Character_Health_Component_OnDecrease_Health;
         enemy.character_Health_Component.OnInsufficient_Health += Character_Health_Component_OnInsufficient_Health;
     }
@@ -55,7 +57,10 @@ public class Enemy_Attack_State : Enemy_Base_State
             {
                 if (enemy.ready_To_Attack)
                 {
-                    enemy.StartCoroutine(AttackPlayer(bulletSpawnDelay, enemy.timeBetweenAttacks));
+                    if (enemy.IsRanged)
+                        enemy.StartCoroutine(RangeAttackPlayer(bulletSpawnDelay, enemy.timeBetweenAttacks));
+                    else
+                        enemy.StartCoroutine(MeleAttackPlayer(enemy.timeBetweenAttacks));
                 }
 
                 enemy.rigidbody.velocity = new Vector3(0f, 0f, 0f);
@@ -72,7 +77,7 @@ public class Enemy_Attack_State : Enemy_Base_State
         enemy.transform.LookAt(enemy.target.position);
     }
 
-    private IEnumerator AttackPlayer(float bulletSpawnDelay, float AttackCooldown)
+    private IEnumerator RangeAttackPlayer(float bulletSpawnDelay, float AttackCooldown)
     {
         enemy.ready_To_Attack = false;
         PlayAttackAnim();
@@ -81,10 +86,23 @@ public class Enemy_Attack_State : Enemy_Base_State
         yield return new WaitForSeconds(AttackCooldown);
         enemy.ready_To_Attack = true;
     }
+    
+    private IEnumerator MeleAttackPlayer(float AttackCooldown)
+    {
+        enemy.ready_To_Attack = false;
+        PlayAttackAnim();
+        yield return new WaitForSeconds(bulletSpawnDelay);
+        MeleAttack();
+        yield return new WaitForSeconds(AttackCooldown);
+        enemy.ready_To_Attack = true;
+    }
 
     public void PlayAttackAnim()
     {
-        enemy.anim.Play(enemy_Attack_Animation_Name);
+        if (enemy.IsRanged)
+            enemy.anim.Play(rangedEnemy_Attack_Animation_Name);
+        else
+            enemy.anim.Play(meleEnemy_Attack_Animation_Name);
     }
 
     public override void OnExit()
@@ -102,6 +120,24 @@ public class Enemy_Attack_State : Enemy_Base_State
                 GameObject.Instantiate(enemy.bulletPrefab, enemy.bulletSpawn.position, enemy.transform.rotation);
             Bullet_Controller bulletScript = bullet.GetComponent<Bullet_Controller>();
             bulletScript.Fire();
+        }
+    }
+    
+    public void MeleAttack()
+    {
+        Vector3 attackPos = enemy.transform.position + enemy.transform.forward;
+        
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPos, attackDistance);
+
+        foreach (var target in hitEnemies)
+        {
+            Debug.Log(target.name);
+            if (target.CompareTag("Player"))
+            {
+                GameObject bullet =
+                    GameObject.Instantiate(enemy.bulletPrefab, enemy.transform.position + enemy.transform.forward, enemy.transform.rotation);
+                target.GetComponent<Health_Component>().DecreaseHealth(enemy.damage);
+            }
         }
     }
 

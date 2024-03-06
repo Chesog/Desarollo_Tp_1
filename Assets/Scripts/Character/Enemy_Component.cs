@@ -16,6 +16,7 @@ public class Enemy_Component : Character_Component
     public bool deathLoop;
     public Transform target;
     public Transform bulletSpawn;
+    public bool IsRanged;
 
     public Player_Data_Source player_Source;
 
