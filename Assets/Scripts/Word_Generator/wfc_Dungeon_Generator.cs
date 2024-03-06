@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -50,11 +49,6 @@ public class wfc_Dungeon_Generator : MonoBehaviour
         {
             item.SetAdjRooms();
         }
-    }
-
-    private void OnEnable()
-    {
-        throw new NotImplementedException();
     }
 
     void Update()

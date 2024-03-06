@@ -43,7 +43,7 @@ public class Enemy_Hit_State : Enemy_Base_State
     /// </summary>
     public void PlayHitAnimation() 
     {
-        GameObject.Instantiate(enemy.hit_Particles, enemy.transform);
+        GameObject.Instantiate(enemy.hit_Particles, enemy.hit_Particles_spawn.transform.position,Quaternion.identity,enemy.transform);
         enemy.anim.Play(hit_Animation_State);
     }
 

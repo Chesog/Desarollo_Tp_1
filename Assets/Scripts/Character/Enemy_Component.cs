@@ -21,6 +21,7 @@ public class Enemy_Component : Character_Component
 
     public GameObject bulletPrefab;
     public GameObject hit_Particles;
+    public GameObject hit_Particles_spawn;
 
     public event Action<Vector2> OnEnemyMove;
     public event Action OnEnemyAttack;
